@@ -29,11 +29,11 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label">日期区间起</label>
                                     <div class="col-lg-4 ">
-                                        @Html.TextBox("StartDate", ViewBag.StartDate as string, new { @type = "date", @class = "form-control" })
+                                        @Html.TextBox("StartDate", ViewBag.StartDate as DateTime?, new { @type = "date", @class = "form-control" })
                                     </div>
                                     <label class="col-lg-2 control-label">日期区间止</label>
                                     <div class="col-lg-4 ">
-                                        @Html.TextBox("EndDate", ViewBag.EndDate as string, new { @type = "date", @class = "form-control" })
+                                        @Html.TextBox("EndDate", ViewBag.EndDate as DateTime?, new { @type = "date", @class = "form-control" })
                                     </div>
                                 </div>
                             </div>

@@ -57,10 +57,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ct_AccountBLL.cs" />
     <Compile Include="ht_admin_userBLL.cs" />
     <Compile Include="ht_admin_userroleBLL.cs" />
+    <Compile Include="ht_CheckRoleRelBLL.cs" />
+    <Compile Include="ht_CheckTypeBLL.cs" />
+    <Compile Include="Ht_LimitBLL.cs" />
+    <Compile Include="ht_LogBLL.cs" />
     <Compile Include="Ht_MenuBLL.cs" />
     <Compile Include="ht_userroleRelBLL.cs" />
+    <Compile Include="LogBLL.cs" />
     <Compile Include="PublicBLL\PubBll.cs" />
     <Compile Include="TestBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

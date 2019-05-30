@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FYMS.DAL;
-using FYMS.Model;
 using Newtonsoft.Json;
 
 namespace FYMS.BLL

@@ -38,27 +38,35 @@ namespace FYMS.BLL
         /// <param name="str"></param>
         public static string MenuAdd(string str)
         {
-            PublicBLL.PubBll<Ht_Menu> bll = new PublicBLL.PubBll<Ht_Menu>();
-            Ht_Menu entity = bll.ReturnEntity(str);
-            if (dal.SelectEntities(x => x.Name == entity.Name).Count > 0)
+            try
             {
-                return "该人员已经被赋予角色";
-            }
-            else
-            {
-                entity.CT = DateTime.Now;
-                entity.CU = 1;
-                entity.LU = 1;
-                entity.LT = DateTime.Now;
-                entity.ST = 1;
-                if (dal.Add(entity))
+                PublicBLL.PubBll<Ht_Menu> bll = new PublicBLL.PubBll<Ht_Menu>();
+                Ht_Menu entity = bll.ReturnEntity(str);
+                if (dal.SelectEntities(x => x.Name == entity.Name).Count > 0)
                 {
-                    return "保存成功";
+                    return "该人员已经被赋予角色";
                 }
                 else
                 {
-                    return "保存失败";
+                    entity.CT = DateTime.Now;
+                    entity.CU = Common.Common.UserID;
+                    entity.LU = Common.Common.UserID;
+                    entity.LT = DateTime.Now;
+                    entity.ST = 1;
+                    if (dal.Add(entity,LogBLL.controllog("add","新增导航栏_MenuAdd",str)))
+                    {
+                        return "保存成功";
+                    }
+                    else
+                    {
+                        return "保存失败";
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.errorControlLog("add", "新增导航栏_MenuAdd", str, ex.ToString());
+                return "保存失败";
             }
         }
 
@@ -68,19 +76,27 @@ namespace FYMS.BLL
         /// <param name="str"></param>
         public static string MenuUpdate(string str)
         {
-            PublicBLL.PubBll<HtMenu> bll = new PublicBLL.PubBll<HtMenu>();
-            HtMenu entity = bll.ReturnEntity(str);
-            Ht_Menu model = dal.SelectEntities(x => x.ID == entity.ID).FirstOrDefault();
-            PublicBLL.PubBll<Ht_Menu> bll1 = new PublicBLL.PubBll<Ht_Menu>();
-            model = bll1.Edit(entity, model);
-            model.LU = 1;
-            model.LT = DateTime.Now;
-            if (dal.Update(model))
+            try
             {
-                return "保存成功";
+                PublicBLL.PubBll<HtMenu> bll = new PublicBLL.PubBll<HtMenu>();
+                HtMenu entity = bll.ReturnEntity(str);
+                Ht_Menu model = dal.SelectEntities(x => x.ID == entity.ID).FirstOrDefault();
+                PublicBLL.PubBll<Ht_Menu> bll1 = new PublicBLL.PubBll<Ht_Menu>();
+                model = bll1.Edit(entity, model);
+                model.LU = Common.Common.UserID; ;
+                model.LT = DateTime.Now;
+                if (dal.Update(model, LogBLL.controllog("modify", "更新导航栏_MenuUpdate", str)))
+                {
+                    return "保存成功";
+                }
+                else
+                {
+                    return "保存失败";
+                }
             }
-            else
+            catch(Exception ex)
             {
+                LogBLL.errorControlLog("modify", "更新导航栏_MenuUpdate", str, ex.ToString());
                 return "保存失败";
             }
         }
@@ -108,18 +124,23 @@ namespace FYMS.BLL
                 Ht_Menu bean = dal.SelectEntities(x => x.ID == id).FirstOrDefault();
                 if (bean.ST == 0)
                 {
+                    bean.LU = Common.Common.UserID;
+                    bean.LT = DateTime.Now;
                     bean.ST = 1;
                 }
                 else
                 {
+                    bean.LU = Common.Common.UserID;
+                    bean.LT = DateTime.Now;
                     bean.ST = 0;
                 }
-                dal.UpdateEntity(bean);
+                dal.UpdateEntity(bean,LogBLL.controllog("delete", "导航栏禁用开启_MenuDelete",id.ToString()));
                 return "成功";
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                LogBLL.errorControlLog("delete", "导航栏禁用开启_MenuDelete", id.ToString(), ex.ToString());
+                return "失败";
             }
         }
     }

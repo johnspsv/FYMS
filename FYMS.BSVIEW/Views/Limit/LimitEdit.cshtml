@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "角色权限修改";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+</div>
+@*@model FYMS.Common.ViewModel.HtLimit*@
+<form id="limit_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">选择角色</label>
+                <div class="col-lg-6 ">
+                    <input type="text" class="form-control" value="@ViewData["rolename"]" disabled />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">权限说明</label>
+                <div class="col-lg-6 ">
+                    <textarea class="form-control" rows="4" name="limit_common">@ViewData["common"]</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">权限列表</label>
+                <div class="col-lg-10 ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div>
+                                <button type="button" class="btn btn-success" id="btn-check-all">全选</button> <button type="button" class="btn btn-danger" id="btn-uncheck-all">清空</button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div id="tree" class=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <input type="text" class="hidden"  name="menu_id" id="txtval" value="@ViewData["value"]" />
+            <input type="text" class="hidden" name="limit_id" value="@ViewData["limit_id"]" />
+        </div>
+
+        <div id="checkable-output"></div>
+
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <input type="button" class="btn btn-primary" id="btnSave" value="保存" />
+                <a href="/Limit/LimitMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        var url = document.URL;
+        var all = url.split('/');
+        var id = all[all.length - 1];
+
+        $.ajax({
+            type: "POST",
+            url: "/Limit/TreeDataEdit",
+            dataType: "json",
+            data: {"id":id},
+            success: function (result) {
+                $('#tree').treeview({
+                    data: result,
+                    showIcon: false,
+                    showCheckbox: true,
+                    levels: 1,
+                    onNodeChecked: function (event, node) {
+                        var a = $("#txtval").val();
+                        var b = a + node.nodeid+",";
+                        if (node.parentId != null) {
+                            var parentnode = $("#tree").treeview("getNode", node.parentId);
+                            if (!parentnode.state.checked) {
+                                parentnode.state.checked = true;
+                                b = b + parentnode.nodeid + ",";
+                            }
+                             if (parentnode.parentId != null) {
+                                var grandparentnode = $("#tree").treeview("getNode", parentnode.parentId);
+                                if (!grandparentnode.state.checked) {
+                                    grandparentnode.state.checked = true;
+                                    b = b + grandparentnode.nodeid + ",";
+                                }
+                            }
+                        }
+                        if (node.nodes != null) {
+                            for (x in node.nodes) {
+                                var childnode = $("#tree").treeview("getNode", node.nodes[x].nodeId);
+                                if (!childnode.state.checked) {
+                                    childnode.state.checked = true;
+                                    b=b+childnode.nodeid+",";
+                                }
+                                if (childnode.nodes != null) {
+                                    for (y in childnode.nodes) {
+                                        var grandchildnode = $("#tree").treeview("getNode", childnode.nodes[y].nodeId);
+                                        if (!grandchildnode.state.checked) {
+                                            grandchildnode.state.checked = true;
+                                            b = b + grandchildnode.nodeid + ",";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        $("#txtval").val(b);
+                    },
+                    onNodeUnchecked: function (event, node) {
+                        var a = $("#txtval").val();
+                        var c = node.nodeid + ",";
+                        var b = a.replace(c, "");
+                        if (node.parentId != null) {
+                            var parentnode = $("#tree").treeview("getNode", node.parentId);
+                            var j=0;
+                            for (x in parentnode.nodes) {
+                                if (parentnode.nodes[x].state.checked) {
+                                    if (parentnode.nodes[x].nodeId != node.nodeId) {
+                                        j++;
+                                    }
+                                }
+                            }
+                            if (j == 0) {
+                                parentnode.state.checked = false;
+                                var d = parentnode.nodeid + ",";
+                                b = b.replace(d, "");
+                                if (parentnode.parentId != null) {
+                                    var grandparentnode = $("#tree").treeview("getNode",parentnode.parentId);
+                                    grandparentnode.state.checked = false;
+                                    var g = grandparentnode.nodeid + ",";
+                                    b = b.replace(g, "");
+                                }
+                            }
+                        }
+                        if (node.nodes != null) {
+                            for (x in node.nodes) {
+                                var childnode = $("#tree").treeview("getNode", node.nodes[x].nodeId);
+                                if (childnode.state.checked) {
+                                    childnode.state.checked = false;
+                                    var d = childnode.nodeid + ",";
+                                    b = b.replace(d, "");
+                                }
+                                if (childnode.nodes != null) {
+                                    for (y in childnode.nodes) {
+                                        var grandchildnode = $("#tree").treeview("getNode", childnode.nodes[y].nodeId);
+                                        if (grandchildnode.state.checked) {
+                                            grandchildnode.state.checked = false;
+                                            var q = grandchildnode.nodeid + ",";
+                                            b = b.replace(q, "");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        $("#txtval").val(b);
+                    }
+                });
+            },
+        })
+    })
+
+    $("#btnSave").click(function () {
+
+        var formData = new FormData($("#limit_form")[0]);
+        $.ajax({
+            type: "POST",
+            url: "/Limit/Update",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                if (result == "保存成功") {
+                    window.location.href = "@Url.Action("LimitMain","Limit")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $('#btn-check-all').on('click', function (e) {
+        $('#tree').treeview('checkAll', { silent: $('#chk-check-silent').is(':checked') });
+    });
+
+    $('#btn-uncheck-all').on('click', function (e) {
+        $('#tree').treeview('uncheckAll', { silent: $('#chk-check-silent').is(':checked') });
+    });
+
+     $('#limit_form').bootstrapValidator({
+        //        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            limit_role: {
+                validators: {
+                    notEmpty: {
+                        message: '请选择角色'
+                    }
+                }
+            },
+           menu_id: {
+                validators: {
+                    notEmpty: {
+                        message: '请勾选相应的权限'
+                    }
+                }
+            },
+        }
+     });
+
+    $("#limit_form").bootstrapValidator('validate');
+
+</script>
+

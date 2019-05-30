@@ -9,9 +9,32 @@ namespace FYMS.BSVIEW.Controllers
     public class IndexController : Controller
     {
         // GET: Index
+        /// <summary>
+        /// 后台管理首页
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            ViewBag.Title = "首页";
+
+            if (Common.Common.UserID>-1)
+            {
+                ViewBag.Title = "首页";
+                ViewData["UserName"] = Common.Common.UserName;
+                return View();
+            }
+            else
+            {
+                return Redirect("/Login/Login");
+            }
+        }
+
+
+        /// <summary>
+        /// 404页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ErrorPage404()
+        {
             return View();
         }
     }

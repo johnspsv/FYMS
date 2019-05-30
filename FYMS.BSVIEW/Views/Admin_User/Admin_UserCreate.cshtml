@@ -8,16 +8,14 @@
 
 <div class="row">
     <h3 class="page-header">@ViewBag.Title</h3>
-    @*<div class="text-right col-lg-6">
-            <a class="btn btn-primary active" href="/Admin_User/Admin_UserMain">返回</a>
-        </div>*@
+    
 </div>
 @model FYMS.Common.ViewModel.User_admin
 <form id="user_form" enctype="multipart/form-data" class="form-horizontal" action="/Admin_User/Save" method="post">
     <div class="row">
         <div class="col-lg-7">
             <div class="form-group">
-                <label class="col-lg-2 control-label">工号</label>
+                <label class="col-lg-2 control-label">账号</label>
                 <div class="col-lg-6 ">
                     <input type="text" class="form-control" name="user_code" />
                 </div>

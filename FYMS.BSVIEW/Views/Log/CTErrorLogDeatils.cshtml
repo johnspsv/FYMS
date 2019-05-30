@@ -1,8 +1,66 @@
 ﻿
 @{
-    ViewBag.Title = "CTErrorLogDeatils";
+    ViewBag.Title = "前台错误日志明细";
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-<h2>CTErrorLogDeatils</h2>
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+</div>
+@model FYMS.Common.ViewModel.CTErrorLog
+<form id="user_form" enctype="multipart/form-data" class="form-horizontal">
+    <div class="row">
+        <fieldset disabled>
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">错误日期</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.CT, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">错误人员</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.error_name, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">所属公司</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">报错路由</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.errorroute, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">报错方法</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.errorfun, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">报错内容</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextAreaFor(model => model.errorcommon, new { rows = "15", @class = "form-control" })
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <a href="/Log/CTErrorLogMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
 

@@ -5,6 +5,302 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FYMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ct_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="AccountName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountDate" Type="int" />
+          <Property Name="AccountNUM" Type="int" />
+        </EntityType>
+        <EntityType Name="ct_ActDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="AccountID" Type="int" />
+          <Property Name="CompanyID" Type="int" />
+          <Property Name="StartDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="EndDate" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ct_ActMenuRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="AccountID" Type="int" />
+          <Property Name="MenuID" Type="int" />
+        </EntityType>
+        <EntityType Name="ct_Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mobilephone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="idno" Type="nvarchar" MaxLength="30" />
+          <Property Name="gender" Type="int" Nullable="false" />
+          <Property Name="photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyManager" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="ManagerPhone" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyLegalPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyPhoto" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ct_ControlLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="ctrl_name" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ctrl_bool" Type="int" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="userName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ct_ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="error_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="error_catch" Type="nvarchar" MaxLength="1000" />
+          <Property Name="error_userid" Type="int" />
+          <Property Name="companyID" Type="int" />
+        </EntityType>
+        <EntityType Name="ct_Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ct_GRRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_LGRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="LimitID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_Limit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="UsersID" Type="int" />
+          <Property Name="Common" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ct_LimtDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="LimitID" Type="int" />
+          <Property Name="MenuID" Type="int" />
+        </EntityType>
+        <EntityType Name="ct_LoginLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="log_ip" Type="nvarchar" MaxLength="50" />
+          <Property Name="log_mac" Type="nvarchar" MaxLength="50" />
+          <Property Name="log_name" Type="nvarchar" MaxLength="20" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ct_LRRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="LimitID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="MenuName" Type="char" MaxLength="10" />
+          <Property Name="Floor" Type="int" />
+          <Property Name="FloorID" Type="int" />
+          <Property Name="NameOrPath" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FloorName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="ct_Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="RoleCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleCommon" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ct_UGRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="GroupID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_ULRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="LimitID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_URRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ct_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mobilephone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="idno" Type="nvarchar" MaxLength="30" />
+          <Property Name="gender" Type="int" />
+          <Property Name="photo" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompanyID" Type="int" />
+        </EntityType>
         <EntityType Name="ht_admin_log">
           <Key>
             <PropertyRef Name="ID" />
@@ -60,6 +356,46 @@
           <Property Name="role_name" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="role_common" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="ht_CheckRoleRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="CheckID" Type="int" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <EntityType Name="ht_CheckTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="CheckID" Type="int" Nullable="false" />
+          <Property Name="Jsonstr" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Common" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ht_CheckType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" />
+          <Property Name="CheckName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CheckCode" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="ht_control_log">
           <Key>
             <PropertyRef Name="ID" />
@@ -71,7 +407,7 @@
           <Property Name="LU" Type="int" Nullable="false" />
           <Property Name="LT" Type="datetime" Nullable="false" />
           <Property Name="ST" Type="int" />
-          <Property Name="ctrl_name" Type="nvarchar" MaxLength="10" />
+          <Property Name="ctrl_name" Type="nvarchar" MaxLength="1000" />
           <Property Name="ctrl_bool" Type="int" />
         </EntityType>
         <EntityType Name="ht_dictionary">
@@ -105,6 +441,40 @@
           <Property Name="error_name" Type="nvarchar" MaxLength="50" />
           <Property Name="error_catch" Type="nvarchar" MaxLength="1000" />
         </EntityType>
+        <EntityType Name="Ht_Limit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="int" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="MenuID" Type="int" Nullable="false" />
+          <Property Name="Common" Type="nvarchar" MaxLength="100" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ht_LimitDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="int" />
+          <Property Name="CU" Type="int" Nullable="false" />
+          <Property Name="CT" Type="datetime" Nullable="false" />
+          <Property Name="LU" Type="int" Nullable="false" />
+          <Property Name="LT" Type="datetime" Nullable="false" />
+          <Property Name="ST" Type="int" Nullable="false" />
+          <Property Name="LimitID" Type="int" Nullable="false" />
+          <Property Name="MenuID" Type="int" />
+          <Property Name="funAdd" Type="int" />
+          <Property Name="funDelete" Type="int" />
+          <Property Name="funSelect" Type="int" />
+          <Property Name="funUpdate" Type="int" />
+        </EntityType>
         <EntityType Name="Ht_Menu">
           <Key>
             <PropertyRef Name="ID" />
@@ -137,6 +507,16 @@
           <Property Name="role_id" Type="int" Nullable="false" />
           <Property Name="role_name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="Test">
           <Key>
             <PropertyRef Name="ID" />
@@ -150,6 +530,306 @@
           <Property Name="TestUserCode" Type="nvarchar" MaxLength="50" />
           <Property Name="TestUserName" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_CT_ACTDE_FK_CTACTD_CT_ACCOU">
+          <End Role="ct_Account" Type="Self.ct_Account" Multiplicity="0..1" />
+          <End Role="ct_ActDetail" Type="Self.ct_ActDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActDetail">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ACTDE_FK_CTACTD_CT_COMPA">
+          <End Role="ct_Company" Type="Self.ct_Company" Multiplicity="0..1" />
+          <End Role="ct_ActDetail" Type="Self.ct_ActDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActDetail">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ACTME_FK_CTAMRE_CT_ACCOU">
+          <End Role="ct_Account" Type="Self.ct_Account" Multiplicity="0..1" />
+          <End Role="ct_ActMenuRel" Type="Self.ct_ActMenuRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActMenuRel">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ACTME_FK_CTAMRE_CT_MENU">
+          <End Role="ct_Menu" Type="Self.ct_Menu" Multiplicity="0..1" />
+          <End Role="ct_ActMenuRel" Type="Self.ct_ActMenuRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActMenuRel">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ADMIN_FK_CUSUSE_CT_COMPA">
+          <End Role="ct_Company" Type="Self.ct_Company" Multiplicity="1" />
+          <End Role="ct_Admin" Type="Self.ct_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_Admin">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_GRREL_FK_CUSTOM_CT_GROUP">
+          <End Role="ct_Group" Type="Self.ct_Group" Multiplicity="1" />
+          <End Role="ct_GRRel" Type="Self.ct_GRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_GRRel">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_GRREL_FK_CUSTOM_CT_ROLES">
+          <End Role="ct_Roles" Type="Self.ct_Roles" Multiplicity="1" />
+          <End Role="ct_GRRel" Type="Self.ct_GRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_GRRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LGREL_FK_CUSTOM_CT_GROUP">
+          <End Role="ct_Group" Type="Self.ct_Group" Multiplicity="1" />
+          <End Role="ct_LGRel" Type="Self.ct_LGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LGRel">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LGREL_FK_CUSTOM_CT_LIMIT">
+          <End Role="ct_Limit" Type="Self.ct_Limit" Multiplicity="1" />
+          <End Role="ct_LGRel" Type="Self.ct_LGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LGRel">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LIMTD_FK_CTLDET_CT_MENU">
+          <End Role="ct_Menu" Type="Self.ct_Menu" Multiplicity="0..1" />
+          <End Role="ct_LimtDetail" Type="Self.ct_LimtDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LimtDetail">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT">
+          <End Role="ct_Limit" Type="Self.ct_Limit" Multiplicity="0..1" />
+          <End Role="ct_LimtDetail" Type="Self.ct_LimtDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LimtDetail">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LRREL_FK_CUSTOM_CT_LIMIT">
+          <End Role="ct_Limit" Type="Self.ct_Limit" Multiplicity="1" />
+          <End Role="ct_LRRel" Type="Self.ct_LRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LRRel">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LRREL_FK_CUSTOM_CT_ROLES">
+          <End Role="ct_Roles" Type="Self.ct_Roles" Multiplicity="1" />
+          <End Role="ct_LRRel" Type="Self.ct_LRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LRRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_UGREL_FK_CUSTOM_CT_GROUP">
+          <End Role="ct_Group" Type="Self.ct_Group" Multiplicity="1" />
+          <End Role="ct_UGRel" Type="Self.ct_UGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_UGRel">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_UGREL_FK_CUSTOM_CT_USERS">
+          <End Role="ct_Users" Type="Self.ct_Users" Multiplicity="1" />
+          <End Role="ct_UGRel" Type="Self.ct_UGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_UGRel">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ULREL_FK_CUSTOM_CT_LIMIT">
+          <End Role="ct_Limit" Type="Self.ct_Limit" Multiplicity="1" />
+          <End Role="ct_ULRel" Type="Self.ct_ULRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ULRel">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ULREL_FK_CUSTOM_CT_USERS">
+          <End Role="ct_Users" Type="Self.ct_Users" Multiplicity="1" />
+          <End Role="ct_ULRel" Type="Self.ct_ULRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ULRel">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_URREL_FK_CUSTOM_CT_ROLES">
+          <End Role="ct_Roles" Type="Self.ct_Roles" Multiplicity="1" />
+          <End Role="ct_URRel" Type="Self.ct_URRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_URRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_URREL_FK_CUSTOM_CT_USERS">
+          <End Role="ct_Users" Type="Self.ct_Users" Multiplicity="1" />
+          <End Role="ct_URRel" Type="Self.ct_URRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_URRel">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_USERS_FK_CUTOME_CT_COMPA">
+          <End Role="ct_Company" Type="Self.ct_Company" Multiplicity="0..1" />
+          <End Role="ct_Users" Type="Self.ct_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_Users">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_CHECK_FK_ CHECK_HT_ADMIN">
+          <End Role="ht_admin_userrole" Type="Self.ht_admin_userrole" Multiplicity="0..1" />
+          <End Role="ht_CheckRoleRel" Type="Self.ht_CheckRoleRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ht_admin_userrole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ht_CheckRoleRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_CHECK_REFERENCE_HT_CHECK">
+          <End Role="ht_CheckType" Type="Self.ht_CheckType" Multiplicity="0..1" />
+          <End Role="ht_CheckRoleRel" Type="Self.ht_CheckRoleRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ht_CheckType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ht_CheckRoleRel">
+              <PropertyRef Name="CheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_LIMIT_FK_LIMIT__HT_LIMIT">
+          <End Role="Ht_Limit" Type="Self.Ht_Limit" Multiplicity="1" />
+          <End Role="Ht_LimitDetails" Type="Self.Ht_LimitDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ht_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ht_LimitDetails">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_LIMIT_FK_LIMITD_HT_MENU">
+          <End Role="Ht_Menu" Type="Self.Ht_Menu" Multiplicity="0..1" />
+          <End Role="Ht_LimitDetails" Type="Self.Ht_LimitDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ht_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ht_LimitDetails">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN">
+          <End Role="ht_admin_userrole" Type="Self.ht_admin_userrole" Multiplicity="1" />
+          <End Role="Ht_Limit" Type="Self.Ht_Limit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ht_admin_userrole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ht_Limit">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_HT_USERR_FK_USER_R_HT_ADMIN">
           <End Role="ht_admin_user" Type="Self.ht_admin_user" Multiplicity="1" />
           <End Role="ht_userroleRel" Type="Self.ht_userroleRel" Multiplicity="*" />
@@ -174,16 +854,177 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="proc_Login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="FYMSModelStoreContainer">
+          <EntitySet Name="ct_Account" EntityType="Self.ct_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_ActDetail" EntityType="Self.ct_ActDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_ActMenuRel" EntityType="Self.ct_ActMenuRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Admin" EntityType="Self.ct_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Company" EntityType="Self.ct_Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_ControlLog" EntityType="Self.ct_ControlLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_ErrorLog" EntityType="Self.ct_ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Group" EntityType="Self.ct_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_GRRel" EntityType="Self.ct_GRRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_LGRel" EntityType="Self.ct_LGRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Limit" EntityType="Self.ct_Limit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_LimtDetail" EntityType="Self.ct_LimtDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_LoginLog" EntityType="Self.ct_LoginLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_LRRel" EntityType="Self.ct_LRRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Menu" EntityType="Self.ct_Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Roles" EntityType="Self.ct_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_UGRel" EntityType="Self.ct_UGRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_ULRel" EntityType="Self.ct_ULRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_URRel" EntityType="Self.ct_URRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ct_Users" EntityType="Self.ct_Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_admin_log" EntityType="Self.ht_admin_log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_admin_user" EntityType="Self.ht_admin_user" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_admin_userrole" EntityType="Self.ht_admin_userrole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ht_CheckRoleRel" EntityType="Self.ht_CheckRoleRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ht_CheckTable" EntityType="Self.ht_CheckTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ht_CheckType" EntityType="Self.ht_CheckType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_control_log" EntityType="Self.ht_control_log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_dictionary" EntityType="Self.ht_dictionary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_error_log" EntityType="Self.ht_error_log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ht_Limit" EntityType="Self.Ht_Limit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ht_LimitDetails" EntityType="Self.Ht_LimitDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ht_Menu" EntityType="Self.Ht_Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ht_userroleRel" EntityType="Self.ht_userroleRel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CT_ACTDE_FK_CTACTD_CT_ACCOU" Association="Self.FK_CT_ACTDE_FK_CTACTD_CT_ACCOU">
+            <End Role="ct_Account" EntitySet="ct_Account" />
+            <End Role="ct_ActDetail" EntitySet="ct_ActDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ACTDE_FK_CTACTD_CT_COMPA" Association="Self.FK_CT_ACTDE_FK_CTACTD_CT_COMPA">
+            <End Role="ct_Company" EntitySet="ct_Company" />
+            <End Role="ct_ActDetail" EntitySet="ct_ActDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ACTME_FK_CTAMRE_CT_ACCOU" Association="Self.FK_CT_ACTME_FK_CTAMRE_CT_ACCOU">
+            <End Role="ct_Account" EntitySet="ct_Account" />
+            <End Role="ct_ActMenuRel" EntitySet="ct_ActMenuRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ACTME_FK_CTAMRE_CT_MENU" Association="Self.FK_CT_ACTME_FK_CTAMRE_CT_MENU">
+            <End Role="ct_Menu" EntitySet="ct_Menu" />
+            <End Role="ct_ActMenuRel" EntitySet="ct_ActMenuRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ADMIN_FK_CUSUSE_CT_COMPA" Association="Self.FK_CT_ADMIN_FK_CUSUSE_CT_COMPA">
+            <End Role="ct_Company" EntitySet="ct_Company" />
+            <End Role="ct_Admin" EntitySet="ct_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_GRREL_FK_CUSTOM_CT_GROUP" Association="Self.FK_CT_GRREL_FK_CUSTOM_CT_GROUP">
+            <End Role="ct_Group" EntitySet="ct_Group" />
+            <End Role="ct_GRRel" EntitySet="ct_GRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_GRREL_FK_CUSTOM_CT_ROLES" Association="Self.FK_CT_GRREL_FK_CUSTOM_CT_ROLES">
+            <End Role="ct_Roles" EntitySet="ct_Roles" />
+            <End Role="ct_GRRel" EntitySet="ct_GRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LGREL_FK_CUSTOM_CT_GROUP" Association="Self.FK_CT_LGREL_FK_CUSTOM_CT_GROUP">
+            <End Role="ct_Group" EntitySet="ct_Group" />
+            <End Role="ct_LGRel" EntitySet="ct_LGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LGREL_FK_CUSTOM_CT_LIMIT" Association="Self.FK_CT_LGREL_FK_CUSTOM_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_LGRel" EntitySet="ct_LGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LIMTD_FK_CTLDET_CT_MENU" Association="Self.FK_CT_LIMTD_FK_CTLDET_CT_MENU">
+            <End Role="ct_Menu" EntitySet="ct_Menu" />
+            <End Role="ct_LimtDetail" EntitySet="ct_LimtDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT" Association="Self.FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_LimtDetail" EntitySet="ct_LimtDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LRREL_FK_CUSTOM_CT_LIMIT" Association="Self.FK_CT_LRREL_FK_CUSTOM_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_LRRel" EntitySet="ct_LRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LRREL_FK_CUSTOM_CT_ROLES" Association="Self.FK_CT_LRREL_FK_CUSTOM_CT_ROLES">
+            <End Role="ct_Roles" EntitySet="ct_Roles" />
+            <End Role="ct_LRRel" EntitySet="ct_LRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_UGREL_FK_CUSTOM_CT_GROUP" Association="Self.FK_CT_UGREL_FK_CUSTOM_CT_GROUP">
+            <End Role="ct_Group" EntitySet="ct_Group" />
+            <End Role="ct_UGRel" EntitySet="ct_UGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_UGREL_FK_CUSTOM_CT_USERS" Association="Self.FK_CT_UGREL_FK_CUSTOM_CT_USERS">
+            <End Role="ct_Users" EntitySet="ct_Users" />
+            <End Role="ct_UGRel" EntitySet="ct_UGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ULREL_FK_CUSTOM_CT_LIMIT" Association="Self.FK_CT_ULREL_FK_CUSTOM_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_ULRel" EntitySet="ct_ULRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ULREL_FK_CUSTOM_CT_USERS" Association="Self.FK_CT_ULREL_FK_CUSTOM_CT_USERS">
+            <End Role="ct_Users" EntitySet="ct_Users" />
+            <End Role="ct_ULRel" EntitySet="ct_ULRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_URREL_FK_CUSTOM_CT_ROLES" Association="Self.FK_CT_URREL_FK_CUSTOM_CT_ROLES">
+            <End Role="ct_Roles" EntitySet="ct_Roles" />
+            <End Role="ct_URRel" EntitySet="ct_URRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_URREL_FK_CUSTOM_CT_USERS" Association="Self.FK_CT_URREL_FK_CUSTOM_CT_USERS">
+            <End Role="ct_Users" EntitySet="ct_Users" />
+            <End Role="ct_URRel" EntitySet="ct_URRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_USERS_FK_CUTOME_CT_COMPA" Association="Self.FK_CT_USERS_FK_CUTOME_CT_COMPA">
+            <End Role="ct_Company" EntitySet="ct_Company" />
+            <End Role="ct_Users" EntitySet="ct_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_CHECK_FK_ CHECK_HT_ADMIN" Association="Self.FK_HT_CHECK_FK_ CHECK_HT_ADMIN">
+            <End Role="ht_admin_userrole" EntitySet="ht_admin_userrole" />
+            <End Role="ht_CheckRoleRel" EntitySet="ht_CheckRoleRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_CHECK_REFERENCE_HT_CHECK" Association="Self.FK_HT_CHECK_REFERENCE_HT_CHECK">
+            <End Role="ht_CheckType" EntitySet="ht_CheckType" />
+            <End Role="ht_CheckRoleRel" EntitySet="ht_CheckRoleRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_LIMIT_FK_LIMIT__HT_LIMIT" Association="Self.FK_HT_LIMIT_FK_LIMIT__HT_LIMIT">
+            <End Role="Ht_Limit" EntitySet="Ht_Limit" />
+            <End Role="Ht_LimitDetails" EntitySet="Ht_LimitDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_LIMIT_FK_LIMITD_HT_MENU" Association="Self.FK_HT_LIMIT_FK_LIMITD_HT_MENU">
+            <End Role="Ht_Menu" EntitySet="Ht_Menu" />
+            <End Role="Ht_LimitDetails" EntitySet="Ht_LimitDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN" Association="Self.FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN">
+            <End Role="ht_admin_userrole" EntitySet="ht_admin_userrole" />
+            <End Role="Ht_Limit" EntitySet="Ht_Limit" />
+          </AssociationSet>
           <AssociationSet Name="FK_HT_USERR_FK_USER_R_HT_ADMIN" Association="Self.FK_HT_USERR_FK_USER_R_HT_ADMIN">
             <End Role="ht_admin_user" EntitySet="ht_admin_user" />
             <End Role="ht_userroleRel" EntitySet="ht_userroleRel" />
@@ -228,6 +1069,169 @@
             <End Role="ht_userroleRel" EntitySet="ht_userroleRel" />
           </AssociationSet>
           <EntitySet Name="Ht_Menu" EntityType="FYMSModel.Ht_Menu" />
+          <EntitySet Name="Ht_Limit" EntityType="FYMSModel.Ht_Limit" />
+          <AssociationSet Name="FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN" Association="FYMSModel.FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN">
+            <End Role="ht_admin_userrole" EntitySet="ht_admin_userrole" />
+            <End Role="Ht_Limit" EntitySet="Ht_Limit" />
+          </AssociationSet>
+          <EntitySet Name="Ht_LimitDetails" EntityType="FYMSModel.Ht_LimitDetails" />
+          <AssociationSet Name="FK_HT_LIMIT_FK_LIMIT__HT_LIMIT" Association="FYMSModel.FK_HT_LIMIT_FK_LIMIT__HT_LIMIT">
+            <End Role="Ht_Limit" EntitySet="Ht_Limit" />
+            <End Role="Ht_LimitDetails" EntitySet="Ht_LimitDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_LIMIT_FK_LIMITD_HT_MENU" Association="FYMSModel.FK_HT_LIMIT_FK_LIMITD_HT_MENU">
+            <End Role="Ht_Menu" EntitySet="Ht_Menu" />
+            <End Role="Ht_LimitDetails" EntitySet="Ht_LimitDetails" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="FYMSModel.sysdiagrams" />
+          <FunctionImport Name="proc_Login" ReturnType="Collection(FYMSModel.proc_Login_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(FYMSModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(FYMSModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="users" ReturnType="Collection(FYMSModel.users_Result)">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ct_Account" EntityType="FYMSModel.ct_Account" />
+          <EntitySet Name="ct_ActDetail" EntityType="FYMSModel.ct_ActDetail" />
+          <EntitySet Name="ct_ActMenuRel" EntityType="FYMSModel.ct_ActMenuRel" />
+          <EntitySet Name="ct_Admin" EntityType="FYMSModel.ct_Admin" />
+          <EntitySet Name="ct_Company" EntityType="FYMSModel.ct_Company" />
+          <EntitySet Name="ct_ControlLog" EntityType="FYMSModel.ct_ControlLog" />
+          <EntitySet Name="ct_ErrorLog" EntityType="FYMSModel.ct_ErrorLog" />
+          <EntitySet Name="ct_Group" EntityType="FYMSModel.ct_Group" />
+          <EntitySet Name="ct_GRRel" EntityType="FYMSModel.ct_GRRel" />
+          <EntitySet Name="ct_LGRel" EntityType="FYMSModel.ct_LGRel" />
+          <EntitySet Name="ct_Limit" EntityType="FYMSModel.ct_Limit" />
+          <EntitySet Name="ct_LimtDetail" EntityType="FYMSModel.ct_LimtDetail" />
+          <EntitySet Name="ct_LoginLog" EntityType="FYMSModel.ct_LoginLog" />
+          <EntitySet Name="ct_LRRel" EntityType="FYMSModel.ct_LRRel" />
+          <EntitySet Name="ct_Menu" EntityType="FYMSModel.ct_Menu" />
+          <EntitySet Name="ct_Roles" EntityType="FYMSModel.ct_Roles" />
+          <EntitySet Name="ct_UGRel" EntityType="FYMSModel.ct_UGRel" />
+          <EntitySet Name="ct_ULRel" EntityType="FYMSModel.ct_ULRel" />
+          <EntitySet Name="ct_URRel" EntityType="FYMSModel.ct_URRel" />
+          <EntitySet Name="ct_Users" EntityType="FYMSModel.ct_Users" />
+          <EntitySet Name="ht_CheckRoleRel" EntityType="FYMSModel.ht_CheckRoleRel" />
+          <EntitySet Name="ht_CheckTable" EntityType="FYMSModel.ht_CheckTable" />
+          <EntitySet Name="ht_CheckType" EntityType="FYMSModel.ht_CheckType" />
+          <AssociationSet Name="FK_CT_ACTDE_FK_CTACTD_CT_ACCOU" Association="FYMSModel.FK_CT_ACTDE_FK_CTACTD_CT_ACCOU">
+            <End Role="ct_Account" EntitySet="ct_Account" />
+            <End Role="ct_ActDetail" EntitySet="ct_ActDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ACTME_FK_CTAMRE_CT_ACCOU" Association="FYMSModel.FK_CT_ACTME_FK_CTAMRE_CT_ACCOU">
+            <End Role="ct_Account" EntitySet="ct_Account" />
+            <End Role="ct_ActMenuRel" EntitySet="ct_ActMenuRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ACTDE_FK_CTACTD_CT_COMPA" Association="FYMSModel.FK_CT_ACTDE_FK_CTACTD_CT_COMPA">
+            <End Role="ct_Company" EntitySet="ct_Company" />
+            <End Role="ct_ActDetail" EntitySet="ct_ActDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ACTME_FK_CTAMRE_CT_MENU" Association="FYMSModel.FK_CT_ACTME_FK_CTAMRE_CT_MENU">
+            <End Role="ct_Menu" EntitySet="ct_Menu" />
+            <End Role="ct_ActMenuRel" EntitySet="ct_ActMenuRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ADMIN_FK_CUSUSE_CT_COMPA" Association="FYMSModel.FK_CT_ADMIN_FK_CUSUSE_CT_COMPA">
+            <End Role="ct_Company" EntitySet="ct_Company" />
+            <End Role="ct_Admin" EntitySet="ct_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_USERS_FK_CUTOME_CT_COMPA" Association="FYMSModel.FK_CT_USERS_FK_CUTOME_CT_COMPA">
+            <End Role="ct_Company" EntitySet="ct_Company" />
+            <End Role="ct_Users" EntitySet="ct_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_GRREL_FK_CUSTOM_CT_GROUP" Association="FYMSModel.FK_CT_GRREL_FK_CUSTOM_CT_GROUP">
+            <End Role="ct_Group" EntitySet="ct_Group" />
+            <End Role="ct_GRRel" EntitySet="ct_GRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LGREL_FK_CUSTOM_CT_GROUP" Association="FYMSModel.FK_CT_LGREL_FK_CUSTOM_CT_GROUP">
+            <End Role="ct_Group" EntitySet="ct_Group" />
+            <End Role="ct_LGRel" EntitySet="ct_LGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_UGREL_FK_CUSTOM_CT_GROUP" Association="FYMSModel.FK_CT_UGREL_FK_CUSTOM_CT_GROUP">
+            <End Role="ct_Group" EntitySet="ct_Group" />
+            <End Role="ct_UGRel" EntitySet="ct_UGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_GRREL_FK_CUSTOM_CT_ROLES" Association="FYMSModel.FK_CT_GRREL_FK_CUSTOM_CT_ROLES">
+            <End Role="ct_Roles" EntitySet="ct_Roles" />
+            <End Role="ct_GRRel" EntitySet="ct_GRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LGREL_FK_CUSTOM_CT_LIMIT" Association="FYMSModel.FK_CT_LGREL_FK_CUSTOM_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_LGRel" EntitySet="ct_LGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT" Association="FYMSModel.FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_LimtDetail" EntitySet="ct_LimtDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LRREL_FK_CUSTOM_CT_LIMIT" Association="FYMSModel.FK_CT_LRREL_FK_CUSTOM_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_LRRel" EntitySet="ct_LRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ULREL_FK_CUSTOM_CT_LIMIT" Association="FYMSModel.FK_CT_ULREL_FK_CUSTOM_CT_LIMIT">
+            <End Role="ct_Limit" EntitySet="ct_Limit" />
+            <End Role="ct_ULRel" EntitySet="ct_ULRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LIMTD_FK_CTLDET_CT_MENU" Association="FYMSModel.FK_CT_LIMTD_FK_CTLDET_CT_MENU">
+            <End Role="ct_Menu" EntitySet="ct_Menu" />
+            <End Role="ct_LimtDetail" EntitySet="ct_LimtDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_LRREL_FK_CUSTOM_CT_ROLES" Association="FYMSModel.FK_CT_LRREL_FK_CUSTOM_CT_ROLES">
+            <End Role="ct_Roles" EntitySet="ct_Roles" />
+            <End Role="ct_LRRel" EntitySet="ct_LRRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_URREL_FK_CUSTOM_CT_ROLES" Association="FYMSModel.FK_CT_URREL_FK_CUSTOM_CT_ROLES">
+            <End Role="ct_Roles" EntitySet="ct_Roles" />
+            <End Role="ct_URRel" EntitySet="ct_URRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_UGREL_FK_CUSTOM_CT_USERS" Association="FYMSModel.FK_CT_UGREL_FK_CUSTOM_CT_USERS">
+            <End Role="ct_Users" EntitySet="ct_Users" />
+            <End Role="ct_UGRel" EntitySet="ct_UGRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_ULREL_FK_CUSTOM_CT_USERS" Association="FYMSModel.FK_CT_ULREL_FK_CUSTOM_CT_USERS">
+            <End Role="ct_Users" EntitySet="ct_Users" />
+            <End Role="ct_ULRel" EntitySet="ct_ULRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CT_URREL_FK_CUSTOM_CT_USERS" Association="FYMSModel.FK_CT_URREL_FK_CUSTOM_CT_USERS">
+            <End Role="ct_Users" EntitySet="ct_Users" />
+            <End Role="ct_URRel" EntitySet="ct_URRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_CHECK_FK__CHECK_HT_ADMIN" Association="FYMSModel.FK_HT_CHECK_FK__CHECK_HT_ADMIN">
+            <End Role="ht_admin_userrole" EntitySet="ht_admin_userrole" />
+            <End Role="ht_CheckRoleRel" EntitySet="ht_CheckRoleRel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HT_CHECK_REFERENCE_HT_CHECK" Association="FYMSModel.FK_HT_CHECK_REFERENCE_HT_CHECK">
+            <End Role="ht_CheckType" EntitySet="ht_CheckType" />
+            <End Role="ht_CheckRoleRel" EntitySet="ht_CheckRoleRel" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ht_admin_log">
           <Key>
@@ -285,6 +1289,8 @@
           <Property Name="role_name" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="role_common" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ht_userroleRel" Relationship="FYMSModel.FK_HT_USERR_FK_USERRO_HT_ADMIN" FromRole="ht_admin_userrole" ToRole="ht_userroleRel" />
+          <NavigationProperty Name="Ht_Limit" Relationship="FYMSModel.FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN" FromRole="ht_admin_userrole" ToRole="Ht_Limit" />
+          <NavigationProperty Name="ht_CheckRoleRel" Relationship="FYMSModel.FK_HT_CHECK_FK__CHECK_HT_ADMIN" FromRole="ht_admin_userrole" ToRole="ht_CheckRoleRel" />
         </EntityType>
         <EntityType Name="ht_control_log">
           <Key>
@@ -297,7 +1303,7 @@
           <Property Name="LU" Type="Int32" Nullable="false" />
           <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ST" Type="Int32" />
-          <Property Name="ctrl_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ctrl_name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="ctrl_bool" Type="Int32" />
         </EntityType>
         <EntityType Name="ht_dictionary">
@@ -388,7 +1394,774 @@
           <Property Name="FloorID" Type="Int32" />
           <Property Name="Path" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FloorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Ht_LimitDetails" Relationship="FYMSModel.FK_HT_LIMIT_FK_LIMITD_HT_MENU" FromRole="Ht_Menu" ToRole="Ht_LimitDetails" />
         </EntityType>
+        <EntityType Name="Ht_Limit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="MenuID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ht_admin_userrole" Relationship="FYMSModel.FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN" FromRole="Ht_Limit" ToRole="ht_admin_userrole" />
+          <Property Name="Common" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ht_LimitDetails" Relationship="FYMSModel.FK_HT_LIMIT_FK_LIMIT__HT_LIMIT" FromRole="Ht_Limit" ToRole="Ht_LimitDetails" />
+        </EntityType>
+        <Association Name="FK_HT_LIMIT_FK_ROLE_L_HT_ADMIN">
+          <End Type="FYMSModel.ht_admin_userrole" Role="ht_admin_userrole" Multiplicity="1" />
+          <End Type="FYMSModel.Ht_Limit" Role="Ht_Limit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ht_admin_userrole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ht_Limit">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Ht_LimitDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PID" Type="Int32" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" Nullable="false" />
+          <Property Name="LimitID" Type="Int32" Nullable="false" />
+          <Property Name="MenuID" Type="Int32" />
+          <NavigationProperty Name="Ht_Limit" Relationship="FYMSModel.FK_HT_LIMIT_FK_LIMIT__HT_LIMIT" FromRole="Ht_LimitDetails" ToRole="Ht_Limit" />
+          <NavigationProperty Name="Ht_Menu" Relationship="FYMSModel.FK_HT_LIMIT_FK_LIMITD_HT_MENU" FromRole="Ht_LimitDetails" ToRole="Ht_Menu" />
+          <Property Name="funAdd" Type="Int32" />
+          <Property Name="funDelete" Type="Int32" />
+          <Property Name="funSelect" Type="Int32" />
+          <Property Name="funUpdate" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_HT_LIMIT_FK_LIMIT__HT_LIMIT">
+          <End Type="FYMSModel.Ht_Limit" Role="Ht_Limit" Multiplicity="1" />
+          <End Type="FYMSModel.Ht_LimitDetails" Role="Ht_LimitDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ht_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ht_LimitDetails">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_LIMIT_FK_LIMITD_HT_MENU">
+          <End Type="FYMSModel.Ht_Menu" Role="Ht_Menu" Multiplicity="0..1" />
+          <End Type="FYMSModel.Ht_LimitDetails" Role="Ht_LimitDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ht_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ht_LimitDetails">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <ComplexType Name="proc_Login_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="RoleID" Nullable="true" />
+          <Property Type="String" Name="RoleName" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="MenuName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="FloorID" Nullable="true" />
+          <Property Type="Int32" Name="MenuID" Nullable="true" />
+          <Property Type="Int32" Name="MenuFloor" Nullable="true" />
+          <Property Type="String" Name="MenuPath" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FloorName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="funAdd" Nullable="true" />
+          <Property Type="Int32" Name="funDelete" Nullable="true" />
+          <Property Type="Int32" Name="funSelect" Nullable="true" />
+          <Property Type="Int32" Name="funUpdate" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="users_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="PID" Nullable="true" />
+          <Property Type="Int32" Name="CU" Nullable="false" />
+          <Property Type="DateTime" Name="CT" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="LU" Nullable="false" />
+          <Property Type="DateTime" Name="LT" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="ST" Nullable="false" />
+          <Property Type="String" Name="role_code" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="role_name" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="role_common" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="ct_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="AccountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountDate" Type="Int32" />
+          <NavigationProperty Name="ct_ActDetail" Relationship="FYMSModel.FK_CT_ACTDE_FK_CTACTD_CT_ACCOU" FromRole="ct_Account" ToRole="ct_ActDetail" />
+          <NavigationProperty Name="ct_ActMenuRel" Relationship="FYMSModel.FK_CT_ACTME_FK_CTAMRE_CT_ACCOU" FromRole="ct_Account" ToRole="ct_ActMenuRel" />
+          <Property Name="AccountNUM" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ct_ActDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="CompanyID" Type="Int32" />
+          <Property Name="StartDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EndDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_Account" Relationship="FYMSModel.FK_CT_ACTDE_FK_CTACTD_CT_ACCOU" FromRole="ct_ActDetail" ToRole="ct_Account" />
+          <NavigationProperty Name="ct_Company" Relationship="FYMSModel.FK_CT_ACTDE_FK_CTACTD_CT_COMPA" FromRole="ct_ActDetail" ToRole="ct_Company" />
+        </EntityType>
+        <EntityType Name="ct_ActMenuRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="AccountID" Type="Int32" />
+          <Property Name="MenuID" Type="Int32" />
+          <NavigationProperty Name="ct_Account" Relationship="FYMSModel.FK_CT_ACTME_FK_CTAMRE_CT_ACCOU" FromRole="ct_ActMenuRel" ToRole="ct_Account" />
+          <NavigationProperty Name="ct_Menu" Relationship="FYMSModel.FK_CT_ACTME_FK_CTAMRE_CT_MENU" FromRole="ct_ActMenuRel" ToRole="ct_Menu" />
+        </EntityType>
+        <EntityType Name="ct_Admin">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mobilephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="Int32" Nullable="false" />
+          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Company" Relationship="FYMSModel.FK_CT_ADMIN_FK_CUSUSE_CT_COMPA" FromRole="ct_Admin" ToRole="ct_Company" />
+        </EntityType>
+        <EntityType Name="ct_Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyManager" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLegalPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_ActDetail" Relationship="FYMSModel.FK_CT_ACTDE_FK_CTACTD_CT_COMPA" FromRole="ct_Company" ToRole="ct_ActDetail" />
+          <NavigationProperty Name="ct_Admin" Relationship="FYMSModel.FK_CT_ADMIN_FK_CUSUSE_CT_COMPA" FromRole="ct_Company" ToRole="ct_Admin" />
+          <NavigationProperty Name="ct_Users" Relationship="FYMSModel.FK_CT_USERS_FK_CUTOME_CT_COMPA" FromRole="ct_Company" ToRole="ct_Users" />
+        </EntityType>
+        <EntityType Name="ct_ControlLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="ctrl_name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ctrl_bool" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ct_ErrorLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="error_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="error_catch" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="error_userid" Type="Int32" />
+          <Property Name="companyID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ct_Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_GRRel" Relationship="FYMSModel.FK_CT_GRREL_FK_CUSTOM_CT_GROUP" FromRole="ct_Group" ToRole="ct_GRRel" />
+          <NavigationProperty Name="ct_LGRel" Relationship="FYMSModel.FK_CT_LGREL_FK_CUSTOM_CT_GROUP" FromRole="ct_Group" ToRole="ct_LGRel" />
+          <NavigationProperty Name="ct_UGRel" Relationship="FYMSModel.FK_CT_UGREL_FK_CUSTOM_CT_GROUP" FromRole="ct_Group" ToRole="ct_UGRel" />
+        </EntityType>
+        <EntityType Name="ct_GRRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Group" Relationship="FYMSModel.FK_CT_GRREL_FK_CUSTOM_CT_GROUP" FromRole="ct_GRRel" ToRole="ct_Group" />
+          <NavigationProperty Name="ct_Roles" Relationship="FYMSModel.FK_CT_GRREL_FK_CUSTOM_CT_ROLES" FromRole="ct_GRRel" ToRole="ct_Roles" />
+        </EntityType>
+        <EntityType Name="ct_LGRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="LimitID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Group" Relationship="FYMSModel.FK_CT_LGREL_FK_CUSTOM_CT_GROUP" FromRole="ct_LGRel" ToRole="ct_Group" />
+          <NavigationProperty Name="ct_Limit" Relationship="FYMSModel.FK_CT_LGREL_FK_CUSTOM_CT_LIMIT" FromRole="ct_LGRel" ToRole="ct_Limit" />
+        </EntityType>
+        <EntityType Name="ct_Limit">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="UsersID" Type="Int32" />
+          <Property Name="Common" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_LGRel" Relationship="FYMSModel.FK_CT_LGREL_FK_CUSTOM_CT_LIMIT" FromRole="ct_Limit" ToRole="ct_LGRel" />
+          <NavigationProperty Name="ct_LimtDetail" Relationship="FYMSModel.FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT" FromRole="ct_Limit" ToRole="ct_LimtDetail" />
+          <NavigationProperty Name="ct_LRRel" Relationship="FYMSModel.FK_CT_LRREL_FK_CUSTOM_CT_LIMIT" FromRole="ct_Limit" ToRole="ct_LRRel" />
+          <NavigationProperty Name="ct_ULRel" Relationship="FYMSModel.FK_CT_ULREL_FK_CUSTOM_CT_LIMIT" FromRole="ct_Limit" ToRole="ct_ULRel" />
+        </EntityType>
+        <EntityType Name="ct_LimtDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="LimitID" Type="Int32" />
+          <Property Name="MenuID" Type="Int32" />
+          <NavigationProperty Name="ct_Limit" Relationship="FYMSModel.FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT" FromRole="ct_LimtDetail" ToRole="ct_Limit" />
+          <NavigationProperty Name="ct_Menu" Relationship="FYMSModel.FK_CT_LIMTD_FK_CTLDET_CT_MENU" FromRole="ct_LimtDetail" ToRole="ct_Menu" />
+        </EntityType>
+        <EntityType Name="ct_LoginLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="log_ip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="log_mac" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="log_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ct_LRRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="LimitID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Limit" Relationship="FYMSModel.FK_CT_LRREL_FK_CUSTOM_CT_LIMIT" FromRole="ct_LRRel" ToRole="ct_Limit" />
+          <NavigationProperty Name="ct_Roles" Relationship="FYMSModel.FK_CT_LRREL_FK_CUSTOM_CT_ROLES" FromRole="ct_LRRel" ToRole="ct_Roles" />
+        </EntityType>
+        <EntityType Name="ct_Menu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="MenuName" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Floor" Type="Int32" />
+          <Property Name="FloorID" Type="Int32" />
+          <Property Name="NameOrPath" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FloorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+          <NavigationProperty Name="ct_ActMenuRel" Relationship="FYMSModel.FK_CT_ACTME_FK_CTAMRE_CT_MENU" FromRole="ct_Menu" ToRole="ct_ActMenuRel" />
+          <NavigationProperty Name="ct_LimtDetail" Relationship="FYMSModel.FK_CT_LIMTD_FK_CTLDET_CT_MENU" FromRole="ct_Menu" ToRole="ct_LimtDetail" />
+        </EntityType>
+        <EntityType Name="ct_Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="RoleCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleCommon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ct_GRRel" Relationship="FYMSModel.FK_CT_GRREL_FK_CUSTOM_CT_ROLES" FromRole="ct_Roles" ToRole="ct_GRRel" />
+          <NavigationProperty Name="ct_LRRel" Relationship="FYMSModel.FK_CT_LRREL_FK_CUSTOM_CT_ROLES" FromRole="ct_Roles" ToRole="ct_LRRel" />
+          <NavigationProperty Name="ct_URRel" Relationship="FYMSModel.FK_CT_URREL_FK_CUSTOM_CT_ROLES" FromRole="ct_Roles" ToRole="ct_URRel" />
+        </EntityType>
+        <EntityType Name="ct_UGRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="GroupID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Group" Relationship="FYMSModel.FK_CT_UGREL_FK_CUSTOM_CT_GROUP" FromRole="ct_UGRel" ToRole="ct_Group" />
+          <NavigationProperty Name="ct_Users" Relationship="FYMSModel.FK_CT_UGREL_FK_CUSTOM_CT_USERS" FromRole="ct_UGRel" ToRole="ct_Users" />
+        </EntityType>
+        <EntityType Name="ct_ULRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="LimitID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Limit" Relationship="FYMSModel.FK_CT_ULREL_FK_CUSTOM_CT_LIMIT" FromRole="ct_ULRel" ToRole="ct_Limit" />
+          <NavigationProperty Name="ct_Users" Relationship="FYMSModel.FK_CT_ULREL_FK_CUSTOM_CT_USERS" FromRole="ct_ULRel" ToRole="ct_Users" />
+        </EntityType>
+        <EntityType Name="ct_URRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ct_Roles" Relationship="FYMSModel.FK_CT_URREL_FK_CUSTOM_CT_ROLES" FromRole="ct_URRel" ToRole="ct_Roles" />
+          <NavigationProperty Name="ct_Users" Relationship="FYMSModel.FK_CT_URREL_FK_CUSTOM_CT_USERS" FromRole="ct_URRel" ToRole="ct_Users" />
+        </EntityType>
+        <EntityType Name="ct_Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mobilephone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idno" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="Int32" />
+          <Property Name="photo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyID" Type="Int32" />
+          <NavigationProperty Name="ct_Company" Relationship="FYMSModel.FK_CT_USERS_FK_CUTOME_CT_COMPA" FromRole="ct_Users" ToRole="ct_Company" />
+          <NavigationProperty Name="ct_UGRel" Relationship="FYMSModel.FK_CT_UGREL_FK_CUSTOM_CT_USERS" FromRole="ct_Users" ToRole="ct_UGRel" />
+          <NavigationProperty Name="ct_ULRel" Relationship="FYMSModel.FK_CT_ULREL_FK_CUSTOM_CT_USERS" FromRole="ct_Users" ToRole="ct_ULRel" />
+          <NavigationProperty Name="ct_URRel" Relationship="FYMSModel.FK_CT_URREL_FK_CUSTOM_CT_USERS" FromRole="ct_Users" ToRole="ct_URRel" />
+        </EntityType>
+        <EntityType Name="ht_CheckRoleRel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="CheckID" Type="Int32" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="ht_admin_userrole" Relationship="FYMSModel.FK_HT_CHECK_FK__CHECK_HT_ADMIN" FromRole="ht_CheckRoleRel" ToRole="ht_admin_userrole" />
+          <NavigationProperty Name="ht_CheckType" Relationship="FYMSModel.FK_HT_CHECK_REFERENCE_HT_CHECK" FromRole="ht_CheckRoleRel" ToRole="ht_CheckType" />
+        </EntityType>
+        <EntityType Name="ht_CheckTable">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="CheckID" Type="Int32" Nullable="false" />
+          <Property Name="Jsonstr" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Common" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ht_CheckType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CU" Type="Int32" Nullable="false" />
+          <Property Name="CT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LU" Type="Int32" Nullable="false" />
+          <Property Name="LT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="CheckName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CheckCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ht_CheckRoleRel" Relationship="FYMSModel.FK_HT_CHECK_REFERENCE_HT_CHECK" FromRole="ht_CheckType" ToRole="ht_CheckRoleRel" />
+        </EntityType>
+        <Association Name="FK_CT_ACTDE_FK_CTACTD_CT_ACCOU">
+          <End Type="FYMSModel.ct_Account" Role="ct_Account" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_ActDetail" Role="ct_ActDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActDetail">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ACTME_FK_CTAMRE_CT_ACCOU">
+          <End Type="FYMSModel.ct_Account" Role="ct_Account" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_ActMenuRel" Role="ct_ActMenuRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActMenuRel">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ACTDE_FK_CTACTD_CT_COMPA">
+          <End Type="FYMSModel.ct_Company" Role="ct_Company" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_ActDetail" Role="ct_ActDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActDetail">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ACTME_FK_CTAMRE_CT_MENU">
+          <End Type="FYMSModel.ct_Menu" Role="ct_Menu" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_ActMenuRel" Role="ct_ActMenuRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ActMenuRel">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ADMIN_FK_CUSUSE_CT_COMPA">
+          <End Type="FYMSModel.ct_Company" Role="ct_Company" Multiplicity="1" />
+          <End Type="FYMSModel.ct_Admin" Role="ct_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_Admin">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_USERS_FK_CUTOME_CT_COMPA">
+          <End Type="FYMSModel.ct_Company" Role="ct_Company" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_Users" Role="ct_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_Users">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_GRREL_FK_CUSTOM_CT_GROUP">
+          <End Type="FYMSModel.ct_Group" Role="ct_Group" Multiplicity="1" />
+          <End Type="FYMSModel.ct_GRRel" Role="ct_GRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_GRRel">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LGREL_FK_CUSTOM_CT_GROUP">
+          <End Type="FYMSModel.ct_Group" Role="ct_Group" Multiplicity="1" />
+          <End Type="FYMSModel.ct_LGRel" Role="ct_LGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LGRel">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_UGREL_FK_CUSTOM_CT_GROUP">
+          <End Type="FYMSModel.ct_Group" Role="ct_Group" Multiplicity="1" />
+          <End Type="FYMSModel.ct_UGRel" Role="ct_UGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_UGRel">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_GRREL_FK_CUSTOM_CT_ROLES">
+          <End Type="FYMSModel.ct_Roles" Role="ct_Roles" Multiplicity="1" />
+          <End Type="FYMSModel.ct_GRRel" Role="ct_GRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_GRRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LGREL_FK_CUSTOM_CT_LIMIT">
+          <End Type="FYMSModel.ct_Limit" Role="ct_Limit" Multiplicity="1" />
+          <End Type="FYMSModel.ct_LGRel" Role="ct_LGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LGRel">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LIMTD_FK_CTLIMI_CT_LIMIT">
+          <End Type="FYMSModel.ct_Limit" Role="ct_Limit" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_LimtDetail" Role="ct_LimtDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LimtDetail">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LRREL_FK_CUSTOM_CT_LIMIT">
+          <End Type="FYMSModel.ct_Limit" Role="ct_Limit" Multiplicity="1" />
+          <End Type="FYMSModel.ct_LRRel" Role="ct_LRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LRRel">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ULREL_FK_CUSTOM_CT_LIMIT">
+          <End Type="FYMSModel.ct_Limit" Role="ct_Limit" Multiplicity="1" />
+          <End Type="FYMSModel.ct_ULRel" Role="ct_ULRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Limit">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ULRel">
+              <PropertyRef Name="LimitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LIMTD_FK_CTLDET_CT_MENU">
+          <End Type="FYMSModel.ct_Menu" Role="ct_Menu" Multiplicity="0..1" />
+          <End Type="FYMSModel.ct_LimtDetail" Role="ct_LimtDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Menu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LimtDetail">
+              <PropertyRef Name="MenuID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_LRREL_FK_CUSTOM_CT_ROLES">
+          <End Type="FYMSModel.ct_Roles" Role="ct_Roles" Multiplicity="1" />
+          <End Type="FYMSModel.ct_LRRel" Role="ct_LRRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_LRRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_URREL_FK_CUSTOM_CT_ROLES">
+          <End Type="FYMSModel.ct_Roles" Role="ct_Roles" Multiplicity="1" />
+          <End Type="FYMSModel.ct_URRel" Role="ct_URRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_URRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_UGREL_FK_CUSTOM_CT_USERS">
+          <End Type="FYMSModel.ct_Users" Role="ct_Users" Multiplicity="1" />
+          <End Type="FYMSModel.ct_UGRel" Role="ct_UGRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_UGRel">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_ULREL_FK_CUSTOM_CT_USERS">
+          <End Type="FYMSModel.ct_Users" Role="ct_Users" Multiplicity="1" />
+          <End Type="FYMSModel.ct_ULRel" Role="ct_ULRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_ULRel">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CT_URREL_FK_CUSTOM_CT_USERS">
+          <End Type="FYMSModel.ct_Users" Role="ct_Users" Multiplicity="1" />
+          <End Type="FYMSModel.ct_URRel" Role="ct_URRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ct_Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ct_URRel">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_CHECK_FK__CHECK_HT_ADMIN">
+          <End Type="FYMSModel.ht_admin_userrole" Role="ht_admin_userrole" Multiplicity="0..1" />
+          <End Type="FYMSModel.ht_CheckRoleRel" Role="ht_CheckRoleRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ht_admin_userrole">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ht_CheckRoleRel">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HT_CHECK_REFERENCE_HT_CHECK">
+          <End Type="FYMSModel.ht_CheckType" Role="ht_CheckType" Multiplicity="0..1" />
+          <End Type="FYMSModel.ht_CheckRoleRel" Role="ht_CheckRoleRel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ht_CheckType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ht_CheckRoleRel">
+              <PropertyRef Name="CheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -545,6 +2318,456 @@
                 <ScalarProperty Name="CT" ColumnName="CT" />
                 <ScalarProperty Name="CU" ColumnName="CU" />
                 <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ht_Limit">
+            <EntityTypeMapping TypeName="FYMSModel.Ht_Limit">
+              <MappingFragment StoreEntitySet="Ht_Limit">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Common" ColumnName="Common" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ht_LimitDetails">
+            <EntityTypeMapping TypeName="FYMSModel.Ht_LimitDetails">
+              <MappingFragment StoreEntitySet="Ht_LimitDetails">
+                <ScalarProperty Name="funUpdate" ColumnName="funUpdate" />
+                <ScalarProperty Name="funSelect" ColumnName="funSelect" />
+                <ScalarProperty Name="funDelete" ColumnName="funDelete" />
+                <ScalarProperty Name="funAdd" ColumnName="funAdd" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FYMSModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="proc_Login" FunctionName="FYMSModel.Store.proc_Login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYMSModel.proc_Login_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="MenuFloor" ColumnName="MenuFloor" />
+                <ScalarProperty Name="MenuPath" ColumnName="MenuPath" />
+                <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+                <ScalarProperty Name="funAdd" ColumnName="funAdd" />
+                <ScalarProperty Name="funDelete" ColumnName="funDelete" />
+                <ScalarProperty Name="funSelect" ColumnName="funSelect" />
+                <ScalarProperty Name="funUpdate" ColumnName="funUpdate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="FYMSModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="FYMSModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="FYMSModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="FYMSModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYMSModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="FYMSModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="FYMSModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="FYMSModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="FYMSModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="ct_Account">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Account">
+              <MappingFragment StoreEntitySet="ct_Account">
+                <ScalarProperty Name="AccountNUM" ColumnName="AccountNUM" />
+                <ScalarProperty Name="AccountDate" ColumnName="AccountDate" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_ActDetail">
+            <EntityTypeMapping TypeName="FYMSModel.ct_ActDetail">
+              <MappingFragment StoreEntitySet="ct_ActDetail">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_ActMenuRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_ActMenuRel">
+              <MappingFragment StoreEntitySet="ct_ActMenuRel">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Admin">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Admin">
+              <MappingFragment StoreEntitySet="ct_Admin">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="idno" ColumnName="idno" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobilephone" ColumnName="mobilephone" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Company">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Company">
+              <MappingFragment StoreEntitySet="ct_Company">
+                <ScalarProperty Name="CompanyPhoto" ColumnName="CompanyPhoto" />
+                <ScalarProperty Name="CompanyLegalPerson" ColumnName="CompanyLegalPerson" />
+                <ScalarProperty Name="ManagerPhone" ColumnName="ManagerPhone" />
+                <ScalarProperty Name="CompanyPhone" ColumnName="CompanyPhone" />
+                <ScalarProperty Name="CompanyManager" ColumnName="CompanyManager" />
+                <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_ControlLog">
+            <EntityTypeMapping TypeName="FYMSModel.ct_ControlLog">
+              <MappingFragment StoreEntitySet="ct_ControlLog">
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="ctrl_bool" ColumnName="ctrl_bool" />
+                <ScalarProperty Name="ctrl_name" ColumnName="ctrl_name" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_ErrorLog">
+            <EntityTypeMapping TypeName="FYMSModel.ct_ErrorLog">
+              <MappingFragment StoreEntitySet="ct_ErrorLog">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="error_userid" ColumnName="error_userid" />
+                <ScalarProperty Name="error_catch" ColumnName="error_catch" />
+                <ScalarProperty Name="error_name" ColumnName="error_name" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Group">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Group">
+              <MappingFragment StoreEntitySet="ct_Group">
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_GRRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_GRRel">
+              <MappingFragment StoreEntitySet="ct_GRRel">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_LGRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_LGRel">
+              <MappingFragment StoreEntitySet="ct_LGRel">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Limit">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Limit">
+              <MappingFragment StoreEntitySet="ct_Limit">
+                <ScalarProperty Name="Common" ColumnName="Common" />
+                <ScalarProperty Name="UsersID" ColumnName="UsersID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_LimtDetail">
+            <EntityTypeMapping TypeName="FYMSModel.ct_LimtDetail">
+              <MappingFragment StoreEntitySet="ct_LimtDetail">
+                <ScalarProperty Name="MenuID" ColumnName="MenuID" />
+                <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_LoginLog">
+            <EntityTypeMapping TypeName="FYMSModel.ct_LoginLog">
+              <MappingFragment StoreEntitySet="ct_LoginLog">
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="log_name" ColumnName="log_name" />
+                <ScalarProperty Name="log_mac" ColumnName="log_mac" />
+                <ScalarProperty Name="log_ip" ColumnName="log_ip" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_LRRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_LRRel">
+              <MappingFragment StoreEntitySet="ct_LRRel">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Menu">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Menu">
+              <MappingFragment StoreEntitySet="ct_Menu">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="FloorName" ColumnName="FloorName" />
+                <ScalarProperty Name="NameOrPath" ColumnName="NameOrPath" />
+                <ScalarProperty Name="FloorID" ColumnName="FloorID" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Roles">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Roles">
+              <MappingFragment StoreEntitySet="ct_Roles">
+                <ScalarProperty Name="RoleCommon" ColumnName="RoleCommon" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_UGRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_UGRel">
+              <MappingFragment StoreEntitySet="ct_UGRel">
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_ULRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_ULRel">
+              <MappingFragment StoreEntitySet="ct_ULRel">
+                <ScalarProperty Name="LimitID" ColumnName="LimitID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_URRel">
+            <EntityTypeMapping TypeName="FYMSModel.ct_URRel">
+              <MappingFragment StoreEntitySet="ct_URRel">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ct_Users">
+            <EntityTypeMapping TypeName="FYMSModel.ct_Users">
+              <MappingFragment StoreEntitySet="ct_Users">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="idno" ColumnName="idno" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobilephone" ColumnName="mobilephone" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ht_CheckRoleRel">
+            <EntityTypeMapping TypeName="FYMSModel.ht_CheckRoleRel">
+              <MappingFragment StoreEntitySet="ht_CheckRoleRel">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ht_CheckTable">
+            <EntityTypeMapping TypeName="FYMSModel.ht_CheckTable">
+              <MappingFragment StoreEntitySet="ht_CheckTable">
+                <ScalarProperty Name="Common" ColumnName="Common" />
+                <ScalarProperty Name="Jsonstr" ColumnName="Jsonstr" />
+                <ScalarProperty Name="CheckID" ColumnName="CheckID" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ht_CheckType">
+            <EntityTypeMapping TypeName="FYMSModel.ht_CheckType">
+              <MappingFragment StoreEntitySet="ht_CheckType">
+                <ScalarProperty Name="CheckCode" ColumnName="CheckCode" />
+                <ScalarProperty Name="CheckName" ColumnName="CheckName" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="LT" ColumnName="LT" />
+                <ScalarProperty Name="LU" ColumnName="LU" />
+                <ScalarProperty Name="CT" ColumnName="CT" />
+                <ScalarProperty Name="CU" ColumnName="CU" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -31,55 +31,86 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult AdminRoleMain(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            
-            List<Admin_Role> list = new List<Admin_Role>();
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            var i = client.AdminRoleAll();
-            //var i = BLL.ht_admin_userBLL.All();
-
-            if (i != null)
+            try
             {
-                list = JsonConvert.DeserializeObject<List<Admin_Role>>(i);
-                var users = from u in list select u;
-                
-                if (!string.IsNullOrEmpty(searchString))
+                if (Common.Common.UserID > 0)
                 {
-                    page = 1;
-                    users = users.Where(u => u.role_name.Contains(searchString));
+                    if (Common.Common.CanRead("/Admin_User/Admin_UserMain") != null)
+                    {
+                        ViewData["add"] = Common.Common.CanRead("/AdminRole/AdminRoleMain").funAdd;
+                        ViewData["delete"] = Common.Common.CanRead("/AdminRole/AdminRoleMain").funDelete;
+                        ViewData["select"] = Common.Common.CanRead("/AdminRole/AdminRoleMain").funSelect;
+                        ViewData["update"] = Common.Common.CanRead("/AdminRole/AdminRoleMain").funUpdate;
+
+                        List<Admin_Role> list = new List<Admin_Role>();
+                        ViewBag.CurrentSort = sortOrder;
+                        ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                        var i = client.AdminRoleAll();
+                        //var i = BLL.ht_admin_userBLL.All();
+
+                        if (i != null)
+                        {
+                            list = JsonConvert.DeserializeObject<List<Admin_Role>>(i);
+                            var users = from u in list select u;
+
+                            if (!string.IsNullOrEmpty(searchString))
+                            {
+                                page = 1;
+                                users = users.Where(u => u.role_name.Contains(searchString));
+                            }
+                            else
+                            {
+                                searchString = currentFilter;
+                            }
+                            ViewBag.CurrentFilter = searchString;
+
+                            switch (sortOrder)
+                            {
+                                case "name_desc":
+                                    users = users.OrderByDescending(u => u.role_name);
+                                    break;
+                                default:
+                                    users = users.OrderBy(u => u.role_name);
+                                    break;
+                            }
+
+                            int j = 1;
+                            foreach (var x in users)
+                            {
+
+                                x.number = j++;
+                            }
+                            int pageSize = 50;
+                            int pageNumber = (page ?? 1);
+                            return View(users.ToPagedList(pageNumber, pageSize));
+                        }
+                        else
+                        {
+                            IQueryable<Admin_Role> iq = null;
+                            IPagedList<Admin_Role> pglist = new PagedList<Admin_Role>(iq, 1, 1);
+                            list = null;
+                            return View(pglist);
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
                 }
+
                 else
                 {
-                    searchString = currentFilter;
+                    return Redirect("/Login/Login");
                 }
-                ViewBag.CurrentFilter = searchString;
-
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        users = users.OrderByDescending(u => u.role_name);
-                        break;
-                    default:
-                        users = users.OrderBy(u => u.role_name);
-                        break;
-                }
-
-                int j = 1;
-                foreach (var x in users)
-                {
-                    
-                    x.number = j++;
-                }
-                int pageSize = 50;
-                int pageNumber = (page ?? 1);
-                return View(users.ToPagedList(pageNumber, pageSize));
             }
-            else
+            catch (Exception ex)
             {
-                IQueryable<Admin_Role> iq = null;
-                IPagedList<Admin_Role> pglist = new PagedList<Admin_Role>(iq, 1, 1);
-                list = null;
-                return View(pglist);
+                client.ErrorlogAsync("AdminRole" + "|" + "角色信息查询_AdminRoleMain" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
+            finally
+            {
+                client.controllog("select", "角色信息查询_AdminRoleMain", "");
             }
         }
 
@@ -89,7 +120,21 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult AdminRoleCreate()
         {
-            return View();
+            if (Common.Common.UserID > 0)
+            {
+                if (Common.Common.CanRead("/AdminRole/AdminRoleMain") != null)
+                {
+                    return View();
+                }
+                else
+                {
+                    return Redirect("/Index/ErrorPage404");
+                }
+            }
+            else
+            {
+                return Redirect("/Login/Login");
+            }
         }
 
         /// <summary>
@@ -100,15 +145,22 @@ namespace FYMS.BSVIEW.Controllers
         [HttpPost]
         public ActionResult Save(FormCollection fc)
         {
-            
-            Admin_Role user = new Admin_Role();
-            user.role_name = fc["role_name"].ToString();
-            user.role_code = fc["role_code"].ToString();
-            user.role_common = fc["role_common"].ToString();
-            string str = JsonConvert.SerializeObject(user).ToString();
-            string i = client.AdminRoleAdd(str);
-            ViewData["message"] = i;
-            return Content(i);
+            try
+            {
+                Admin_Role user = new Admin_Role();
+                user.role_name = fc["role_name"].ToString();
+                user.role_code = fc["role_code"].ToString();
+                user.role_common = fc["role_common"].ToString();
+                string str = JsonConvert.SerializeObject(user).ToString();
+                string i = client.AdminRoleAdd(str);
+                ViewData["message"] = i;
+                return Content(i);
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("AdminRole" + "|" + "人员角色保存_Save" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
         }
 
         /// <summary>
@@ -119,21 +171,29 @@ namespace FYMS.BSVIEW.Controllers
         [HttpPost]
         public ActionResult Update(Admin_Role admin_Role, FormCollection fc)
         {
-            string i = "";
             try
             {
-                admin_Role.ID = Id;
-                admin_Role.CT = CT;
-                admin_Role.role_common = fc["role_common"] == null ? "" : fc["role_common"].ToString();
-                string str = JsonConvert.SerializeObject(admin_Role).ToString();
-                i = client.AdminRoleUpdate(str);
-                //ViewData["message"] = i;
+                string i = "";
+                try
+                {
+                    admin_Role.ID = Id;
+                    admin_Role.CT = CT;
+                    admin_Role.role_common = fc["role_common"] == null ? "" : fc["role_common"].ToString();
+                    string str = JsonConvert.SerializeObject(admin_Role).ToString();
+                    i = client.AdminRoleUpdate(str);
+                    //ViewData["message"] = i;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                return Content(i);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                throw ex;
+                client.ErrorlogAsync("AdminRole" + "|" + "人员角色更新_Update" + "|" + ex.ToString());
+                return Content("保存失败");
             }
-            return Content(i);
         }
 
         /// <summary>
@@ -143,10 +203,32 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult AdminRoleEdit(int id)
         {
-            Id = id;
-            Admin_Role admin_Role = JsonConvert.DeserializeObject<Admin_Role>(client.AdminRoleByID(id));
-            CT = admin_Role.CT;
-            return View(admin_Role);
+            try
+            {
+                if (Common.Common.UserID > 0)
+                {
+                    if (Common.Common.CanRead("/AdminRole/AdminRoleMain") != null)
+                    {
+                        Id = id;
+                        Admin_Role admin_Role = JsonConvert.DeserializeObject<Admin_Role>(client.AdminRoleByID(id));
+                        CT = admin_Role.CT;
+                        return View(admin_Role);
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("AdminRole" + "|" + "角色信息编辑_AdminRoleEdit" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
         }
 
         /// <summary>
@@ -155,8 +237,30 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult AdminRoleDetails(int id)
         {
-            Admin_Role admin_Role = JsonConvert.DeserializeObject<Admin_Role>(client.AdminRoleByID(id));
-            return View(admin_Role);
+            try
+            {
+                if (Common.Common.UserID > 0)
+                {
+                    if (Common.Common.CanRead("/AdminRole/AdminRoleMain") != null)
+                    {
+                        Admin_Role admin_Role = JsonConvert.DeserializeObject<Admin_Role>(client.AdminRoleByID(id));
+                        return View(admin_Role);
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("AdminRole" + "|" + "角色信息查看_AdminRoleDetails" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
         }
 
         /// <summary>

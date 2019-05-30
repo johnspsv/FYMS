@@ -24,75 +24,98 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult AdminRoleRelMain(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            
-            List<AdminRoleRel> list = new List<AdminRoleRel>();
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-
-
-            var i = client.AdminRoleRelAll();
-            //var i = BLL.ht_userroleRelBLL.All();
-            List<User_admin> userlist = JsonConvert.DeserializeObject<List<User_admin>>(client.AdminUserAll());
-            List<Admin_Role> rolelist = JsonConvert.DeserializeObject<List<Admin_Role>>(client.AdminRoleAll());
-
-            if (i != null)
+            try
             {
-                list = JsonConvert.DeserializeObject<List<AdminRoleRel>>(i);
-                var users = from u in list select u;
-
-                if (!string.IsNullOrEmpty(searchString))
+                if (Common.Common.UserID > 0)
                 {
-                    page = 1;
-                    users = users.Where(u => u.role_name.Contains(searchString));
+                    if (Common.Common.CanRead("/AdminRoleRel/AdminRoleRelMain") != null)
+                    {
+                        ViewData["add"] = Common.Common.CanRead("/AdminRoleRel/AdminRoleRelMain").funAdd;
+                        ViewData["delete"] = Common.Common.CanRead("/AdminRoleRel/AdminRoleRelMain").funDelete;
+                        ViewData["select"] = Common.Common.CanRead("/AdminRoleRel/AdminRoleRelMain").funSelect;
+                        ViewData["update"] = Common.Common.CanRead("/AdminRoleRel/AdminRoleRelMain").funUpdate;
+
+                        List<AdminRoleRel> list = new List<AdminRoleRel>();
+                        ViewBag.CurrentSort = sortOrder;
+                        ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+
+
+                        var i = client.AdminRoleRelAll();
+                        //var i = BLL.ht_userroleRelBLL.All();
+                        List<User_admin> userlist = JsonConvert.DeserializeObject<List<User_admin>>(client.AdminUserAll());
+                        List<Admin_Role> rolelist = JsonConvert.DeserializeObject<List<Admin_Role>>(client.AdminRoleAll());
+
+                        if (i != null)
+                        {
+                            list = JsonConvert.DeserializeObject<List<AdminRoleRel>>(i);
+                            var users = from u in list select u;
+
+                            if (!string.IsNullOrEmpty(searchString))
+                            {
+                                page = 1;
+                                users = users.Where(u => u.role_name.Contains(searchString));
+                            }
+                            else
+                            {
+                                searchString = currentFilter;
+                            }
+                            ViewBag.CurrentFilter = searchString;
+
+                            switch (sortOrder)
+                            {
+                                case "name_desc":
+                                    users = users.OrderByDescending(u => u.role_name);
+                                    break;
+                                default:
+                                    users = users.OrderBy(u => u.role_name);
+                                    break;
+                            }
+                            int j = 1;
+                            foreach (var x in users)
+                            {
+                                if (j == 1)
+                                {
+                                    x.userlist = userlist;
+                                    x.rolelist = rolelist;
+                                }
+                                x.number = j++;
+                            }
+                            int pageSize = 50;
+                            int pageNumber = (page ?? 1);
+                            return View(Tuple.Create(users.ToPagedList(pageNumber, pageSize), userlist, rolelist));
+                        }
+                        else
+                        {
+                            IQueryable<AdminRoleRel> iq = null;
+                            IPagedList<AdminRoleRel> pglist = new PagedList<AdminRoleRel>(iq, 1, 1);
+                            list = null;
+                            return View(Tuple.Create(pglist, userlist, rolelist));
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
                 }
                 else
                 {
-                    searchString = currentFilter;
+                    return Redirect("/Login/Login");
                 }
-                ViewBag.CurrentFilter = searchString;
-
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        users = users.OrderByDescending(u => u.role_name);
-                        break;
-                    default:
-                        users = users.OrderBy(u => u.role_name);
-                        break;
-                }
-                int j = 1;
-                foreach (var x in users)
-                {
-                    if (j == 1)
-                    {
-                        x.userlist = userlist;
-                        x.rolelist = rolelist;
-                    }
-                    x.number = j++;
-                }
-                int pageSize = 50;
-                int pageNumber = (page ?? 1);
-                return View(Tuple.Create(users.ToPagedList(pageNumber, pageSize),userlist,rolelist));
             }
-            else
+            catch (Exception ex)
             {
-                IQueryable<AdminRoleRel> iq = null;
-                IPagedList<AdminRoleRel> pglist = new PagedList<AdminRoleRel>(iq, 1, 1);
-                list = null;
-                return View(Tuple.Create(pglist, userlist,rolelist));
+                client.ErrorlogAsync("AdminRoleRel" + "|" + "人员分配查询_AdminRoleRelMain" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
+            finally
+            {
+                client.controllog("select", "人员分配查询_AdminRoleRelMain", "");
             }
         }
 
-        /// <summary>
-        /// 人员关系创建
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult AdminRoleRelCreate()
-        {
-            return View();
-        }
-
+        
         /// <summary>
         /// 保存
         /// </summary>
@@ -101,19 +124,27 @@ namespace FYMS.BSVIEW.Controllers
         [HttpPost]
         public ActionResult Save(FormCollection fc)
         {
-            AdminRoleRel rolerel = new AdminRoleRel();
-            rolerel.admin_id  = Convert.ToInt32 (fc["username"]);
-            rolerel.role_id = Convert.ToInt32(fc["rolename"]);
-            List<User_admin> userlist = JsonConvert.DeserializeObject<List<User_admin>>(client.AdminUserAll());
-            List<Admin_Role> rolelist = JsonConvert.DeserializeObject<List<Admin_Role>>(client.AdminRoleAll());
-            var username = userlist.Where(x => x.ID == rolerel.admin_id).FirstOrDefault();
-            rolerel.admin_name = username.user_name;
-            var rolename = rolelist.Where(x => x.ID == rolerel.role_id).FirstOrDefault();
-            rolerel.role_name = rolename.role_name;
-            string str = JsonConvert.SerializeObject(rolerel).ToString();
-            //string i = BLL.ht_userroleRelBLL.UserRoleRelAdd(str);
-            string i = client.AdminRoleRelAdd(str);
-            return Content(i);
+            try
+            {
+                AdminRoleRel rolerel = new AdminRoleRel();
+                rolerel.admin_id = Convert.ToInt32(fc["username"]);
+                rolerel.role_id = Convert.ToInt32(fc["rolename"]);
+                List<User_admin> userlist = JsonConvert.DeserializeObject<List<User_admin>>(client.AdminUserAll());
+                List<Admin_Role> rolelist = JsonConvert.DeserializeObject<List<Admin_Role>>(client.AdminRoleAll());
+                var username = userlist.Where(x => x.ID == rolerel.admin_id).FirstOrDefault();
+                rolerel.admin_name = username.user_name;
+                var rolename = rolelist.Where(x => x.ID == rolerel.role_id).FirstOrDefault();
+                rolerel.role_name = rolename.role_name;
+                string str = JsonConvert.SerializeObject(rolerel).ToString();
+                //string i = BLL.ht_userroleRelBLL.UserRoleRelAdd(str);
+                string i = client.AdminRoleRelAdd(str);
+                return Content(i);
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("AdminRoleRel" + "|" + "人员分配保存_Save" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
         }
 
 
@@ -125,20 +156,28 @@ namespace FYMS.BSVIEW.Controllers
         [HttpPost]
         public ActionResult Update(FormCollection fc)
         {
-            int id = Convert.ToInt32(fc["editid"]);
-            AdminRoleRel rolerel = JsonConvert.DeserializeObject<AdminRoleRel>(client.AdminRoleRelEntity(id));
-            rolerel.admin_id = Convert.ToInt32(fc["user_id"]);
-            rolerel.role_id = Convert.ToInt32(fc["rolename"]);
-            List<User_admin> userlist = JsonConvert.DeserializeObject<List<User_admin>>(client.AdminUserAll());
-            List<Admin_Role> rolelist = JsonConvert.DeserializeObject<List<Admin_Role>>(client.AdminRoleAll());
-            var username = userlist.Where(x => x.ID == rolerel.admin_id).FirstOrDefault();
-            rolerel.admin_name = username.user_name;
-            var rolename = rolelist.Where(x => x.ID == rolerel.role_id).FirstOrDefault();
-            rolerel.role_name = rolename.role_name;
-            string str = JsonConvert.SerializeObject(rolerel).ToString();
-            //string i = BLL.ht_userroleRelBLL.UserRoleRelUpdate(str);
-            string i = client.AdminRoleRelUpdate(str);
-            return Content(i);
+            try
+            {
+                int id = Convert.ToInt32(fc["editid"]);
+                AdminRoleRel rolerel = JsonConvert.DeserializeObject<AdminRoleRel>(client.AdminRoleRelEntity(id));
+                rolerel.admin_id = Convert.ToInt32(fc["user_id"]);
+                rolerel.role_id = Convert.ToInt32(fc["rolename"]);
+                List<User_admin> userlist = JsonConvert.DeserializeObject<List<User_admin>>(client.AdminUserAll());
+                List<Admin_Role> rolelist = JsonConvert.DeserializeObject<List<Admin_Role>>(client.AdminRoleAll());
+                var username = userlist.Where(x => x.ID == rolerel.admin_id).FirstOrDefault();
+                rolerel.admin_name = username.user_name;
+                var rolename = rolelist.Where(x => x.ID == rolerel.role_id).FirstOrDefault();
+                rolerel.role_name = rolename.role_name;
+                string str = JsonConvert.SerializeObject(rolerel).ToString();
+                //string i = BLL.ht_userroleRelBLL.UserRoleRelUpdate(str);
+                string i = client.AdminRoleRelUpdate(str);
+                return Content(i);
+            }
+            catch(Exception ex)
+            {
+                client.ErrorlogAsync("AdminRoleRel" + "|" + "人员分配更新_Update" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
         }
 
         /// <summary>

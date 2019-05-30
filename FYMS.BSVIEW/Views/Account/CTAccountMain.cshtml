@@ -1,0 +1,446 @@
+﻿
+@{
+    ViewBag.Title = "账号类型";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@model PagedList.IPagedList<FYMS.Common.ViewModel.Account>
+@using PagedList.Mvc;
+
+<script type="text/javascript">
+    function del(e) {
+
+        var id = $(e).data("id");
+        //取表格的选中行数据
+        bootbox.confirm({
+            title: '',
+            message: "确定进行操作？",
+            buttons: {
+                confirm: { label: "确定" },
+                cancel: { label: "取消" }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Account/AccountTypeDelete",
+                        data: { "id": id },
+                        async: false,
+                        success: function (result) {
+                            bootbox.alert("成功");
+                            location.href = "CTAccountMain";
+                        },
+                        error: function (result) {
+                            bootbox.alert("失败" + result);
+                        }
+                    });
+                } else {
+                    return;
+                }
+            },
+        });
+    };
+
+    function edit(e) {
+
+        var id = $(e).data("editid");
+        //取表格的选中行数据
+        $("#editid").val(id);
+        var Name = $(e).parent().parent().find('td').eq(1).text().trim();
+        var Date = $(e).parent().parent().find('td').eq(2).text().trim();
+        var Num = $(e).parent().parent().find('td').eq(3).text().trim();
+        $("input[name='ed_AccountName']").val(Name);
+        $("input[name='ed_AccountDate']").val(Date);
+        $("input[name='ed_AccountNUM']").val(Num);
+    };
+
+/**/</script>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<h3 class="page-header">@ViewBag.Title</h3>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-6">
+            @if (ViewData["add"].ToString() == "1")
+            {
+                <button class="btn btn-primary active" data-toggle="modal" data-target="#AccountTypeCreate">新增账号类型</button>
+            }
+        </div>
+        @using (Html.BeginForm("CTAccountMain", "Account", FormMethod.Get, new { @class = "form-horizontal" }))
+        {
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">输入搜索内容：</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="submit" class="btn btn-primary active" value="搜索" />
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+</div>
+
+<br />
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="active">
+                <th>
+                    序号
+                </th>
+                <th>
+                    @Html.ActionLink("账号类型名称", "CTAccountMain", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    有效天数(单位：天)
+                </th>
+                <th>
+                    账号限制数量(单位：个)
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    if (item.ST == 0)
+                    {
+                        <tr class="info">
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountNUM)
+                            </td>
+                            <td>
+                                @if (ViewData["delete"].ToString() == "1")
+                                {
+                                    <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-ok label label-success ">启用</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AccountNUM)
+                            </td>
+                            <td>
+                                @if (ViewData["update"].ToString() == "1")
+                                {
+                                    <a data-editid="@item.ID" class=" glyphicon glyphicon-level-up label label-warning" data-toggle="modal" data-target="#AccountTypeEdit" onclick="edit(this)">编辑</a>
+                                }
+                                &nbsp;
+                                @if (ViewData["delete"].ToString() == "1")
+                                {
+                                    <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-remove label label-danger ">禁用</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("CTAccountMain", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div class="modal fade" id="AccountTypeCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    账号类型新增
+                </h4>
+            </div>
+            <form id="cr_accounttype_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">账号类型名称</label>
+                                    <div class="col-lg-5 ">
+                                        <input type="text" class="form-control" name="cr_AccountName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">账号有效天数(单位：天)</label>
+                                    <div class="col-lg-5 ">
+                                        <input type="number" class="form-control" name="cr_AccountDate" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">账号限制数量(单位：个)</label>
+                                    <div class="col-lg-5 ">
+                                        <input type="number" class="form-control" name="cr_AccountNUM" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-9 control-label text-danger">TIPS：有效天数设置为0为无限制，账号数量设置为0为无限制</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="cr_saveBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="AccountTypeEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    账号类型编辑
+                </h4>
+            </div>
+            <form id="ed_accounttype_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">账号类型名称<input type="hidden" id="editid" name="editid" value="" /></label>
+                                    <div class="col-lg-5 ">
+                                        <input type="text" class="form-control" name="ed_AccountName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">账号有效天数(单位：天)</label>
+                                    <div class="col-lg-5 ">
+                                        <input type="number" class="form-control" name="ed_AccountDate" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">账号限制数量(单位：个)</label>
+                                    <div class="col-lg-5 ">
+                                        <input type="number" class="form-control" name="ed_AccountNUM" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-9 control-label text-danger">TIPS：有效天数设置为0为无限制，账号数量设置为0为无限制</label>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="ed_saveBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+<script type="text/javascript">
+    $("#cr_saveBtn").click(function () {
+
+        var formData = new FormData($("#cr_accounttype_form")[0]);
+        if ($("input[name='cr_AccountName']").val() == null||$("input[name='cr_AccountName']").val() == "") {
+            toastr.warning("请填写账号类型名称", '提示');
+            return;
+        }
+        if ($("input[name='cr_AccountDate']").val() == null||$("input[name='cr_AccountDate']").val() == "") {
+            toastr.warning("请填写账号有效天数", '提示');
+            return;
+        }
+        if ($("input[name='cr_AccountNUM']").val() == null||$("input[name='cr_AccountNUM']").val() == "") {
+            toastr.warning("请填写账号限制数量", '提示');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Account/Save",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("CTAccountMain","Account")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $("#cr_accounttype_form").bootstrapValidator({
+        //live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            cr_AccountName: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入账号类型名称'
+                    }
+                }
+            },
+            cr_AccountDate: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入账号有效天数'
+                    },
+                    regexp: {
+                        regexp: /^[0-9]+$/,
+                        message: '请输入数字'
+                    }
+                }
+            },
+            cr_AccountNUM: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入账号限制数量'
+                    },
+                    regexp: {
+                        regexp: /^[0-9]+$/,
+                        message: '请输入数字'
+                    },
+                }
+            }
+        }
+    });
+
+    $("#cr_accounttype_form").bootstrapValidator("validate");
+
+    $("#ed_saveBtn").click(function () {
+
+        var formData = new FormData($("#ed_accounttype_form")[0]);
+        if ($("input[name='ed_AccountName']").val() == null||$("input[name='ed_AccountName']").val() == "") {
+            toastr.warning("请填写账号类型名称", '提示');
+            return;
+        }
+        if ($("input[name='ed_AccountDate']").val() == null||$("input[name='ed_AccountDate']").val() == "") {
+            toastr.warning("请填写账号有效天数", '提示');
+            return;
+        }
+        if ($("input[name='ed_AccountNUM']").val() == null||$("input[name='ed_AccountNUM']").val() == "") {
+            toastr.warning("请填写账号限制数量", '提示');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Account/Update",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("CTAccountMain","Account")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $("#ed_accounttype_form").bootstrapValidator({
+        //live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            ed_AccountName: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入账号类型名称'
+                    }
+                }
+            },
+            ed_AccountDate: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入账号有效天数'
+                    },
+                    regexp: {
+                        regexp: /^[0-9]+$/,
+                        message: '请输入数字'
+                    }
+                }
+            },
+            ed_AccountNUM: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入账号限制数量'
+                    },
+                    regexp: {
+                        regexp: /^[0-9]+$/,
+                        message: '请输入数字'
+                    },
+                }
+            }
+        }
+    });
+
+    $("#ed_accounttype_form").bootstrapValidator("validate");
+</script>
+

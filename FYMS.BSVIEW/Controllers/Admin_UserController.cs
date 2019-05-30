@@ -17,6 +17,7 @@ namespace FYMS.BSVIEW.Controllers
         /// </summary>
         public static string picname;
 
+        MainService.MainServiceClient client = new MainService.MainServiceClient();
         /// <summary>
         /// 编辑时记录ID
         /// </summary>
@@ -33,61 +34,112 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult Admin_UserMain(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            MainService.MainServiceClient client = new MainService.MainServiceClient();
-            List<User_admin> list = new List<User_admin>();
-            ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            var i = client.AdminUserAll();
-            //var i = BLL.ht_admin_userBLL.All();
-
-            if (i != null)
+            try
             {
-                list = JsonConvert.DeserializeObject<List<User_admin>>(i);
-                var users = from u in list select u;
-                
-                if (!string.IsNullOrEmpty(searchString))
+                if (Common.Common.UserID > 0)
                 {
-                    page = 1;
-                    users = users.Where(u => u.user_name.Contains(searchString));
+                    if (Common.Common.CanRead("/Admin_User/Admin_UserMain") != null)
+                    {
+                        ViewData["add"] = Common.Common.CanRead("/Admin_User/Admin_UserMain").funAdd;
+                        ViewData["delete"] = Common.Common.CanRead("/Admin_User/Admin_UserMain").funDelete;
+                        ViewData["select"] = Common.Common.CanRead("/Admin_User/Admin_UserMain").funSelect;
+                        ViewData["update"] = Common.Common.CanRead("/Admin_User/Admin_UserMain").funUpdate;
+
+
+                        List<User_admin> list = new List<User_admin>();
+                        ViewBag.CurrentSort = sortOrder;
+                        ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+                        string i = client.AdminUserAll();
+                        //var i = BLL.ht_admin_userBLL.All();
+
+
+
+                        if (i != null)
+                        {
+                            list = JsonConvert.DeserializeObject<List<User_admin>>(i);
+                            var users = from u in list select u;
+
+                            if (!string.IsNullOrEmpty(searchString))
+                            {
+                                page = 1;
+                                users = users.Where(u => u.user_name.Contains(searchString));
+                            }
+                            else
+                            {
+                                searchString = currentFilter;
+                            }
+                            ViewBag.CurrentFilter = searchString;
+
+                            switch (sortOrder)
+                            {
+                                case "name_desc":
+                                    users = users.OrderByDescending(u => u.user_name);
+                                    break;
+                                default:
+                                    users = users.OrderBy(u => u.user_name);
+                                    break;
+                            }
+                            int j = 1;
+                            foreach (var x in users)
+                            {
+                                x.number = j++;
+                            }
+                            int pageSize = 10; 
+                            int pageNumber = (page ?? 1);
+                            return View(users.ToPagedList(pageNumber, pageSize));
+                        }
+                        else
+                        {
+                            IQueryable<User_admin> iq = null;
+                            IPagedList<User_admin> pglist = new PagedList<User_admin>(iq, 1, 1);
+                            list = null;
+                            return View(pglist);
+                        }
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
                 }
                 else
                 {
-                    searchString = currentFilter;
+                    return Redirect("/Login/Login");
                 }
-                ViewBag.CurrentFilter = searchString;
-
-                switch (sortOrder)
-                {
-                    case "name_desc":
-                        users = users.OrderByDescending(u => u.user_name);
-                        break;
-                    default:
-                        users = users.OrderBy(u => u.user_name);
-                        break;
-                }
-                int j = 1;
-                foreach (var x in users)
-                {
-                    x.number = j++;
-                }
-                int pageSize = 50;
-                int pageNumber = (page ?? 1);
-                return View(users.ToPagedList(pageNumber, pageSize));
             }
-            else
+            catch (Exception ex)
             {
-                IQueryable<User_admin> iq = null;
-                IPagedList<User_admin> pglist = new PagedList<User_admin>(iq,1,1);
-                list = null;
-                return View(pglist);
-            }  
+                client.ErrorlogAsync("Admin_User" + "|" + "人员信息查询_Admin_UserMain" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
+            finally
+            {
+                client.controllog("select", "人员信息查询_Admin_UserMain", "");
+            }
         }
 
 
-
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Admin_UserCreate()
         {
-            return View();
+            if (Common.Common.UserID > 0)
+            {
+                if (Common.Common.CanRead("/Admin_User/Admin_UserMain") != null)
+                {
+                    return View();
+                }
+                else
+                {
+                    return Redirect("/Index/ErrorPage404");
+                }
+            }
+            else
+            {
+                return Redirect("/Login/Login");
+            }
+
         }
 
 
@@ -99,24 +151,32 @@ namespace FYMS.BSVIEW.Controllers
         [HttpPost]
         public ActionResult Save(FormCollection fc)
         {
-            MainService.MainServiceClient client = new MainService.MainServiceClient();
-            Common.ViewModel.User_admin user = new Common.ViewModel.User_admin();
-            user.user_birthday = Convert.ToDateTime(fc["user_birthday"]);
-            user.user_code = fc["user_code"].ToString();
-            user.user_email = fc["user_email"].ToString();
-            user.user_gender = Convert.ToInt32(fc["user_gender"]);
-            user.user_idno = fc["user_idno"].ToString();
-            user.user_name = fc["user_name"].ToString();
-            user.user_password =Common.Common.GetMD5Str(fc["user_password"].ToString());
-            user.user_phone = fc["user_phone"].ToString();
-            user.user_photo = string.IsNullOrEmpty(picname) ? "":picname ;
-            user.user_common = fc["user_commmon"] == null ? "" : fc["user_commmon"].ToString();
+            try
+            {
+                MainService.MainServiceClient client = new MainService.MainServiceClient();
+                Common.ViewModel.User_admin user = new Common.ViewModel.User_admin();
+                user.user_birthday = Convert.ToDateTime(fc["user_birthday"]);
+                user.user_code = fc["user_code"].ToString();
+                user.user_email = fc["user_email"].ToString();
+                user.user_gender = Convert.ToInt32(fc["user_gender"]);
+                user.user_idno = fc["user_idno"].ToString();
+                user.user_name = fc["user_name"].ToString();
+                user.user_password = Common.Common.GetMD5Str(fc["user_password"].ToString());
+                user.user_phone = fc["user_phone"].ToString();
+                user.user_photo = string.IsNullOrEmpty(picname) ? "" : picname;
+                user.user_common = fc["user_commmon"] == null ? "" : fc["user_commmon"].ToString();
 
-            string str = JsonConvert.SerializeObject(user).ToString();
+                string str = JsonConvert.SerializeObject(user).ToString();
 
-            string i = client.Add(str); 
-            //ViewData["message"] = i;
-            return Content(i);
+                string i = client.Add(str);
+                //ViewData["message"] = i;
+                return Content(i);
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("Admin_User" + "|" + "人员信息保存_Save" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
         }
 
         /// <summary>
@@ -127,24 +187,32 @@ namespace FYMS.BSVIEW.Controllers
         [HttpPost]
         public ActionResult Update(User_admin user_Admin, FormCollection fc)
         {
-            
-            MainService.MainServiceClient client = new MainService.MainServiceClient();
-            user_Admin.ID = Id;
-            user_Admin.CT = CT;
-            user_Admin.user_gender= Convert.ToInt32(fc["user_gender"]);
-            string com = fc["user_commmon"]==null?"": fc["user_commmon"].ToString();
-            user_Admin.user_common=com;
-            user_Admin.user_photo= string.IsNullOrEmpty(picname) ? "" : picname;
-        
-            if (user_Admin.user_password!= fc["user_password"].ToString())
+            try
             {
-                user_Admin.user_password= Common.Common.GetMD5Str(fc["user_password"].ToString());
+
+                user_Admin.ID = Id;
+                user_Admin.CT = CT;
+
+                user_Admin.user_gender = Convert.ToInt32(fc["user_gender"]);
+                string com = fc["user_commmon"] == null ? "" : fc["user_commmon"].ToString();
+                user_Admin.user_common = com;
+                user_Admin.user_photo = string.IsNullOrEmpty(picname) ? "" : picname;
+
+                if (user_Admin.user_password != fc["user_password"].ToString())
+                {
+                    user_Admin.user_password = Common.Common.GetMD5Str(fc["user_password"].ToString());
+                }
+                string str = JsonConvert.SerializeObject(user_Admin).ToString();
+                string i = BLL.ht_admin_userBLL.UserUpdate(str);
+                //string i = client.Update(str);
+                ViewData["message"] = i;
+                return Content(i);
             }
-            string str = JsonConvert.SerializeObject(user_Admin).ToString();
-            string i= BLL.ht_admin_userBLL.UserUpdate(str);
-            //string i = client.Update(str);
-            ViewData["message"] = i;
-            return Content(i);
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("Admin_User" + "|" + "人员信息更新_Update" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
         }
 
 
@@ -160,9 +228,9 @@ namespace FYMS.BSVIEW.Controllers
 
             try
             {
-                if(user_photo.ContentLength>0)
+                if (user_photo.ContentLength > 0)
                 {
-                    
+
                     string name = DateTime.Now.ToString("yyyymmddhhmmss");
 
                     var filename = Path.GetFileName(user_photo.FileName);
@@ -173,7 +241,7 @@ namespace FYMS.BSVIEW.Controllers
                     else
                         name += ".gif";
                     var path = Path.Combine(Server.MapPath("~/Temp"), name);
-                    
+
                     user_photo.SaveAs(path);
                     picname = name;
                 }
@@ -183,9 +251,10 @@ namespace FYMS.BSVIEW.Controllers
             {
                 //失败时返回的参数必须加 error键
                 json = "{\"error\":\"" + ex.Message + "\"}";
+                client.ErrorlogAsync("Admin_User" + "|" + "人员信息更新_UpLoadFile" + "|" + ex.ToString());
                 return json;
             }
-           
+
         }
 
         /// <summary>
@@ -195,20 +264,41 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult Admin_UserEdit(int id)
         {
-            Id = id;
-            MainService.MainServiceClient client = new MainService.MainServiceClient();
-            User_admin user_Admin = JsonConvert.DeserializeObject<User_admin>(client.AdminByID(id));
-            if (string.IsNullOrEmpty(user_Admin.user_photo))
+            try
             {
-                user_Admin.picname = "name.png";
+                if (Common.Common.UserID > 0)
+                {
+                    if (Common.Common.CanRead("/Admin_User/Admin_UserMain") != null)
+                    {
+                        Id = id;
+                        User_admin user_Admin = JsonConvert.DeserializeObject<User_admin>(client.AdminByID(id));
+                        if (string.IsNullOrEmpty(user_Admin.user_photo))
+                        {
+                            user_Admin.picname = "name.png";
+                        }
+                        else
+                        {
+                            user_Admin.picname = user_Admin.user_photo;
+                        }
+                        CT = user_Admin.CT;
+                        user_Admin.confirmpassword = user_Admin.user_password;
+                        return View(user_Admin);
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                user_Admin.picname = user_Admin.user_photo;
+                client.ErrorlogAsync("Admin_User" + "|" + "人员信息编辑_Admin_UserEdit" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
             }
-            CT = user_Admin.CT;
-            user_Admin.confirmpassword = user_Admin.user_password;
-            return View(user_Admin);
         }
 
         /// <summary>
@@ -217,21 +307,42 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult Admin_UserDetails(int id)
         {
-            MainService.MainServiceClient client = new MainService.MainServiceClient();
-            User_admin user_Admin = JsonConvert.DeserializeObject<User_admin>(client.AdminByID(id));
-            if (string.IsNullOrEmpty(user_Admin.user_photo))
+            try
             {
-                user_Admin.picname = "name.png";
+                if (Common.Common.UserID > 0)
+                {
+                    if (Common.Common.CanRead("/Admin_User/Admin_UserMain") != null)
+                    {
+                        User_admin user_Admin = JsonConvert.DeserializeObject<User_admin>(client.AdminByID(id));
+                        if (string.IsNullOrEmpty(user_Admin.user_photo))
+                        {
+                            user_Admin.picname = "name.png";
+                        }
+                        else
+                        {
+                            user_Admin.picname = user_Admin.user_photo;
+                        }
+
+                        return View(user_Admin);
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                user_Admin.picname = user_Admin.user_photo;
+                client.ErrorlogAsync("Admin_User" + "|" + "人员信息查看_Admin_UserDetails" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
             }
-            
-            return View(user_Admin);
         }
 
-       
+
         /// <summary>
         /// 删除
         /// </summary>
@@ -241,9 +352,73 @@ namespace FYMS.BSVIEW.Controllers
         public string Delete()
         {
             string id = Request["id"].ToString();
-            int i =Convert.ToInt32(id); 
-            MainService.MainServiceClient client = new MainService.MainServiceClient();
+            int i = Convert.ToInt32(id);
             return client.Delete(i);
+        }
+
+        /// <summary>
+        /// 密码修改
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public ActionResult PwModify(FormCollection fc)
+        {
+            try
+            {
+                if (Common.Common.UserID > 0)
+                {
+
+                    string i = "";
+                    User_admin user_Admin = JsonConvert.DeserializeObject<User_admin>(client.AdminByID(Common.Common.UserID));
+                    string oldpassword = fc["oldpassword"] == null ? "" : fc["oldpassword"].ToString();
+                    string newpassword = fc["newpassword"] == null ? "" : fc["newpassword"].ToString();
+                    string conpassword = fc["conpassword"] == null ? "" : fc["conpassword"].ToString();
+                    if (string.IsNullOrEmpty(oldpassword))
+                    {
+                        i = "请输入原密码！";
+                    }
+                    else if (oldpassword == newpassword)
+                    {
+                        i = "新密码不能与原密码一致";
+                    }
+                    else if (user_Admin.user_password != Common.Common.GetMD5Str(oldpassword))
+                    {
+                        i = "原密码输入错误！";
+                    }
+                    else if (newpassword != conpassword)
+                    {
+                        i = "新密码与旧密码不一致";
+                    }
+                    else if (newpassword == "")
+                    {
+                        i = "新密码不能为空";
+                    }
+                    else if (conpassword == "")
+                    {
+                        i = "确认密码不能为空";
+                    }
+
+                    else
+                    {
+                        user_Admin.user_password = Common.Common.GetMD5Str(newpassword);
+                        string str = JsonConvert.SerializeObject(user_Admin);
+
+                        i = client.Update(str);
+                    }
+                    return Content(i);
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("Admin_User" + "|" + "密码修改_PwModify" + "|" + ex.ToString());
+
+                return Content("修改失败");
+            }
         }
     }
 }

@@ -22,10 +22,16 @@ namespace FYMS.BSVIEW.MainService {
         System.Threading.Tasks.Task DoWorkAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/login", ReplyAction="http://tempuri.org/IMainService/loginResponse")]
-        int login(string username, string password);
+        string[] login(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/login", ReplyAction="http://tempuri.org/IMainService/loginResponse")]
-        System.Threading.Tasks.Task<int> loginAsync(string username, string password);
+        System.Threading.Tasks.Task<string[]> loginAsync(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/loginlimit", ReplyAction="http://tempuri.org/IMainService/loginlimitResponse")]
+        string loginlimit(string username, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/loginlimit", ReplyAction="http://tempuri.org/IMainService/loginlimitResponse")]
+        System.Threading.Tasks.Task<string> loginlimitAsync(string username, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AdminUserAll", ReplyAction="http://tempuri.org/IMainService/AdminUserAllResponse")]
         string AdminUserAll();
@@ -146,6 +152,84 @@ namespace FYMS.BSVIEW.MainService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/MenuOpen", ReplyAction="http://tempuri.org/IMainService/MenuOpenResponse")]
         System.Threading.Tasks.Task<string> MenuOpenAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitAll", ReplyAction="http://tempuri.org/IMainService/LimitAllResponse")]
+        string LimitAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitAll", ReplyAction="http://tempuri.org/IMainService/LimitAllResponse")]
+        System.Threading.Tasks.Task<string> LimitAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitAdd", ReplyAction="http://tempuri.org/IMainService/LimitAddResponse")]
+        bool LimitAdd(string str, string str1);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitAdd", ReplyAction="http://tempuri.org/IMainService/LimitAddResponse")]
+        System.Threading.Tasks.Task<bool> LimitAddAsync(string str, string str1);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitUpdate", ReplyAction="http://tempuri.org/IMainService/LimitUpdateResponse")]
+        bool LimitUpdate(string[] str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitUpdate", ReplyAction="http://tempuri.org/IMainService/LimitUpdateResponse")]
+        System.Threading.Tasks.Task<bool> LimitUpdateAsync(string[] str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitEditData", ReplyAction="http://tempuri.org/IMainService/LimitEditDataResponse")]
+        string[] LimitEditData(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitEditData", ReplyAction="http://tempuri.org/IMainService/LimitEditDataResponse")]
+        System.Threading.Tasks.Task<string[]> LimitEditDataAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitDelete", ReplyAction="http://tempuri.org/IMainService/LimitDeleteResponse")]
+        string LimitDelete(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/LimitDelete", ReplyAction="http://tempuri.org/IMainService/LimitDeleteResponse")]
+        System.Threading.Tasks.Task<string> LimitDeleteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/loginlog", ReplyAction="http://tempuri.org/IMainService/loginlogResponse")]
+        void loginlog(string[] str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/loginlog", ReplyAction="http://tempuri.org/IMainService/loginlogResponse")]
+        System.Threading.Tasks.Task loginlogAsync(string[] str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/Errorlog", ReplyAction="http://tempuri.org/IMainService/ErrorlogResponse")]
+        void Errorlog(string ex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/Errorlog", ReplyAction="http://tempuri.org/IMainService/ErrorlogResponse")]
+        System.Threading.Tasks.Task ErrorlogAsync(string ex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/controllog", ReplyAction="http://tempuri.org/IMainService/controllogResponse")]
+        void controllog(string str, string functionname, string other);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/controllog", ReplyAction="http://tempuri.org/IMainService/controllogResponse")]
+        System.Threading.Tasks.Task controllogAsync(string str, string functionname, string other);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/errorcontrollog", ReplyAction="http://tempuri.org/IMainService/errorcontrollogResponse")]
+        void errorcontrollog(string str, string functionname, string other, string ex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/errorcontrollog", ReplyAction="http://tempuri.org/IMainService/errorcontrollogResponse")]
+        System.Threading.Tasks.Task errorcontrollogAsync(string str, string functionname, string other, string ex);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeAll", ReplyAction="http://tempuri.org/IMainService/CheckTypeAllResponse")]
+        string CheckTypeAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeAll", ReplyAction="http://tempuri.org/IMainService/CheckTypeAllResponse")]
+        System.Threading.Tasks.Task<string> CheckTypeAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeAdd", ReplyAction="http://tempuri.org/IMainService/CheckTypeAddResponse")]
+        string CheckTypeAdd(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeAdd", ReplyAction="http://tempuri.org/IMainService/CheckTypeAddResponse")]
+        System.Threading.Tasks.Task<string> CheckTypeAddAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeUpdate", ReplyAction="http://tempuri.org/IMainService/CheckTypeUpdateResponse")]
+        string CheckTypeUpdate(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeUpdate", ReplyAction="http://tempuri.org/IMainService/CheckTypeUpdateResponse")]
+        System.Threading.Tasks.Task<string> CheckTypeUpdateAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeDelete", ReplyAction="http://tempuri.org/IMainService/CheckTypeDeleteResponse")]
+        string CheckTypeDelete(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeDelete", ReplyAction="http://tempuri.org/IMainService/CheckTypeDeleteResponse")]
+        System.Threading.Tasks.Task<string> CheckTypeDeleteAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -183,12 +267,20 @@ namespace FYMS.BSVIEW.MainService {
             return base.Channel.DoWorkAsync();
         }
         
-        public int login(string username, string password) {
+        public string[] login(string username, string password) {
             return base.Channel.login(username, password);
         }
         
-        public System.Threading.Tasks.Task<int> loginAsync(string username, string password) {
+        public System.Threading.Tasks.Task<string[]> loginAsync(string username, string password) {
             return base.Channel.loginAsync(username, password);
+        }
+        
+        public string loginlimit(string username, string password) {
+            return base.Channel.loginlimit(username, password);
+        }
+        
+        public System.Threading.Tasks.Task<string> loginlimitAsync(string username, string password) {
+            return base.Channel.loginlimitAsync(username, password);
         }
         
         public string AdminUserAll() {
@@ -349,6 +441,110 @@ namespace FYMS.BSVIEW.MainService {
         
         public System.Threading.Tasks.Task<string> MenuOpenAsync(int id) {
             return base.Channel.MenuOpenAsync(id);
+        }
+        
+        public string LimitAll() {
+            return base.Channel.LimitAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> LimitAllAsync() {
+            return base.Channel.LimitAllAsync();
+        }
+        
+        public bool LimitAdd(string str, string str1) {
+            return base.Channel.LimitAdd(str, str1);
+        }
+        
+        public System.Threading.Tasks.Task<bool> LimitAddAsync(string str, string str1) {
+            return base.Channel.LimitAddAsync(str, str1);
+        }
+        
+        public bool LimitUpdate(string[] str) {
+            return base.Channel.LimitUpdate(str);
+        }
+        
+        public System.Threading.Tasks.Task<bool> LimitUpdateAsync(string[] str) {
+            return base.Channel.LimitUpdateAsync(str);
+        }
+        
+        public string[] LimitEditData(int id) {
+            return base.Channel.LimitEditData(id);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> LimitEditDataAsync(int id) {
+            return base.Channel.LimitEditDataAsync(id);
+        }
+        
+        public string LimitDelete(int id) {
+            return base.Channel.LimitDelete(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> LimitDeleteAsync(int id) {
+            return base.Channel.LimitDeleteAsync(id);
+        }
+        
+        public void loginlog(string[] str) {
+            base.Channel.loginlog(str);
+        }
+        
+        public System.Threading.Tasks.Task loginlogAsync(string[] str) {
+            return base.Channel.loginlogAsync(str);
+        }
+        
+        public void Errorlog(string ex) {
+            base.Channel.Errorlog(ex);
+        }
+        
+        public System.Threading.Tasks.Task ErrorlogAsync(string ex) {
+            return base.Channel.ErrorlogAsync(ex);
+        }
+        
+        public void controllog(string str, string functionname, string other) {
+            base.Channel.controllog(str, functionname, other);
+        }
+        
+        public System.Threading.Tasks.Task controllogAsync(string str, string functionname, string other) {
+            return base.Channel.controllogAsync(str, functionname, other);
+        }
+        
+        public void errorcontrollog(string str, string functionname, string other, string ex) {
+            base.Channel.errorcontrollog(str, functionname, other, ex);
+        }
+        
+        public System.Threading.Tasks.Task errorcontrollogAsync(string str, string functionname, string other, string ex) {
+            return base.Channel.errorcontrollogAsync(str, functionname, other, ex);
+        }
+        
+        public string CheckTypeAll() {
+            return base.Channel.CheckTypeAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckTypeAllAsync() {
+            return base.Channel.CheckTypeAllAsync();
+        }
+        
+        public string CheckTypeAdd(string str) {
+            return base.Channel.CheckTypeAdd(str);
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckTypeAddAsync(string str) {
+            return base.Channel.CheckTypeAddAsync(str);
+        }
+        
+        public string CheckTypeUpdate(string str) {
+            return base.Channel.CheckTypeUpdate(str);
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckTypeUpdateAsync(string str) {
+            return base.Channel.CheckTypeUpdateAsync(str);
+        }
+        
+        public string CheckTypeDelete(int id) {
+            return base.Channel.CheckTypeDelete(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckTypeDeleteAsync(int id) {
+            return base.Channel.CheckTypeDeleteAsync(id);
         }
     }
 }

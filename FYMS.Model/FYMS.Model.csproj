@@ -59,6 +59,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ct_Account.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_ActDetail.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_ActMenuRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Admin.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Company.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_ControlLog.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_ErrorLog.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Group.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_GRRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_LGRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Limit.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_LimtDetail.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_LoginLog.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_LRRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Menu.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Roles.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_UGRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_ULRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_URRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ct_Users.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\FYMSContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -83,6 +143,15 @@
     <Compile Include="Entities\ht_admin_userrole.cs">
       <DependentUpon>FYMSContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ht_CheckRoleRel.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ht_CheckTable.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\ht_CheckType.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\ht_control_log.cs">
       <DependentUpon>FYMSContext.tt</DependentUpon>
     </Compile>
@@ -92,13 +161,34 @@
     <Compile Include="Entities\ht_error_log.cs">
       <DependentUpon>FYMSContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Ht_Limit.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\Ht_LimitDetails.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Ht_Menu.cs">
       <DependentUpon>FYMSContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\ht_userroleRel.cs">
       <DependentUpon>FYMSContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\proc_Login_Result.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\sp_helpdiagrams_Result.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\sysdiagrams.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Test.cs">
+      <DependentUpon>FYMSContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\users_Result.cs">
       <DependentUpon>FYMSContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

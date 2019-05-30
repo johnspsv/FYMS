@@ -49,29 +49,37 @@ namespace FYMS.BLL
         /// <param name="str"></param>
         public static string UserRoleRelAdd(string str)
         {
-            PublicBLL.PubBll<ht_userroleRel> bll = new PublicBLL.PubBll<ht_userroleRel>();
-            ht_userroleRel entity = bll.ReturnEntity(str);
+            try
+            {
+                PublicBLL.PubBll<ht_userroleRel> bll = new PublicBLL.PubBll<ht_userroleRel>();
+                ht_userroleRel entity = bll.ReturnEntity(str);
 
 
-            entity.CT = DateTime.Now;
-            if (dal.SelectEntities(x => x.admin_id == entity.admin_id).Count > 0)
-            {
-                return "该人员已经被赋予角色";
-            }
-            else
-            {
-                entity.CU = 1;
-                entity.LU = 1;
-                entity.LT = DateTime.Now;
-                entity.ST = 1;
-                if (dal.Add(entity))
+                entity.CT = DateTime.Now;
+                if (dal.SelectEntities(x => x.admin_id == entity.admin_id).Count > 0)
                 {
-                    return "保存成功";
+                    return "该人员已经被赋予角色";
                 }
                 else
                 {
-                    return "保存失败";
+                    entity.CU = Common.Common.UserID;
+                    entity.LU = Common.Common.UserID;
+                    entity.LT = DateTime.Now;
+                    entity.ST = 1;
+                    if (dal.Add(entity,LogBLL.controllog("add", "新增人员关系_UserRoleRelAdd",str)))
+                    {
+                        return "保存成功";
+                    }
+                    else
+                    {
+                        return "保存失败";
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.errorControlLog("add", "新增人员关系_UserRoleRelAdd", str, ex.ToString());
+                return "保存失败";
             }
         }
 
@@ -81,22 +89,29 @@ namespace FYMS.BLL
         /// <param name="str"></param>
         public static string UserRoleRelUpdate(string str)
         {
-            PublicBLL.PubBll<AdminRoleRel> bll = new PublicBLL.PubBll<AdminRoleRel>();
-            AdminRoleRel entity = bll.ReturnEntity(str);
-            ht_userroleRel model= dal.SelectEntities(x => x.ID==entity.ID).FirstOrDefault();
-            PublicBLL.PubBll<ht_userroleRel> bll1 = new PublicBLL.PubBll<ht_userroleRel>();
-            model= bll1.Edit(entity, model);
-            model.LU = 1;
-            model.LT = DateTime.Now;
-            if (dal.Update(model))
+            try
             {
-                return "保存成功";
+                PublicBLL.PubBll<AdminRoleRel> bll = new PublicBLL.PubBll<AdminRoleRel>();
+                AdminRoleRel entity = bll.ReturnEntity(str);
+                ht_userroleRel model = dal.SelectEntities(x => x.ID == entity.ID).FirstOrDefault();
+                PublicBLL.PubBll<ht_userroleRel> bll1 = new PublicBLL.PubBll<ht_userroleRel>();
+                model = bll1.Edit(entity, model);
+                model.LU = Common.Common.UserID;
+                model.LT = DateTime.Now;
+                if (dal.Update(model, LogBLL.controllog("modify", "更新人员关系_UserRoleRelUpdate", str)))
+                {
+                    return "保存成功";
+                }
+                else
+                {
+                    return "保存失败";
+                }
             }
-            else
+            catch(Exception ex)
             {
+                LogBLL.errorControlLog("modify", "更新人员关系_UserRoleRelUpdate", str, ex.ToString());
                 return "保存失败";
             }
-
         }
 
         /// <summary>
@@ -122,18 +137,23 @@ namespace FYMS.BLL
                 ht_userroleRel bean = dal.SelectEntities(x => x.ID == id).FirstOrDefault();
                 if (bean.ST == 0)
                 {
+                    bean.LU = Common.Common.UserID;
+                    bean.LT = DateTime.Now;
                     bean.ST = 1;
                 }
                 else
                 {
+                    bean.LU = Common.Common.UserID;
+                    bean.LT = DateTime.Now;
                     bean.ST = 0;
                 }
-                dal.UpdateEntity(bean);
+                dal.UpdateEntity(bean,LogBLL.controllog("delete", "人员关系禁用开启_RoleRelDelete",id.ToString()));
                 return "成功";
             }
             catch (Exception ex)
             {
-                return ex.ToString();
+                LogBLL.errorControlLog("delete", "人员关系禁用开启_RoleRelDelete", id.ToString(), ex.ToString());
+                return "失败";
             }
         }
     }

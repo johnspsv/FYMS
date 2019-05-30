@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8082/MainService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8082/MainService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8082/MainService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IMainService_DoWork_InputMessage">
@@ -17,6 +18,12 @@
   </wsdl:message>
   <wsdl:message name="IMainService_login_OutputMessage">
     <wsdl:part name="parameters" element="tns:loginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_loginlimit_InputMessage">
+    <wsdl:part name="parameters" element="tns:loginlimit" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_loginlimit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:loginlimitResponse" />
   </wsdl:message>
   <wsdl:message name="IMainService_AdminUserAll_InputMessage">
     <wsdl:part name="parameters" element="tns:AdminUserAll" />
@@ -138,6 +145,84 @@
   <wsdl:message name="IMainService_MenuOpen_OutputMessage">
     <wsdl:part name="parameters" element="tns:MenuOpenResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainService_LimitAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:LimitAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LimitAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:LimitAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LimitAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:LimitUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LimitUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitEditData_InputMessage">
+    <wsdl:part name="parameters" element="tns:LimitEditData" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitEditData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LimitEditDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:LimitDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_LimitDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LimitDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_loginlog_InputMessage">
+    <wsdl:part name="parameters" element="tns:loginlog" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_loginlog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:loginlogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Errorlog_InputMessage">
+    <wsdl:part name="parameters" element="tns:Errorlog" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Errorlog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorlogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_controllog_InputMessage">
+    <wsdl:part name="parameters" element="tns:controllog" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_controllog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:controllogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_errorcontrollog_InputMessage">
+    <wsdl:part name="parameters" element="tns:errorcontrollog" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_errorcontrollog_OutputMessage">
+    <wsdl:part name="parameters" element="tns:errorcontrollogResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTypeDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTypeDeleteResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMainService">
     <wsdl:operation name="DoWork">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/DoWork" message="tns:IMainService_DoWork_InputMessage" />
@@ -146,6 +231,10 @@
     <wsdl:operation name="login">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/login" message="tns:IMainService_login_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainService/loginResponse" message="tns:IMainService_login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="loginlimit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/loginlimit" message="tns:IMainService_loginlimit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/loginlimitResponse" message="tns:IMainService_loginlimit_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AdminUserAll">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminUserAll" message="tns:IMainService_AdminUserAll_InputMessage" />
@@ -227,6 +316,58 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/MenuOpen" message="tns:IMainService_MenuOpen_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainService/MenuOpenResponse" message="tns:IMainService_MenuOpen_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="LimitAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/LimitAll" message="tns:IMainService_LimitAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/LimitAllResponse" message="tns:IMainService_LimitAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LimitAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/LimitAdd" message="tns:IMainService_LimitAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/LimitAddResponse" message="tns:IMainService_LimitAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LimitUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/LimitUpdate" message="tns:IMainService_LimitUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/LimitUpdateResponse" message="tns:IMainService_LimitUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LimitEditData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/LimitEditData" message="tns:IMainService_LimitEditData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/LimitEditDataResponse" message="tns:IMainService_LimitEditData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LimitDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/LimitDelete" message="tns:IMainService_LimitDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/LimitDeleteResponse" message="tns:IMainService_LimitDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="loginlog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/loginlog" message="tns:IMainService_loginlog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/loginlogResponse" message="tns:IMainService_loginlog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Errorlog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/Errorlog" message="tns:IMainService_Errorlog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/ErrorlogResponse" message="tns:IMainService_Errorlog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="controllog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/controllog" message="tns:IMainService_controllog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/controllogResponse" message="tns:IMainService_controllog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="errorcontrollog">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/errorcontrollog" message="tns:IMainService_errorcontrollog_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/errorcontrollogResponse" message="tns:IMainService_errorcontrollog_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTypeAll" message="tns:IMainService_CheckTypeAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTypeAllResponse" message="tns:IMainService_CheckTypeAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTypeAdd" message="tns:IMainService_CheckTypeAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTypeAddResponse" message="tns:IMainService_CheckTypeAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTypeUpdate" message="tns:IMainService_CheckTypeUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTypeUpdateResponse" message="tns:IMainService_CheckTypeUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTypeDelete" message="tns:IMainService_CheckTypeDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTypeDeleteResponse" message="tns:IMainService_CheckTypeDelete_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMainService" type="tns:IMainService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -241,6 +382,15 @@
     </wsdl:operation>
     <wsdl:operation name="login">
       <soap:operation soapAction="http://tempuri.org/IMainService/login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginlimit">
+      <soap:operation soapAction="http://tempuri.org/IMainService/loginlimit" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -421,6 +571,123 @@
     </wsdl:operation>
     <wsdl:operation name="MenuOpen">
       <soap:operation soapAction="http://tempuri.org/IMainService/MenuOpen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LimitAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/LimitAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LimitAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/LimitAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LimitUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/LimitUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LimitEditData">
+      <soap:operation soapAction="http://tempuri.org/IMainService/LimitEditData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LimitDelete">
+      <soap:operation soapAction="http://tempuri.org/IMainService/LimitDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="loginlog">
+      <soap:operation soapAction="http://tempuri.org/IMainService/loginlog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Errorlog">
+      <soap:operation soapAction="http://tempuri.org/IMainService/Errorlog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="controllog">
+      <soap:operation soapAction="http://tempuri.org/IMainService/controllog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="errorcontrollog">
+      <soap:operation soapAction="http://tempuri.org/IMainService/errorcontrollog" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTypeAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTypeAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTypeUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTypeDelete">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTypeDelete" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

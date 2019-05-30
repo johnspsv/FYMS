@@ -7,27 +7,182 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FYMS.Model.Entities
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
-    
-    public partial class FYMSEntities : DbContext
-    {
-        public object ht_admin_user;
-        public object ht_userroleRel;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Core.Objects;
+using System.Linq;
 
-        public FYMSEntities()
-            : base("name=FYMSEntities")
-        {
-        }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
-        }
-    
-        public virtual DbSet<Test> Test { get; set; }
+public partial class FYMSEntities : DbContext
+{
+    public FYMSEntities()
+        : base("name=FYMSEntities")
+    {
+    }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        throw new UnintentionalCodeFirstException();
+    }
+
+    public virtual DbSet<Test> Test { get; set; }
+    public virtual DbSet<ht_admin_log> ht_admin_log { get; set; }
+    public virtual DbSet<ht_admin_user> ht_admin_user { get; set; }
+    public virtual DbSet<ht_admin_userrole> ht_admin_userrole { get; set; }
+    public virtual DbSet<ht_control_log> ht_control_log { get; set; }
+    public virtual DbSet<ht_dictionary> ht_dictionary { get; set; }
+    public virtual DbSet<ht_error_log> ht_error_log { get; set; }
+    public virtual DbSet<ht_userroleRel> ht_userroleRel { get; set; }
+    public virtual DbSet<Ht_Menu> Ht_Menu { get; set; }
+    public virtual DbSet<Ht_Limit> Ht_Limit { get; set; }
+    public virtual DbSet<Ht_LimitDetails> Ht_LimitDetails { get; set; }
+    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+    public virtual DbSet<ct_Account> ct_Account { get; set; }
+    public virtual DbSet<ct_ActDetail> ct_ActDetail { get; set; }
+    public virtual DbSet<ct_ActMenuRel> ct_ActMenuRel { get; set; }
+    public virtual DbSet<ct_Admin> ct_Admin { get; set; }
+    public virtual DbSet<ct_Company> ct_Company { get; set; }
+    public virtual DbSet<ct_ControlLog> ct_ControlLog { get; set; }
+    public virtual DbSet<ct_ErrorLog> ct_ErrorLog { get; set; }
+    public virtual DbSet<ct_Group> ct_Group { get; set; }
+    public virtual DbSet<ct_GRRel> ct_GRRel { get; set; }
+    public virtual DbSet<ct_LGRel> ct_LGRel { get; set; }
+    public virtual DbSet<ct_Limit> ct_Limit { get; set; }
+    public virtual DbSet<ct_LimtDetail> ct_LimtDetail { get; set; }
+    public virtual DbSet<ct_LoginLog> ct_LoginLog { get; set; }
+    public virtual DbSet<ct_LRRel> ct_LRRel { get; set; }
+    public virtual DbSet<ct_Menu> ct_Menu { get; set; }
+    public virtual DbSet<ct_Roles> ct_Roles { get; set; }
+    public virtual DbSet<ct_UGRel> ct_UGRel { get; set; }
+    public virtual DbSet<ct_ULRel> ct_ULRel { get; set; }
+    public virtual DbSet<ct_URRel> ct_URRel { get; set; }
+    public virtual DbSet<ct_Users> ct_Users { get; set; }
+    public virtual DbSet<ht_CheckRoleRel> ht_CheckRoleRel { get; set; }
+    public virtual DbSet<ht_CheckTable> ht_CheckTable { get; set; }
+    public virtual DbSet<ht_CheckType> ht_CheckType { get; set; }
+
+    public virtual ObjectResult<proc_Login_Result> proc_Login(string username, string password)
+    {
+        var usernameParameter = username != null ?
+            new ObjectParameter("username", username) :
+            new ObjectParameter("username", typeof(string));
+
+        var passwordParameter = password != null ?
+            new ObjectParameter("password", password) :
+            new ObjectParameter("password", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<proc_Login_Result>("proc_Login", usernameParameter, passwordParameter);
+    }
+
+    public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+    {
+        var diagramnameParameter = diagramname != null ?
+            new ObjectParameter("diagramname", diagramname) :
+            new ObjectParameter("diagramname", typeof(string));
+
+        var owner_idParameter = owner_id.HasValue ?
+            new ObjectParameter("owner_id", owner_id) :
+            new ObjectParameter("owner_id", typeof(int));
+
+        var versionParameter = version.HasValue ?
+            new ObjectParameter("version", version) :
+            new ObjectParameter("version", typeof(int));
+
+        var definitionParameter = definition != null ?
+            new ObjectParameter("definition", definition) :
+            new ObjectParameter("definition", typeof(byte[]));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+    }
+
+    public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+    {
+        var diagramnameParameter = diagramname != null ?
+            new ObjectParameter("diagramname", diagramname) :
+            new ObjectParameter("diagramname", typeof(string));
+
+        var owner_idParameter = owner_id.HasValue ?
+            new ObjectParameter("owner_id", owner_id) :
+            new ObjectParameter("owner_id", typeof(int));
+
+        var versionParameter = version.HasValue ?
+            new ObjectParameter("version", version) :
+            new ObjectParameter("version", typeof(int));
+
+        var definitionParameter = definition != null ?
+            new ObjectParameter("definition", definition) :
+            new ObjectParameter("definition", typeof(byte[]));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+    }
+
+    public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+    {
+        var diagramnameParameter = diagramname != null ?
+            new ObjectParameter("diagramname", diagramname) :
+            new ObjectParameter("diagramname", typeof(string));
+
+        var owner_idParameter = owner_id.HasValue ?
+            new ObjectParameter("owner_id", owner_id) :
+            new ObjectParameter("owner_id", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+    }
+
+    public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+    {
+        var diagramnameParameter = diagramname != null ?
+            new ObjectParameter("diagramname", diagramname) :
+            new ObjectParameter("diagramname", typeof(string));
+
+        var owner_idParameter = owner_id.HasValue ?
+            new ObjectParameter("owner_id", owner_id) :
+            new ObjectParameter("owner_id", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+    }
+
+    public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+    {
+        var diagramnameParameter = diagramname != null ?
+            new ObjectParameter("diagramname", diagramname) :
+            new ObjectParameter("diagramname", typeof(string));
+
+        var owner_idParameter = owner_id.HasValue ?
+            new ObjectParameter("owner_id", owner_id) :
+            new ObjectParameter("owner_id", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+    }
+
+    public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+    {
+        var diagramnameParameter = diagramname != null ?
+            new ObjectParameter("diagramname", diagramname) :
+            new ObjectParameter("diagramname", typeof(string));
+
+        var owner_idParameter = owner_id.HasValue ?
+            new ObjectParameter("owner_id", owner_id) :
+            new ObjectParameter("owner_id", typeof(int));
+
+        var new_diagramnameParameter = new_diagramname != null ?
+            new ObjectParameter("new_diagramname", new_diagramname) :
+            new ObjectParameter("new_diagramname", typeof(string));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+    }
+
+    public virtual int sp_upgraddiagrams()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+    }
+
+    public virtual ObjectResult<users_Result> users(Nullable<int> id)
+    {
+        var idParameter = id.HasValue ?
+            new ObjectParameter("id", id) :
+            new ObjectParameter("id", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<users_Result>("users", idParameter);
     }
 }

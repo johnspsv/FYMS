@@ -49,6 +49,7 @@
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,10 +58,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ct_AccountDAL.cs" />
+    <Compile Include="ct_ControlLogDAL.cs" />
+    <Compile Include="ct_ErrorLogDAL.cs" />
+    <Compile Include="ct_LoginLogDAL.cs" />
+    <Compile Include="ht_admin_logDAL.cs" />
     <Compile Include="ht_admin_userDAL.cs" />
     <Compile Include="ht_admin_userroleDAL.cs" />
+    <Compile Include="ht_CheckRoleRelDAL.cs" />
+    <Compile Include="ht_CheckTypeDAL.cs" />
+    <Compile Include="ht_control_logDAL.cs" />
+    <Compile Include="ht_error_logDAL.cs" />
+    <Compile Include="Ht_LimitDAL.cs" />
+    <Compile Include="Ht_LimitDetailsDAL.cs" />
     <Compile Include="Ht_MenuDAL.cs" />
     <Compile Include="ht_userroleRelDAL.cs" />
+    <Compile Include="LogDAL.cs" />
     <Compile Include="PublicDAL\PubClass.cs" />
     <Compile Include="TestDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

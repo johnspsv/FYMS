@@ -47,7 +47,10 @@
 {
     <div class="row">
         <div class="col-lg-6">
-            <a class="btn btn-primary active" href="/Admin_User/Admin_UserCreate">新增管理员</a>
+            @if (ViewData["add"].ToString() == "1")
+            {
+               <a class="btn btn-primary active" href="/Admin_User/Admin_UserCreate">新增管理员</a>
+            }
         </div>
         <div class="text-right col-lg-6">
             <span>
@@ -69,7 +72,7 @@
                     @Html.ActionLink("姓名", "Admin_UserMain", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                 </th>
                 <th>
-                    工号
+                    账号
                 </th>
                 <th>
                     邮箱
@@ -111,9 +114,20 @@
                             @Html.DisplayFor(modelItem => item.CT)
                         </td>
                         <td>
-                            @Html.ActionLink("查看", "Admin_UserDetails", new { id = item.ID }, new { @class = "glyphicon glyphicon-eye-open label label-primary" })&nbsp;
-                            @Html.ActionLink("编辑", "Admin_UserEdit", new { id = item.ID }, new { @class = "glyphicon glyphicon-level-up label label-warning " })&nbsp;
-                            <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-trash label label-danger ">删除</a>
+                            @if (ViewData["select"].ToString() == "1")
+                            {
+                                @Html.ActionLink("查看", "Admin_UserDetails", new { id = item.ID }, new { @class = "glyphicon glyphicon-eye-open label label-primary" })
+                            }
+                            &nbsp;
+                            @if (ViewData["update"].ToString() == "1")
+                            {
+                                @Html.ActionLink("编辑", "Admin_UserEdit", new { id = item.ID }, new { @class = "glyphicon glyphicon-level-up label label-warning " })
+                            }
+                            &nbsp;
+                            @if (ViewData["delete"].ToString() == "1")
+                            {
+                                <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-trash label label-danger ">删除</a>
+                            }
                         </td>
                     </tr>
                 }

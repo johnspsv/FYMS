@@ -13,6 +13,7 @@ namespace FYMS.SERVICE
     {
         public void DoWork()
         {
+
         }
 
         #region 登录
@@ -22,9 +23,15 @@ namespace FYMS.SERVICE
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public int login(string username,string password)
+        public string[] login(string username,string password)
         {
             return ht_admin_userBLL.Login(username,password);
+        }
+
+
+        public string loginlimit(string username,string password)
+        {
+            return ht_admin_userBLL.Loginlimit(username, password);
         }
         #endregion
 
@@ -239,5 +246,143 @@ namespace FYMS.SERVICE
             return Ht_MenuBLL.MenuDelete(id);
         }
         #endregion
+
+        #region 角色权限管理
+        /// <summary>
+        /// 查询数据
+        /// </summary>
+        /// <returns></returns>
+        public string LimitAll()
+        {
+            return Ht_LimitBLL.LimitAll();
+        }
+
+        /// <summary>
+        /// 权限保存
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="str1"></param>
+        /// <returns></returns>
+        public bool LimitAdd(string str,string str1)
+        {
+            return Ht_LimitBLL.LimitSave(str,str1);
+        }
+
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public bool LimitUpdate(string[] str)
+        {
+            return Ht_LimitBLL.LimitUpdate(str);
+        }
+
+        /// <summary>
+        /// 返回明细数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string[] LimitEditData(int id)
+        {
+            return Ht_LimitBLL.LimitEditData(id);
+        }
+
+        /// <summary>
+        /// 禁用/开启
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string LimitDelete(int id)
+        {
+            return Ht_LimitBLL.LimitDelete(id);
+        }
+        #endregion
+
+        #region 日志
+
+        /// <summary>
+        /// 登录日志
+        /// </summary>
+        /// <param name="str"></param>
+        public void loginlog(string[] str)
+        {
+             LogBLL.LoginAdmin(str);
+        }
+
+        /// <summary>
+        /// 错误日志
+        /// </summary>
+        /// <param name="ex"></param>
+        public void Errorlog(string ex)
+        {
+            LogBLL.Error(ex);
+        }
+
+        /// <summary>
+        /// 操作日志
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="functionname"></param>
+        /// <param name="other"></param>
+        public void controllog(string str, string functionname, string other)
+        {
+            LogBLL.inlog( str, functionname, other);
+        }
+        
+        /// <summary>
+        /// 错误操作日志
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="functionname"></param>
+        /// <param name="other"></param>
+        /// <param name="ex"></param>
+        public void errorcontrollog(string str, string functionname, string other,string ex)
+        {
+            LogBLL.errorControlLog(str, functionname, other, ex);
+        }
+        #endregion
+
+        #region 审核类型
+
+        /// <summary>
+        /// 获取审核类型所有数据
+        /// </summary>
+        /// <param name="str"></param>
+        public string CheckTypeAll()
+        {
+            return ht_CheckTypeBLL.CheckTypeAll();
+        }
+
+        /// <summary>
+        /// 审核类型新增
+        /// </summary>
+        /// <param name="ex"></param>
+        public string CheckTypeAdd(string str)
+        {
+            return ht_CheckTypeBLL.CheckTypeAdd(str);
+        }
+
+        /// <summary>
+        /// 审核类型更新
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public string CheckTypeUpdate(string str)
+        {
+            return ht_CheckTypeBLL.CheckTypeUpdate(str);
+        }
+
+        /// <summary>
+        /// 审核类型禁用开启
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string CheckTypeDelete(int id)
+        {
+            return ht_CheckTypeBLL.CheckTypeDelete(id);
+        }
+        #endregion
+
     }
 }

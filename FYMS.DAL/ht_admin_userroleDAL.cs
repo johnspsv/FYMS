@@ -8,5 +8,6 @@ namespace FYMS.DAL
 {
     public class ht_admin_userroleDAL:PublicDAL.PubClass<ht_admin_userrole>
     {
+        
     }
 }

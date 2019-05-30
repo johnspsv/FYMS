@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FYMS.DAL.PublicDAL;
-using FYMS.Model.Entities;
+
 
 
 namespace FYMS.DAL

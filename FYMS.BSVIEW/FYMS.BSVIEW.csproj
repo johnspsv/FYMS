@@ -140,6 +140,9 @@
     <None Include="Connected Services\MainService\MainService.disco" />
     <None Include="Connected Services\MainService\configuration91.svcinfo" />
     <None Include="Connected Services\MainService\configuration.svcinfo" />
+    <None Include="Connected Services\MainService\MainService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\MainService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -152,10 +155,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminRoleController.cs" />
     <Compile Include="Controllers\AdminRoleRelController.cs" />
     <Compile Include="Controllers\Admin_UserController.cs" />
+    <Compile Include="Controllers\CheckRoleRelController.cs" />
+    <Compile Include="Controllers\CheckTypeController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
+    <Compile Include="Controllers\LimitController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,6 +172,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\404js\bodymovin.js" />
+    <Content Include="Content\404js\data.js" />
     <Content Include="Content\app.js" />
     <Content Include="Content\assets\css\ie10-viewport-bug-workaround.css" />
     <Content Include="Content\bootbox\bootbox.all.min.js" />
@@ -338,7 +348,12 @@
     <Content Include="Content\bootstrap-select\js\i18n\defaults-zh_CN.min.js" />
     <Content Include="Content\bootstrap-select\js\i18n\defaults-zh_TW.js" />
     <Content Include="Content\bootstrap-select\js\i18n\defaults-zh_TW.min.js" />
+    <Content Include="Content\bootstrap-switch\css\bootstrap-switch.css" />
+    <Content Include="Content\bootstrap-switch\css\bootstrap-switch.min.css" />
+    <Content Include="Content\bootstrap-switch\js\bootstrap-switch.js" />
+    <Content Include="Content\bootstrap-switch\js\bootstrap-switch.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-treeview.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrapvalidator\css\bootstrapValidator.css" />
     <Content Include="Content\bootstrapvalidator\css\bootstrapValidator.min.css" />
@@ -5288,6 +5303,7 @@
     <Content Include="Content\particles.min.js" />
     <Content Include="Content\prompt.js" />
     <Content Include="Content\reset.css" />
+    <Content Include="Content\strtohtml.js" />
     <Content Include="Content\style.css" />
     <Content Include="Content\toastr\toastr.css" />
     <Content Include="Content\toastr\toastr.min.css" />
@@ -5392,6 +5408,27 @@
     <Content Include="Content\bootstrap-select\js\i18n\defaults-zh_CN.js.map" />
     <Content Include="Content\bootstrap-select\js\i18n\defaults-zh_TW.js.map" />
     <Content Include="Views\Menu\MenuMain.cshtml" />
+    <Content Include="Views\Limit\LimitMain.cshtml" />
+    <Content Include="Views\Limit\LimitCreate.cshtml" />
+    <Content Include="Views\Limit\LimitEdit.cshtml" />
+    <Content Include="Views\Limit\LimitDetails.cshtml" />
+    <Content Include="Views\Index\ErrorPage404.cshtml" />
+    <Content Include="Views\CheckType\CheckTypeMain.cshtml" />
+    <Content Include="Views\CheckRoleRel\CheckRoleRelMain.cshtml" />
+    <Content Include="Views\CheckRoleRel\CheckRoleRelCreate.cshtml" />
+    <Content Include="Views\CheckRoleRel\CheckRoleRelEdit.cshtml" />
+    <Content Include="Views\CheckRoleRel\CheckRoleRelDetail.cshtml" />
+    <Content Include="Views\Log\ErrorLogMain.cshtml" />
+    <Content Include="Views\Log\ErrorLogMainDeatils.cshtml" />
+    <Content Include="Views\Log\AdminLogMain.cshtml" />
+    <Content Include="Views\Log\ControlLogMain.cshtml" />
+    <Content Include="Views\Log\ControlLogDeatils.cshtml" />
+    <Content Include="Views\Log\CTErrorLogMain.cshtml" />
+    <Content Include="Views\Log\CTErrorLogDeatils.cshtml" />
+    <Content Include="Views\Log\CTLoginLogMain.cshtml" />
+    <Content Include="Views\Log\CTControlLogMain.cshtml" />
+    <Content Include="Views\Log\CTControlLogDeatils.cshtml" />
+    <Content Include="Views\Account\CTAccountMain.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

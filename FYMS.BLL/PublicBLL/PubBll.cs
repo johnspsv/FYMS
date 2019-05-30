@@ -139,9 +139,15 @@ namespace FYMS.BLL.PublicBLL
                     {
                         if (p.Name == x.Name)
                         {
-                            x.SetValue(t, p.GetValue(s));
-                            break;
-                            //x.SetValue(t, p.GetValue(s, null), null);
+                            if (p.Name == "CT"|| p.Name == "CU"|| p.Name == "LU"|| p.Name == "LT")
+                            {
+                                x.SetValue(t, x.GetValue(t));
+                            }
+                            else
+                            {
+                                x.SetValue(t, p.GetValue(s));
+                                break;
+                            }
                         }
                     }
                 }

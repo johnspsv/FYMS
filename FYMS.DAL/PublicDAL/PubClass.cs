@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FYMS.Model.Entities;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -11,7 +10,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace FYMS.DAL.PublicDAL
 {
-    public class PubClass<T> where T:class,new()
+    public class PubClass<T> where T : class, new()
     {
         #region 上下文
         /// <summary>
@@ -29,8 +28,22 @@ namespace FYMS.DAL.PublicDAL
         public virtual bool Add(T t)
         {
             dbcontext.Entry<T>(t).State = EntityState.Added;
-            return dbcontext.SaveChanges()>0;
+            return dbcontext.SaveChanges() > 0;
         }
+
+        /// <summary>
+        /// 保存单条数据，返回结果(bool)(带日志)
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        public virtual bool Add(T t, ht_control_log log)
+        {
+            dbcontext.Entry<T>(t).State = EntityState.Added;
+            dbcontext.ht_control_log.Add(log);
+            return dbcontext.SaveChanges() > 0;
+        }
+
 
         /// <summary>
         /// 保存单条数据，返回保存的对象
@@ -40,6 +53,20 @@ namespace FYMS.DAL.PublicDAL
         public virtual T AddEntity(T t)
         {
             dbcontext.Entry<T>(t).State = EntityState.Added;
+            dbcontext.SaveChanges();
+            return t;
+        }
+
+        /// <summary>
+        /// 保存单条数据，返回保存的对象（带日志）
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        public virtual T AddEntity(T t, ht_control_log log)
+        {
+            dbcontext.Entry<T>(t).State = EntityState.Added;
+            dbcontext.ht_control_log.Add(log);
             dbcontext.SaveChanges();
             return t;
         }
@@ -56,7 +83,23 @@ namespace FYMS.DAL.PublicDAL
             //    dbcontext.Entry<T>(t).State = EntityState.Added;
             //}
             list.ForEach(c => dbcontext.Entry<T>(c).State = EntityState.Added);//同foreach
-            return dbcontext.SaveChanges()>0;  
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        /// <summary>
+        /// 保存多条数据，返回保存结果(bool)(带日志）
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public virtual bool Add(List<T> list, ht_control_log log)
+        {
+            //foreach(var t in list)
+            //{
+            //    dbcontext.Entry<T>(t).State = EntityState.Added;
+            //}
+            list.ForEach(c => dbcontext.Entry<T>(c).State = EntityState.Added);//同foreach
+            dbcontext.ht_control_log.Add(log);
+            return dbcontext.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -74,6 +117,23 @@ namespace FYMS.DAL.PublicDAL
             dbcontext.SaveChanges();
             return list;
         }
+
+        /// <summary>
+        /// 保存多条数据，返回保存list(带日志)
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public virtual List<T> AddEntities(List<T> list, ht_control_log log)
+        {
+            foreach (var t in list)
+            {
+                dbcontext.Entry<T>(t).State = EntityState.Added;
+            }
+            //list.ForEach(c => dbcontext.Entry<T>(c).State = EntityState.Added);//同foreach
+            dbcontext.ht_control_log.Add(log);
+            dbcontext.SaveChanges();
+            return list;
+        }
         #endregion
 
         #region 删(不推荐)
@@ -86,7 +146,20 @@ namespace FYMS.DAL.PublicDAL
         {
             dbcontext.Set<T>().Attach(t);
             dbcontext.Entry<T>(t).State = EntityState.Deleted;
-            return dbcontext.SaveChanges()>0;
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        /// <summary>
+        /// 删除单条数据（带日志）
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public virtual bool Delete(T t, ht_control_log log)
+        {
+            dbcontext.Set<T>().Attach(t);
+            dbcontext.Entry<T>(t).State = EntityState.Deleted;
+            dbcontext.ht_control_log.Add(log);
+            return dbcontext.SaveChanges() > 0;
         }
 
         /// <summary>
@@ -94,13 +167,29 @@ namespace FYMS.DAL.PublicDAL
         /// </summary>
         /// <param name="func"></param>
         /// <returns></returns>
-        public virtual bool DeleteEntities(Func<T,bool> func)
+        public virtual bool DeleteEntities(Func<T, bool> func)
         {
             var data = dbcontext.Set<T>().Where<T>(func).ToList();
-            foreach(var p in data)
+            foreach (var p in data)
             {
                 dbcontext.Entry<T>(p).State = EntityState.Deleted;
             }
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        /// <summary>
+        /// 根据条件批量删除(带日志)
+        /// </summary>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        public virtual bool DeleteEntities(Func<T, bool> func, ht_control_log log)
+        {
+            var data = dbcontext.Set<T>().Where<T>(func).ToList();
+            foreach (var p in data)
+            {
+                dbcontext.Entry<T>(p).State = EntityState.Deleted;
+            }
+            dbcontext.ht_control_log.Add(log);
             return dbcontext.SaveChanges() > 0;
         }
 
@@ -115,6 +204,21 @@ namespace FYMS.DAL.PublicDAL
             {
                 dbcontext.Entry<T>(t).State = EntityState.Deleted;
             }
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        /// <summary>
+        /// 批量删除(带日志)
+        /// </summary>
+        /// <param name="list"></param>
+        /// <returns></returns>
+        public virtual bool DeleteEntities(List<T> list, ht_control_log log)
+        {
+            foreach (var t in list)
+            {
+                dbcontext.Entry<T>(t).State = EntityState.Deleted;
+            }
+            dbcontext.ht_control_log.Add(log);
             return dbcontext.SaveChanges() > 0;
         }
         #endregion
@@ -133,7 +237,27 @@ namespace FYMS.DAL.PublicDAL
                 dbcontext.Entry<T>(t).State = EntityState.Modified;//属性都将被标记为修改状态
                 return dbcontext.SaveChanges() > 0;
             }
-            catch(Exception ex)
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// 更新单条数据,修改所有列的值，没有赋值的属性会被赋予属性类型的默认值(带日志)
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public virtual bool Update(T t, ht_control_log log)
+        {
+            try
+            {
+                dbcontext.Set<T>().Attach(t);
+                dbcontext.Entry<T>(t).State = EntityState.Modified;//属性都将被标记为修改状态
+                dbcontext.ht_control_log.Add(log);
+                return dbcontext.SaveChanges() > 0;
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -153,17 +277,47 @@ namespace FYMS.DAL.PublicDAL
         }
 
         /// <summary>
-        /// 更新单条数据，修改制定列的值
+        /// 更新单条数据，并返回保存的对象（带日志）
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public virtual T UpdateEntity(T t, ht_control_log log)
+        {
+            dbcontext.Set<T>().Attach(t);
+            dbcontext.Entry<T>(t).State = EntityState.Modified;//属性都将被标记为修改状态
+            dbcontext.ht_control_log.Add(log);
+            dbcontext.SaveChanges();
+            return t;
+        }
+
+        /// <summary>
+        /// 更新单条数据，修改指定列的值
         /// </summary>
         /// <param name="t">要修改的实体对象 </param>
         /// <param name="proNames">要修改的属性名称</param>
         /// <returns></returns>
-        public virtual bool Update(T t,params string[] proNames)
+        public virtual bool Update(T t, params string[] proNames)
         {
             dbcontext.Set<T>().Attach(t);
             DbEntityEntry<T> entity = dbcontext.Entry<T>(t);
             entity.State = EntityState.Unchanged;//将属性标记为未修改
             proNames.ToList().ForEach(x => entity.Property(x).IsModified = true);
+            return dbcontext.SaveChanges() > 0;
+        }
+
+        /// <summary>
+        /// 更新单条数据，修改指定列的值(带日志)
+        /// </summary>
+        /// <param name="t">要修改的实体对象 </param>
+        /// <param name="proNames">要修改的属性名称</param>
+        /// <returns></returns>
+        public virtual bool Update(T t, ht_control_log log, params string[] proNames)
+        {
+            dbcontext.Set<T>().Attach(t);
+            DbEntityEntry<T> entity = dbcontext.Entry<T>(t);
+            entity.State = EntityState.Unchanged;//将属性标记为未修改
+            proNames.ToList().ForEach(x => entity.Property(x).IsModified = true);
+            dbcontext.ht_control_log.Add(log);
             return dbcontext.SaveChanges() > 0;
         }
 
@@ -183,20 +337,36 @@ namespace FYMS.DAL.PublicDAL
         }
 
         /// <summary>
+        /// 更新单条数据，并返回保存的对象(带日志)
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        public virtual T UpdateEntity(T t, ht_control_log log, params string[] proNames)
+        {
+            dbcontext.Set<T>().Attach(t);
+            var entity = dbcontext.Entry<T>(t);
+            entity.State = EntityState.Unchanged;//将属性标记为未修改
+            proNames.ToList().ForEach(x => entity.Property(x).IsModified = true);
+            dbcontext.ht_control_log.Add(log);
+            dbcontext.SaveChanges();
+            return t;
+        }
+
+        /// <summary>
         /// 批量修改返回结果
         /// </summary>
         /// <param name="t"></param>
         /// <param name="func"></param>
         /// <param name="proNames"></param>
         /// <returns></returns>
-        public virtual bool UpdateEntities(T t,Func<T,bool> func, params string[] proNames)
+        public virtual bool UpdateEntities(T t, Func<T, bool> func, params string[] proNames)
         {
             var entities = dbcontext.Set<T>().Where(func).ToList();
             PropertyInfo[] proinfos = t.GetType().GetProperties();
             List<PropertyInfo> list = new List<PropertyInfo>();
-            foreach(var p in proinfos)
+            foreach (var p in proinfos)
             {
-                if(proNames.Contains(p.Name))
+                if (proNames.Contains(p.Name))
                 {
                     list.Add(p);
                 }
@@ -212,6 +382,37 @@ namespace FYMS.DAL.PublicDAL
             return dbcontext.SaveChanges() > 0;
         }
 
+        /// <summary>
+        /// 批量修改返回结果
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="func"></param>
+        /// <param name="proNames"></param>
+        /// <returns></returns>
+        public virtual bool UpdateEntities(T t, Func<T, bool> func, ht_control_log log, params string[] proNames)
+        {
+            var entities = dbcontext.Set<T>().Where(func).ToList();
+            PropertyInfo[] proinfos = t.GetType().GetProperties();
+            List<PropertyInfo> list = new List<PropertyInfo>();
+            foreach (var p in proinfos)
+            {
+                if (proNames.Contains(p.Name))
+                {
+                    list.Add(p);
+                }
+            }
+            entities.ForEach(x =>
+            {
+                foreach (var p in list)
+                {
+                    object value = p.GetValue(t, null);
+                    p.SetValue(x, value, null);
+                }
+            });
+            dbcontext.ht_control_log.Add(log);
+            return dbcontext.SaveChanges() > 0;
+        }
+
         #endregion
 
         #region 查
@@ -221,7 +422,7 @@ namespace FYMS.DAL.PublicDAL
         /// </summary>
         /// <param name="func"></param>
         /// <returns></returns>
-        public virtual IList<T> SelectEntities(Func<T,bool> func)
+        public virtual IList<T> SelectEntities(Func<T, bool> func)
         {
             return dbcontext.Set<T>().Where<T>(func).ToList();
         }
@@ -234,12 +435,12 @@ namespace FYMS.DAL.PublicDAL
         /// <param name="isAsc"></param>
         /// <param name="orderbyLambds"></param>
         /// <returns></returns>
-        public virtual IList<T> SelectEntities<S>(Func<T,bool> func, bool isAsc,Func<T,S> orderbyLambds)
+        public virtual IList<T> SelectEntities<S>(Func<T, bool> func, bool isAsc, Func<T, S> orderbyLambds)
         {
             var temp = dbcontext.Set<T>().Where<T>(func);
-            if(isAsc)
+            if (isAsc)
             {
-               return temp.OrderBy<T, S>(orderbyLambds).ToList();
+                return temp.OrderBy<T, S>(orderbyLambds).ToList();
             }
             else
             {
@@ -273,11 +474,11 @@ namespace FYMS.DAL.PublicDAL
         /// <param name="isAsc"></param>
         /// <param name="orderByLambds"></param>
         /// <returns></returns>
-        public virtual IList<T> PageOuery<S>(int pageIndex,int pageSize,out int rows,out int totalPage,Func<T,bool> func, bool isAsc,Func<T,S> orderByLambds)
+        public virtual IList<T> PageOuery<S>(int pageIndex, int pageSize, out int rows, out int totalPage, Func<T, bool> func, bool isAsc, Func<T, S> orderByLambds)
         {
             var temp = dbcontext.Set<T>().Where<T>(func);
             rows = temp.Count();
-            if(rows%pageSize==0)
+            if (rows % pageSize == 0)
             {
                 totalPage = rows / pageSize;
             }
@@ -285,7 +486,7 @@ namespace FYMS.DAL.PublicDAL
             {
                 totalPage = rows / pageSize + 1;
             }
-            if(isAsc)
+            if (isAsc)
             {
                 temp = temp.OrderBy<T, S>(orderByLambds);
             }
@@ -327,6 +528,5 @@ namespace FYMS.DAL.PublicDAL
         }
         #endregion
 
-       
     }
 }

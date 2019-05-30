@@ -8,5 +8,6 @@ namespace FYMS.DAL
 {
     public class Ht_MenuDAL:PublicDAL.PubClass<Ht_Menu>
     {
+       
     }
 }

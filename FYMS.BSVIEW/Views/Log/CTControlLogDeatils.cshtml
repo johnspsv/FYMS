@@ -1,8 +1,73 @@
 ﻿
 @{
-    ViewBag.Title = "CTControlLogDeatils";
+    ViewBag.Title = "前台操作日志明细";
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-<h2>CTControlLogDeatils</h2>
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+</div>
+@model FYMS.Common.ViewModel.CTControlLog
+<form id="user_form" enctype="multipart/form-data" class="form-horizontal">
+    <div class="row">
+        <fieldset disabled>
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">操作日期</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.CT, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">操作人</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.userName, new { @class = "form-control" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">所属公司</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">操作类型</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.ctrlTypeName, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">操作方法</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.ctrlFun, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">操作结果</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextBoxFor(model => model.ctrl_succ, new { @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">操作数据</label>
+                    <div class="col-lg-6 ">
+                        @Html.TextAreaFor(model => model.ctrlData, new { rows = "15", @class = "form-control" })
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <a href="/Log/CTControlLogMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
 

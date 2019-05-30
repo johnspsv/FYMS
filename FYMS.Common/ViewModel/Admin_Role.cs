@@ -13,6 +13,8 @@ namespace FYMS.Common.ViewModel
         [DataMember]
         public int ID { get; set; }
         [DataMember]
+        public int ST { get; set; }
+        [DataMember]      
         public DateTime CT { get; set; }
         [DataMember]
         public string role_code { get; set; }

@@ -19,6 +19,8 @@ using System.Runtime.Serialization;
     public ht_admin_userrole()
     {
         this.ht_userroleRel = new HashSet<ht_userroleRel>();
+        this.Ht_Limit = new HashSet<Ht_Limit>();
+        this.ht_CheckRoleRel = new HashSet<ht_CheckRoleRel>();
     }
 
     [DataMember]
@@ -44,4 +46,8 @@ using System.Runtime.Serialization;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
     public virtual ICollection<ht_userroleRel> ht_userroleRel { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Ht_Limit> Ht_Limit { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<ht_CheckRoleRel> ht_CheckRoleRel { get; set; }
 }

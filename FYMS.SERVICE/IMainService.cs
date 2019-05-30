@@ -15,10 +15,14 @@ namespace FYMS.SERVICE
         
         [OperationContract]
         void DoWork();
-        
+        #region 登录
         [OperationContract]
         //登录
-        int login(string username, string password);
+        string[] login(string username, string password);
+
+        [OperationContract]
+        string loginlimit(string username, string password);
+        #endregion
 
         #region 管理员管理
         [OperationContract]
@@ -79,6 +83,46 @@ namespace FYMS.SERVICE
         [OperationContract]
         string MenuOpen(int id);
         #endregion
+
+        #region 权限管理
+        [OperationContract]
+        string LimitAll();
+
+        [OperationContract]
+        bool LimitAdd(string str, string str1);
+
+        [OperationContract]
+        bool LimitUpdate(string[] str);
+
+        [OperationContract]
+        string[] LimitEditData(int id);
+
+        [OperationContract]
+        string LimitDelete(int id);
+        #endregion
+
+        #region 日志
+        [OperationContract]
+        void loginlog(string[] str);
+        [OperationContract]
+        void Errorlog(string ex);
+        [OperationContract]
+        void controllog(string str, string functionname, string other);
+        [OperationContract]
+        void errorcontrollog(string str, string functionname, string other, string ex);
+        #endregion
+
+        #region 审核类型
+        [OperationContract]
+        string CheckTypeAll();
+        [OperationContract]
+        string CheckTypeAdd(string str);
+        [OperationContract]
+        string CheckTypeUpdate(string str);
+        [OperationContract]
+        string CheckTypeDelete(int id);
+
+        #endregion 
 
     }
 }

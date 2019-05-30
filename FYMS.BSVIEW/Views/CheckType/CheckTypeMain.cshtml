@@ -1,0 +1,370 @@
+﻿
+@{
+    ViewBag.Title = "审核类型";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@model PagedList.IPagedList<FYMS.Common.ViewModel.CheckType>
+@using PagedList.Mvc;
+
+<script type="text/javascript">
+    function del(e) {
+
+        var id = $(e).data("id");
+        //取表格的选中行数据
+        bootbox.confirm({
+            title: '',
+            message: "确定进行操作？",
+            buttons: {
+                confirm: { label: "确定" },
+                cancel: { label: "取消" }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/CheckType/CheckTypeDelete",
+                        data: { "id": id },
+                        async: false,
+                        success: function (result) {
+                            bootbox.alert("成功");
+                            location.href = "CheckTypeMain";
+                        },
+                        error: function (result) {
+                            bootbox.alert("失败" + result);
+                        }
+                    });
+                } else {
+                    return;
+                }
+            },
+        });
+    };
+
+    function edit(e) {
+
+        var id = $(e).data("editid");
+        //取表格的选中行数据
+        $("#editid").val(id);
+        var Name = $(e).parent().parent().find('td').eq(2).text().trim();
+        var Code = $(e).parent().parent().find('td').eq(1).text().trim();
+
+        $("input[name='ed_CheckCode']").val(Code);
+        $("input[name='ed_CheckName']").val(Name);
+    };
+
+/**/</script>
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<h3 class="page-header">@ViewBag.Title</h3>
+
+<div class="row">
+
+    <div class="col-lg-6">
+        @if (ViewData["add"].ToString() == "1")
+        {
+            <button class="btn btn-primary active" data-toggle="modal" data-target="#CheckTypeCreate">新增审核类型</button>
+        }
+    </div>
+    @using (Html.BeginForm("CheckTypeMain", "CheckType", FormMethod.Get))
+    {
+        <div class="text-right col-lg-6">
+            <span>
+                按审核类型名称搜索：@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" class="btn btn-primary active" value="搜索" />
+            </span>
+        </div>
+    }
+</div>
+<br />
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="active">
+                <th>
+                    序号
+                </th>
+                <th>
+                    审核类型编号
+                </th>
+                <th>
+                    @Html.ActionLink("审核类型名称", "CheckTypeMain", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    if (item.ST == 0)
+                    {
+                        <tr class="info">
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CheckCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CheckName)
+                            </td>
+                            <td>
+                                @if (ViewData["delete"].ToString() == "1")
+                                {
+                                    <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-ok label label-success ">启用</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CheckCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CheckName)
+                            </td>
+                            <td>
+                                @if (ViewData["update"].ToString() == "1")
+                                {
+                                    <a data-editid="@item.ID" class=" glyphicon glyphicon-level-up label label-warning" data-toggle="modal" data-target="#CheckTypeEdit" onclick="edit(this)">编辑</a>
+                                }
+                                &nbsp;
+                                @if (ViewData["delete"].ToString() == "1")
+                                {
+                                    <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-remove label label-danger ">禁用</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("CheckTypeMain", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div class="modal fade" id="CheckTypeCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    审核类型新增
+                </h4>
+            </div>
+            <form id="cr_checktype_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">审核类型编号</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="cr_CheckCode" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">审核类型名称</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="cr_CheckName" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="cr_saveBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="CheckTypeEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    审核类型编辑
+                </h4>
+            </div>
+            <form id="ed_checktype_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">审核类型编号<input type="hidden" id="editid" name="editid" value="" /></label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="ed_CheckCode" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">审核类型名称</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="ed_CheckName" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="ed_saveBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+
+
+<script type="text/javascript">
+    $("#cr_saveBtn").click(function () {
+
+        var formData = new FormData($("#cr_checktype_form")[0]);
+        if ($("input[name='cr_CheckName']").val() == null||$("input[name='cr_CheckName']").val() == "") {
+            toastr.warning("请填写审核类型名称", '提示');
+            return;
+        }
+        if ($("input[name='cr_CheckCode']").val() == null||$("input[name='cr_CheckCode']").val() == "") {
+            toastr.warning("请填写审核类型编号", '提示');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/CheckType/Save",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("CheckTypeMain","CheckType")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $("#cr_checktype_form").bootstrapValidator({
+        //live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            cr_CheckCode: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入审核类型编号'
+                    }
+                }
+            },
+            cr_CheckName: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入审核类型名称'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#cr_checktype_form").bootstrapValidator("validate");
+
+    $("#ed_saveBtn").click(function () {
+
+        var formData = new FormData($("#ed_checktype_form")[0]);
+        if ($("input[name='ed_CheckName']").val() == null||$("input[name='ed_CheckName']").val() == "") {
+            toastr.warning("请填写审核类型名称", '提示');
+            return;
+        }
+        if ($("input[name='ed_CheckCode']").val() == null||$("input[name='ed_CheckCode']").val() == "") {
+            toastr.warning("请填写审核类型编号", '提示');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/CheckType/Update",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("CheckTypeMain","CheckType")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $("#ed_checktype_form").bootstrapValidator({
+        //live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            ed_CheckCode: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入审核类型编号'
+                    }
+                }
+            },
+            ed_CheckName: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入审核类型名称'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#ed_checktype_form").bootstrapValidator("validate");
+</script>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FYMS.DAL;
-using FYMS.Model.Entities;
+
 using FYMS.Common.ViewModel;
 using Newtonsoft.Json;
 
@@ -36,38 +36,46 @@ namespace FYMS.BLL
         }
 
         /// <summary>
-        /// 新增管理员
+        /// 新增人员角色
         /// </summary>
         /// <param name="str"></param>
         public static string UserRoleAdd(string str)
         {
-            PublicBLL.PubBll<ht_admin_userrole> bll = new PublicBLL.PubBll<ht_admin_userrole>();
-            ht_admin_userrole entity = bll.ReturnEntity(str);
+            try
+            {
+                PublicBLL.PubBll<ht_admin_userrole> bll = new PublicBLL.PubBll<ht_admin_userrole>();
+                ht_admin_userrole entity = bll.ReturnEntity(str);
 
 
-            entity.CT = DateTime.Now;
-            if (dal.SelectEntities(x => x.role_name == entity.role_name).Count > 0)
-            {
-                return "角色名重复";
-            }
-            else if (dal.SelectEntities(x => x.role_code == entity.role_code).Count > 0)
-            {
-                return "角色编号重复";
-            }
-            else
-            {
-                entity.CU = 1;
-                entity.LU = 1;
-                entity.LT = DateTime.Now;
-                entity.ST = 1;
-                if (dal.Add(entity))
+                entity.CT = DateTime.Now;
+                if (dal.SelectEntities(x => x.role_name == entity.role_name).Count > 0)
                 {
-                    return "保存成功";
+                    return "角色名重复";
+                }
+                else if (dal.SelectEntities(x => x.role_code == entity.role_code).Count > 0)
+                {
+                    return "角色编号重复";
                 }
                 else
                 {
-                    return "保存失败";
+                    entity.CU = Common.Common.UserID;
+                    entity.LU = Common.Common.UserID;
+                    entity.LT = DateTime.Now;
+                    entity.ST = 1;
+                    if (dal.Add(entity, LogBLL.controllog("add", "新增人员角色_UserAdd", str)))
+                    {
+                        return "保存成功";
+                    }
+                    else
+                    {
+                        return "保存失败";
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.errorControlLog("add", "新增人员角色_UserRoleAdd", str, ex.ToString());
+                return "保存失败";
             }
         }
 
@@ -91,32 +99,40 @@ namespace FYMS.BLL
         /// <returns></returns>
         public static string UserRoleUpdate(string str)
         {
-            PublicBLL.PubBll<Admin_Role> bll = new PublicBLL.PubBll<Admin_Role>();
-            Admin_Role user = bll.ReturnEntity(str);
+            try
+            {
+                PublicBLL.PubBll<Admin_Role> bll = new PublicBLL.PubBll<Admin_Role>();
+                Admin_Role user = bll.ReturnEntity(str);
 
-            if (dal.SelectEntities(x => x.role_name == user.role_name).Count > 1)
-            {
-                return "工号重复";
-            }
-            else if (dal.SelectEntities(x => x.role_code == user.role_code).Count > 1)
-            {
-                return "手机号重复";
-            }
-            else
-            {
-                ht_admin_userrole htuser = dal.SelectEntities(x => x.ID == user.ID).FirstOrDefault();
-                PublicBLL.PubBll<ht_admin_userrole> bll1 = new PublicBLL.PubBll<ht_admin_userrole>();
-                htuser = bll1.Edit<Admin_Role>(user, htuser);
-                htuser.LU = 1;
-                htuser.LT = DateTime.Now;
-                if (dal.Update(htuser))
+                if (dal.SelectEntities(x => x.role_name == user.role_name && x.ID != user.ID).Count > 0)
                 {
-                    return "保存成功";
+                    return "工号重复";
+                }
+                else if (dal.SelectEntities(x => x.role_code == user.role_code && x.ID != user.ID).Count > 0)
+                {
+                    return "手机号重复";
                 }
                 else
                 {
-                    return "保存失败";
+                    ht_admin_userrole htuser = dal.SelectEntities(x => x.ID == user.ID).FirstOrDefault();
+                    PublicBLL.PubBll<ht_admin_userrole> bll1 = new PublicBLL.PubBll<ht_admin_userrole>();
+                    htuser = bll1.Edit<Admin_Role>(user, htuser);
+                    htuser.LU = Common.Common.UserID;
+                    htuser.LT = DateTime.Now;
+                    if (dal.Update(htuser, LogBLL.controllog("modify", "人员角色更新_UserRoleUpdate", str)))
+                    {
+                        return "保存成功";
+                    }
+                    else
+                    {
+                        return "保存失败";
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                LogBLL.errorControlLog("modify", "人员角色更新_UserRoleUpdate", str, ex.ToString());
+                return "保存失败";
             }
         }
 
@@ -129,12 +145,15 @@ namespace FYMS.BLL
             try
             {
                 ht_admin_userrole bean = dal.SelectEntities(x => x.ID == id).FirstOrDefault();
+                bean.LT = DateTime.Now;
+                bean.LU = Common.Common.UserID;
                 bean.ST = 0;
-                dal.UpdateEntity(bean);
+                dal.UpdateEntity(bean, LogBLL.controllog("delete", "角色删除_Delete", id.ToString()));
                 return "删除成功";
             }
             catch (Exception ex)
             {
+                LogBLL.errorControlLog("delete", "角色删除_Delete", id.ToString(), ex.ToString());
                 return ex.ToString();
             }
         }

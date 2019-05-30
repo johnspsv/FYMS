@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-@model Tuple<PagedList.IPagedList<FYMS.Common.ViewModel.ControlLog>, FYMS.Common.ViewModel.SearchCon>
+@model Tuple<PagedList.IPagedList<FYMS.Common.ViewModel.ControlLog>, FYMS.Common.ViewModel.SearchCon,List<SelectListItem>,List<SelectListItem>>
 @using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" />
@@ -27,21 +27,46 @@
                         <div class="row ">
                             <div class="col-lg-6 ">
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label">日期区间起</label>
-                                    <div class="col-lg-4 ">
+                                    <label class="col-lg-3 control-label">日期区间起</label>
+                                    <div class="col-lg-6 ">
                                         @Html.TextBox("StartDate", ViewBag.StartDate as string, new { @type = "date", @class = "form-control" })
                                     </div>
-                                    <label class="col-lg-2 control-label">日期区间止</label>
-                                    <div class="col-lg-4 ">
-                                        @Html.TextBox("EndDate", ViewBag.EndDate as string, new { @type = "date", @class = "form-control" })
-                                    </div>
+                                    @ViewBag.StartDate
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
+                                    <label class="col-lg-3 control-label">日期区间止</label>
+                                    <div class="col-lg-6 ">
+                                        @Html.TextBox("EndDate", ViewBag.EndDate as string, new { @type = "date", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">操作类型</label>
+                                    <div class="col-lg-6 ">
+                                        @Html.DropDownList("CtrlType",Model.Item3,new { @class="form-control"})
+                                    </div>
+                                    @ViewBag.CtrlType
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="col-lg-3 control-label">操作结果</label>
+                                    <div class="col-lg-6 ">
+                                        @Html.DropDownList("CtrlResult", Model.Item4, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-lg-6">
+                                <div class="form-group">
                                     <label class="col-lg-3 control-label">输入搜索内容</label>
                                     <div class="col-lg-6">
-                                        @*<input  id="searchstr" type="date" name="SearchString" class="form-control" value="@ViewBag.CurrentFilter " />*@
                                         @Html.TextBox("SearchString", ViewBag.SearchString as string, new { @class = "form-control" })
                                     </div>
                                 </div>
@@ -82,6 +107,9 @@
                 <th>
                     操作结果
                 </th>
+                <th>
+                    操作
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -103,7 +131,7 @@
                     @Html.DisplayFor(modelItem => item.user_phone)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ctrlType)
+                    @Html.DisplayFor(modelItem => item.ctrlTypeName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ctrlFun)
@@ -111,7 +139,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ctrl_succ)
                 </td>
-
+                <td>
+                    @if (ViewData["select"].ToString() == "1")
+                    {
+                        @Html.ActionLink("查看", "ControlLogDeatils", new { id = item.ID }, new { @class = "glyphicon glyphicon-eye-open label label-primary" })
+                    }
+                </td>
             </tr>
 
                 }

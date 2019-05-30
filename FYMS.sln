@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYMS.Model", "FYMS.Model\FY
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYMS.Common", "FYMS.Common\FYMS.Common.csproj", "{949AB1A6-50B3-4C5E-BD11-821833016034}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FYMS.LANGUAGE", "FYMS.LANGUAGE\FYMS.LANGUAGE.csproj", "{F9F58AFE-7347-4FA2-BD09-761BBC42DC8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{949AB1A6-50B3-4C5E-BD11-821833016034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{949AB1A6-50B3-4C5E-BD11-821833016034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{949AB1A6-50B3-4C5E-BD11-821833016034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9F58AFE-7347-4FA2-BD09-761BBC42DC8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9F58AFE-7347-4FA2-BD09-761BBC42DC8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9F58AFE-7347-4FA2-BD09-761BBC42DC8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9F58AFE-7347-4FA2-BD09-761BBC42DC8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

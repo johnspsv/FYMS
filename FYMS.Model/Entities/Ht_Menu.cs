@@ -15,6 +15,12 @@ using System.Runtime.Serialization;
 [DataContract]
  public partial class Ht_Menu
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Ht_Menu()
+    {
+        this.Ht_LimitDetails = new HashSet<Ht_LimitDetails>();
+    }
+
     [DataMember]
 	 public int ID { get; set; }
     [DataMember]
@@ -39,4 +45,7 @@ using System.Runtime.Serialization;
 	 public string Path { get; set; }
     [DataMember]
 	 public string FloorName { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Ht_LimitDetails> Ht_LimitDetails { get; set; }
 }
