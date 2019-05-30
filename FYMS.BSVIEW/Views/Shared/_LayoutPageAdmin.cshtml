@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>房源管理系统后台</title>
+    @*<link href="~/OpenSource/bootstrap-3.3.7/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">*@
+    <link href="~/Content/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="~/Content/bootstrapvalidator/css/bootstrapValidator.css" rel="stylesheet" />
+    <link href="~/Content/LayoutAdmin.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/fontawesome/css/all.css" crossorigin="anonymous">
+    <link href="~/Content/bootstrap-fileup/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="~/Content/toastr/toastr.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker/bootstrap-datepicker3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" type="text/css" />
+    <script src="~/Content/JQuery/jquery-3.4.0.min.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap-fileup/js/fileinput.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap-3.3.7/js/bootstrap.js" type="text/javascript"></script>
+    <script src="~/Content/toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrapvalidator/js/bootstrapValidator.js" type="text/javascript"></script>
+    <script src="~/Content/bootstrap-fileup/js/locales/zh.js" type="text/javascript"></script>
+    <script src="~/Content/prompt.js" type="text/javascript"></script>
+    <script src="~/Content/bootbox/bootbox.min.js" type="text/javascript"></script>
+    <script sec="~/Content/bootstrap-select/js/bootstrap-select.min.js" type="text/javascript"></script>
+    <script sec="~/Content/bootstrap-select/js/i18n/defaults-zh_CN.js" type="text/javascript"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">房源管理系统后台</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">当前登录人:xxx</a></li>
+                    <li><a href="#">登录人角色</a></li>
+                    <li><a href="#">修改密码</a></li>
+                    <li><a id="clock" href="#"></a></li>
+                </ul>
+                @*<form class="navbar-form navbar-right">
+                        <input type="text" class="form-control" placeholder="Search...">
+                    </form>*@
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <div class="panel-group" id="accordion">
+                    <ul class="nav nav-sidebar" id="colul">
+                        <li><a href="/Index/Index"><span class="glyphicon glyphicon-th-list">后台首页</span></a></li>
+                        <li>
+                            <a href="#1" data-parent="#colul" data-toggle="collapse">
+                                <span class="glyphicon glyphicon-th-list">人员管理</span><b class="caret"></b>
+                            </a>
+                            <div id="1" class="panel-group collapse">
+                                <ul class="nav navbar-collapse">
+                                    <li><a href="/Admin_User/Admin_UserMain"><span class="glyphicon glyphicon-th-list">人员信息</span></a></li>
+                                    <li><a href="/AdminRole/AdminRoleMain"><span class="glyphicon glyphicon-th-list">角色信息</span></a></li>
+                                    <li><a href="/AdminRoleRel/AdminRoleRelMain"><span class="glyphicon glyphicon-th-list">人员分配</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li><a href="#"><span class="glyphicon glyphicon-th-list">基础信息</span></a></li>
+                        <li>
+                            <a href="#2" data-parent="#colul" data-toggle="collapse">
+                                <span class="glyphicon glyphicon-th-list">系统配置</span> <b class="caret"></b>
+                            </a>
+                            <div id="2" class="panel-group collapse">
+                                <ul class="nav navbar-collapse">
+                                    <li><a href="/Menu/MenuMain"><span class="glyphicon glyphicon-th-list">导航管理</span></a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-th-list">配置2</span></a></li>
+                                    <li><a href="#"><span class="glyphicon glyphicon-th-list">配置3</span></a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">         
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    @*<script src="~/OpenSource/JQuery/jquery-3.4.0.min.js"></script>*@
+    
+    <script>
+        ///时钟显示
+        var i = 0;
+        function myDate() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+
+            document.getElementById("clock").innerHTML = year + "年" + month + "月" + day + "日" + hours + "：" + minutes + "：" + seconds;
+        }
+        setInterval(myDate, 1000);
+    </script>
+    <script>
+        $(function () {
+            $(".nav.nav-sidebar").children("li").click(
+                function () {
+                    var a = $(this).hasClass("active");
+                    var b = $(this).parent("ul").hasClass("navbar-collapse");
+                    if ($(this).parent("ul").hasClass("navbar-collapse") && !$(this).hasClass("active")) {
+                        $(this).siblings().removeClass();
+                        $(this).toggleClass("active");
+                    }
+                    if (!a) {
+                        $(this).siblings().removeClass();
+                        $(this).toggleClass("active");
+                    }
+                    else {
+
+                    }
+                });
+        });
+
+        ///提示信息初始化
+        $(function () {
+            toastr.options = {
+                "positionClass": "toastr-top-center",
+                "debug": false,
+                "closeButton": false,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod":"fadeOut"
+            }
+        })
+    </script>
+</body>
+</html>

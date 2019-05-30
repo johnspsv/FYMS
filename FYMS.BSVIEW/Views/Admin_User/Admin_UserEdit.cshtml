@@ -1,0 +1,314 @@
+﻿
+@{
+    ViewBag.Title = "人员信息编辑";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+    @*<div class="text-right col-lg-6">
+            <a class="btn btn-primary active" href="/Admin_User/Admin_UserMain">返回</a>
+        </div>*@
+</div>
+@model FYMS.Common.ViewModel.User_admin
+<form id="user_form" enctype="multipart/form-data" class="form-horizontal"  method="post">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="form-group">
+                <label class="col-lg-2 control-label">工号</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.user_code, new { name = "user_code", htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">邮箱</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.user_email, new { name = "user_email", htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">手机号</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.user_phone, new { name = "user_phone", htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">密码</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.user_password, new { name = "user_password", htmlAttributes = new { @class = "form-control", @type = "password" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">确认密码</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.confirmpassword, new { name = "confirmpassword", htmlAttributes = new { @class = "form-control", @type = "password" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">姓名</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.user_name, new { name = "user_email", htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">性别</label>
+                <div class="col-lg-6">
+                    @if (Model.user_gender == 0)
+                    {
+                        <div class="radio">
+                            <label>
+
+                                <input type="radio" name="user_gender" value="0" checked /> 男
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+
+                                <input type="radio" name="user_gender" value="1" /> 女
+                            </label>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="radio">
+                            <label>
+
+                                <input type="radio" name="user_gender" value="0" checked /> 男
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+
+                                <input type="radio" name="user_gender" value="1" checked /> 女
+                            </label>
+                        </div>
+                    }
+                    @*<div class="radio">
+                            <label>
+                                @Html.CheckBoxFor(model => (model.user_gender == 0 ? true : false), new { name = "user_gender", htmlAttributes = new { @class = "form-control" } }) 男
+                                <input type="radio" name="user_gender" value="0" /> 男
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                @Html.CheckBoxFor(model => (model.user_gender == 1 ? true : false), new { name = "user_gender", htmlAttributes = new { @class = "form-control" } }) 女
+                                <input type="radio" name="user_gender" value="1" /> 女
+                            </label>
+                        </div>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">身份证号</label>
+                <div class="col-lg-6 ">
+                    @Html.EditorFor(model => model.user_idno, new { name = "user_idno", htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">生日</label>
+                <div class="col-lg-6 ">
+                    <input type="date" id="userdate" class="form-control" name="user_birthday" value=@Model.user_birthday.ToString("yyyy-MM-dd") />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">备注</label>
+                <div class="col-lg-6 ">
+                    <textarea class="form-control" rows="4" name="user_commmon">@Model.user_common</textarea>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <h4 class="page-header">头像上传</h4>
+            @*<div class="file-loading">
+                    <input id="kv-explorer" type="file" multiple>
+                </div>
+                <br>*@
+            @*<div class="file-loading">*@
+            <input id="uploadfile" type="file" name="user_photo" multiple class="file-loading" data-min-file-count="1" data-theme="fas">
+            @*</div>*@
+            <br>
+            @*<img src="~/OpenSource/image/pic/name.png" class="img-circle" width="100" height="100" />*@
+        </div>
+
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <input type="button" class="btn btn-primary" id="validateBtn" value="保存" />
+                @*<input type="button" class="btn btn-info" id="resetBtn" value="重置" />*@
+                <a href="/Admin_User/Admin_UserMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $('#user_form').bootstrapValidator({
+        //        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            user_code: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入工号'
+                    }
+                }
+            },
+            user_email: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入邮箱'
+                    },
+                    emailAddress: {
+                        message: '请输入正确邮箱格式'
+                    }
+                }
+            },
+            user_phone: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入手机号'
+                    },
+                    stringLength: {
+                        min: 11,
+                        max: 11,
+                        message: '手机号格式不正确'
+                    },
+                    regexp: {
+                        regexp: /^[0-9]+$/,
+                        message: '请输入正常的手机号格式'
+                    },
+                }
+            },
+            user_password: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入密码'
+                    },
+                    identical: {
+                        field: 'confirmpassword',
+                        message: '密码与确认密码不一致'
+                    }
+                }
+            },
+            confirmpassword: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入确认密码'
+                    },
+                    identical: {
+                        field: 'user_password',
+                        message: '密码与确认密码不一致'
+                    }
+                }
+            },
+            user_birthday: {
+                validators: {
+                    notEmpty: {
+                        message: '请填写出生日期'
+                    },
+                    date: {
+                        format: 'YYYY/MM/DD',
+                        message: '请填写生日日期'
+                    }
+                }
+            },
+            user_gender: {
+                validators: {
+                    notEmpty: {
+                        message: '请选择性别'
+                    }
+                }
+            },
+            user_name: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入姓名'
+                    }
+                }
+            }
+        }
+     });
+
+    $("#user_form").bootstrapValidator('validate');
+    
+    $("#resetBtn").click(function () {
+        $("#user_form").data("bootstrapValidator").resetForm(true);
+    });
+
+
+    $(function () {
+            var control = $("#uploadfile");
+            var uploadurl = "/Admin_User/UpLoadFile"
+        var upObj = {
+            language: 'zh', //设置语言
+            uploadUrl: uploadurl, //上传的地址
+            //uploadExtraData: { "savepath": "/bootstrap-fileinput-master/examples/" },//上传至服务器的参数，非常重要
+            allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
+            showUpload: true, //显示批量上传按钮
+            showCaption: false,//是否显示标题
+            browseClass: "btn btn-primary", //按钮样式
+            uploadAsync: true,
+            //overwriteInitial: false,
+            initialPreviewAsData: true,
+            initialPreview:["../../Temp/@Model.picname"],
+            maxFileSize: 4096,//单位为kb，如果为0表示不限制文件大小
+            minFileCount: 0,
+            maxFileCount: 1,
+            msgSizeTooLarge: " \"{name}\" 大小为({size} KB) 最大文件大小为 {maxSize} KB.请重新上传!",//文件的实际大小有些许偏差
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+            allowedPreviewTypes: ['image']//能够预览的文件类型，如果不限制。文件预览时可能很慢
+        };
+        //$('#uploadfile').html("[请选择"+upObj.allowedFileExtensions+"]文件");
+        control.fileinput(upObj);
+
+        //导入文件上传成功之后的事件
+        $("#uploadfile").on("fileuploaded", function (event, data, previewId, index) {
+
+    });
+        //导入文件上传失败之后的事件
+        $('#uploadfile').on('fileuploaderror', function (event, data, msg) {
+        var msg = data.response;
+    });
+    });
+
+    $("#validateBtn").click(function () {
+        var formData = new FormData($("#user_form")[0]);
+        $.ajax({
+            type: "POST",
+            url: "/Admin_User/Update",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+                    window.location.href = "@Url.Action("Admin_UserMain","Admin_User")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+</script>
+<script type="text/javascript">
+    
+    $(".datepicker").datepicker("setDate",(@(Model.user_birthday.ToString("yyyy/MM/dd"))));
+</script>

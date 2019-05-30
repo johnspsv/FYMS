@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "人员角色管理";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@model PagedList.IPagedList<FYMS.Common.ViewModel.Admin_Role>
+@using PagedList.Mvc;
+
+<script type="text/javascript">
+    function del(e) {
+
+        var id = $(e).data("id");
+        //取表格的选中行数据
+        bootbox.confirm({
+            title: '',
+            message: "确定进行删除操作？" ,
+            buttons: {
+                confirm: { label: "确定" },
+                cancel: { label: "取消" }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/AdminRole/Delete",
+                        data: { "id": id },
+                        async: false,
+                        success: function (result) {
+                            bootbox.alert("删除成功");
+                            location.href = "AdminRoleMain";
+                        },
+                        error: function (result) {
+                            bootbox.alert("删除失败" + result);
+                        }
+                    });
+                } else {
+                    return;
+                }
+            },
+        });
+    };
+</script>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<h3 class="page-header">@ViewBag.Title</h3>
+@using (Html.BeginForm("AdminRoleMain", "AdminRole", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <a class="btn btn-primary active" href="/AdminRole/AdminRoleCreate">新增人员角色</a>
+        </div>
+        <div class="text-right col-lg-6">
+            <span>
+                按角色名称搜索：@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" class="btn btn-primary active" value="搜索" />
+            </span>
+        </div>
+    </div>
+}
+<br />
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="active">
+                <th>
+                    序号
+                </th>
+                <th>
+                    角色编号
+                </th>
+                <th>
+                    @Html.ActionLink("角色名称", "AdminRoleMain", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th> 
+                <th>
+                    角色说明
+                </th>
+                <th>
+                    创建时间
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>
+                            <b>@Html.DisplayFor(modelItem => item.number)</b>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.role_code)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.role_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.role_common)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CT)
+                        </td>
+                        <td>
+                            @Html.ActionLink("查看", "AdminRoleDetails", new { id = item.ID }, new { @class = "glyphicon glyphicon-eye-open label label-primary" })&nbsp;
+                            @Html.ActionLink("编辑", "AdminRoleEdit", new { id = item.ID }, new { @class = "glyphicon glyphicon-level-up label label-warning " })&nbsp;
+                            <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-trash label label-danger ">删除</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("AdminRoleMain", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+

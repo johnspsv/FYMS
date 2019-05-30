@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FYMS.SERVICE.MainService" CodeBehind="MainService.svc.cs" %>

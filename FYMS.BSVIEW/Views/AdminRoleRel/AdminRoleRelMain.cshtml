@@ -1,0 +1,388 @@
+﻿
+@{
+    ViewBag.Title = "人员分配管理";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+@model Tuple<PagedList.IPagedList<FYMS.Common.ViewModel.AdminRoleRel>, List<FYMS.Common.ViewModel.User_admin>, List<FYMS.Common.ViewModel.Admin_Role>>
+@using PagedList.Mvc;
+
+<script type="text/javascript">
+    function del(e) {
+
+        var id = $(e).data("id");
+        //取表格的选中行数据
+        bootbox.confirm({
+            title: '',
+            message: "确定进行操作？",
+            buttons: {
+                confirm: { label: "确定" },
+                cancel: { label: "取消" }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/AdminRoleRel/RoleRelDelete",
+                        data: { "id": id },
+                        async: false,
+                        success: function (result) {
+                            bootbox.alert("成功");
+                            location.href = "AdminRoleRelMain";
+                        },
+                        error: function (result) {
+                            bootbox.alert("失败" + result);
+                        }
+                    });
+                } else {
+                    return;
+                }
+            },
+        });
+    };
+
+    function edit(e) {
+
+        var id = $(e).data("editid");
+        //取表格的选中行数据
+        $("#editid").val(id);
+        var username = $(e).parent().parent().find('td').eq(1).text();
+        var userid = $(e).parent().parent().find('td').eq(1).find('input').val();
+        var rolename = $(e).parent().parent().find('td').eq(2).text();
+        var roleid = $(e).parent().parent().find('td').eq(2).find('input').val();
+        var st = $(e).parent().parent().find('td').eq(3).find("a[name='useornot']").html().trim();
+
+        $("#select11 option").each(function () {
+            if ($(this).val() == userid) {
+                $(this).attr("selected", true);
+            }
+        })
+        $("#select11").attr("disabled", "disabled");
+        $("#user_id").val(userid);
+        $("#select22 option").each(function () {
+            if ($(this).val() == roleid) {
+                $(this).attr("selected", true);
+            }
+        })
+
+    };
+</script>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<h3 class="page-header">@ViewBag.Title</h3>
+
+<div class="row">
+    <div class="col-lg-6">
+        <button class="btn btn-primary active" data-toggle="modal" data-target="#myModal">新增人员分配</button>
+    </div>
+    @using (Html.BeginForm("AdminRoleRelMain", "AdminRoleRel", FormMethod.Get))
+    {
+        <div class="text-right col-lg-6">
+
+            <span>
+                按人员姓名搜索：@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" class="btn btn-primary active" value="搜索" />
+            </span>
+        </div>
+    }
+</div>
+
+<br />
+<div class="table-responsive">
+    <table id="table1" class="table table-hover">
+        <thead>
+            <tr class="active">
+                <th>
+                    序号
+                </th>
+                <th>
+                    @Html.ActionLink("人员姓名", "AdminRoleRelMain", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    人员角色
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Item1 != null)
+            {
+                foreach (var item in Model.Item1)
+                {
+                    if (item.ST == 0)
+                    {
+                        <tr class="info">
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.admin_name)<input type="hidden" name="admin_id" value="@item.admin_id" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.role_name)<input type="hidden" name="role_id" value="@item.role_id" />
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("编辑", "AdminRoleEdit", new { id = item.ID }, new { @class = "glyphicon glyphicon-level-up btn btn-warning " })&nbsp;*@
+                                @*<a data-editid="@item.ID" class=" glyphicon glyphicon-level-up label label-warning" data-toggle="modal" data-target="#myModal1" onclick="edit(this)" >编辑</a>*@
+                                <a name="useornot" id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon  glyphicon-ok label label-success ">启用</a>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.admin_name)<input type="hidden" name="admin_id" value="@item.admin_id" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.role_name)<input type="hidden" name="role_id" value="@item.role_id" />
+                            </td>
+                            <td>
+                                @*@Html.ActionLink("编辑", "AdminRoleEdit", new { id = item.ID }, new { @class = "glyphicon glyphicon-level-up btn btn-warning " })&nbsp;*@
+                                <a data-editid="@item.ID" class=" glyphicon glyphicon-level-up label label-warning" data-toggle="modal" data-target="#myModal1" onclick="edit(this)">编辑</a>
+                                <a name="useornot" id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-remove label label-danger ">禁用</a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+
+            }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.Item1.PageCount < Model.Item1.PageNumber ? 0 : Model.Item1.PageNumber) of @Model.Item1.PageCount
+    @Html.PagedListPager(Model.Item1, page => Url.Action("AdminRoleMain", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    人员关系新增
+                </h4>
+            </div>
+            <form id="rel_form" enctype="multipart/form-data" class="form-horizontal" action="/AdminRole/Save" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">人员选择</label>
+                                    <div class="col-lg-6 ">
+                                        <select id="select1" class="form-control " name="username" data-live-search="true">
+                                            <option value="0" class="glyphicon glyphicon-user danger">选择人员</option>
+                                            @foreach (var i in Model.Item2)
+                                            {
+                                                <option value="@i.ID">@i.user_name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">角色选择</label>
+                                    <div class="col-lg-6 ">
+                                        <select id="select2" class="form-control " name="rolename" data-live-search="true">
+                                            <option value="0" class="glyphicon glyphicon-user danger">选择角色</option>
+
+                                            @foreach (var i in Model.Item3)
+                                            {
+                                                <option value="@i.ID">@i.role_name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="validateBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">
+                    人员关系编辑
+                </h4>
+            </div>
+            <form id="rel1_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">人员选择 <input type="hidden" id="editid" name="editid" value="" /><input type="hidden" id="user_id" name="user_id" value="" /></label>
+                                    <div class="col-lg-6 ">
+                                        <select id="select11" class="form-control " name="username" data-live-search="true">
+                                            <option value="0"> 选择人员 </option>
+                                            @foreach (var i in Model.Item2)
+                                            {
+                                                <option value="@i.ID">@i.user_name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">角色选择</label>
+                                    <div class="col-lg-6 ">
+                                        <select id="select22" class="form-control " name="rolename" data-live-search="true">
+                                            <option value="0" class="glyphicon glyphicon-user danger">选择角色</option>
+                                            @foreach (var i in Model.Item3)
+                                            {
+                                                <option value="@i.ID">@i.role_name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="editbtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+<script type="text/javascript">
+    $('#rel_form').bootstrapValidator({
+        //        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入管理员编号'
+                    }
+                }
+            },
+           rolename: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入管理员角色名称'
+                    }
+                }
+            },
+        }
+    });
+
+    $("#rel_form").bootstrapValidator('validate');
+
+        $('#rel_form').bootstrapValidator({
+        //        live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入管理员编号'
+                    }
+                }
+            },
+           rolename: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入管理员角色名称'
+                    }
+                }
+            },
+        }
+    });
+
+    $("#rel_form").bootstrapValidator('validate');
+
+
+    $("#resetBtn").click(function () {
+        $("#user_form").data("bootstrapValidator").resetForm(true);
+    });
+
+    $("#validateBtn").click(function () {
+
+        var formData = new FormData($("#rel_form")[0]);
+
+        $.ajax({
+            type: "POST",
+            url: "/AdminRoleRel/Save",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("AdminRoleRelMain","AdminRoleRel")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $("#editbtn").click(function () {
+        var formData = new FormData($("#rel1_form")[0]);
+        $.ajax({
+            type: "POST",
+            url: "/AdminRoleRel/Update",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("AdminRoleRelMain","AdminRoleRel")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+</script>
+

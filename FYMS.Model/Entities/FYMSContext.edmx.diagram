@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ddf0af3687664c46af2d7c529c7a7575" Name="Diagram1">
+        <EntityTypeShape EntityType="FYMSModel.Test" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FYMSModel.ht_admin_log" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FYMSModel.ht_admin_user" Width="1.5" PointX="3.75" PointY="1" />
+        <EntityTypeShape EntityType="FYMSModel.ht_admin_userrole" Width="1.5" PointX="3.75" PointY="6.625" />
+        <EntityTypeShape EntityType="FYMSModel.ht_control_log" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FYMSModel.ht_dictionary" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="FYMSModel.ht_error_log" Width="1.5" PointX="8.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FYMSModel.ht_userroleRel" Width="1.5" PointX="6" PointY="1.5" />
+        <AssociationConnector Association="FYMSModel.FK_HT_USERR_FK_USER_R_HT_ADMIN" />
+        <AssociationConnector Association="FYMSModel.FK_HT_USERR_FK_USERRO_HT_ADMIN" />
+        <EntityTypeShape EntityType="FYMSModel.Ht_Menu" Width="1.5" PointX="0.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

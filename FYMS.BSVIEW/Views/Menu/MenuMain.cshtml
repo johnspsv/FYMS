@@ -1,0 +1,415 @@
+﻿
+@{
+    ViewBag.Title = "导航菜单管理";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+@model Tuple<PagedList.IPagedList<FYMS.Common.ViewModel.HtMenu>, List<FYMS.Common.ViewModel.DpMenu>>
+@using PagedList.Mvc;
+<script type="text/javascript">
+    function del(e) {
+
+        var id = $(e).data("id");
+        //取表格的选中行数据
+        bootbox.confirm({
+            title: '',
+            message: "确定进行操作？",
+            buttons: {
+                confirm: { label: "确定" },
+                cancel: { label: "取消" }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Menu/MenuDelete",
+                        data: { "id": id },
+                        async: false,
+                        success: function (result) {
+                            bootbox.alert("成功");
+                            location.href = "MenuMain";
+                        },
+                        error: function (result) {
+                            bootbox.alert("失败" + result);
+                        }
+                    });
+                } else {
+                    return;
+                }
+            },
+        });
+    };
+
+    function edit(e) {
+
+        var id = $(e).data("editid");
+        //取表格的选中行数据
+        $("#editid").val(id);
+        var Name = $(e).parent().parent().find('td').eq(1).text().trim();
+        var Path = $(e).parent().parent().find('td').eq(3).text().trim();
+        var Floorname = $(e).parent().parent().find('td').eq(2).text().trim();
+        var FloorID = $(e).parent().parent().find('td').eq(2).find('input').val();
+        $("input[name='edName']").val(Name) ;
+        $("input[name='edPath']").val(Path);
+        if (Floorname == "") {
+            $("#edck").attr("checked",false);
+            $("select[name='edfloorname']").attr("disabled", "disabled");
+        }
+        else {
+            $("#edck").attr("checked",true);
+            $("select[name='edfloorname']").attr("disabled", false);
+            $("select[name='edfloorname'] option").each(function () {
+                if ($(this).val() == FloorID) {
+                    $(this).attr("selected", true);
+                }
+            })
+        }
+    };
+</script>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<h3 class="page-header">@ViewBag.Title</h3>
+
+<div class="row">
+    <div class="col-lg-6">
+        <button class="btn btn-primary active" data-toggle="modal" data-target="#menuCreate">新增导航栏</button>
+    </div>
+    @using (Html.BeginForm("MenuMain", "Menu", FormMethod.Get))
+    {
+        <div class="text-right col-lg-6">
+            <span>
+                按导航栏名称搜索：@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input type="submit" class="btn btn-primary active" value="搜索" />
+            </span>
+        </div>
+    }
+</div>
+
+<br />
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr class="active">
+                <th>
+                    序号
+                </th>
+                <th>
+                    @Html.ActionLink("导航名称", "MenuMain", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th>
+                    所属导航栏名称
+                </th>
+                <th>
+                    导航路径
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model.Item1)
+                {
+                    if (item.ST == 0)
+                    {
+                        <tr class="info">
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FloorName)<input type="hidden" name="FloorID" value="@item.FloorID" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Path)
+                            </td>
+                            <td>
+                                @*<a data-editid="@item.ID" class=" glyphicon glyphicon-level-up label label-warning" data-toggle="modal" data-target="#menuEdit" onclick="edit(this)">编辑</a>&nbsp;*@
+                                <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-ok label label-success ">启用</a>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <b>@Html.DisplayFor(modelItem => item.number)</b>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.FloorName)<input type="hidden" name="FloorID" value="@item.FloorID" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Path)
+                            </td>
+                            <td>
+                                <a data-editid="@item.ID" class=" glyphicon glyphicon-level-up label label-warning" data-toggle="modal" data-target="#menuEdit" onclick="edit(this)">编辑</a>
+                                <a id="@item.ID" data-id="@item.ID" onclick="del(this)" class="glyphicon glyphicon-remove label label-danger ">禁用</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    <br />
+    Page @(Model.Item1.PageCount < Model.Item1.PageNumber ? 0 : Model.Item1.PageNumber) of @Model.Item1.PageCount
+    @Html.PagedListPager(Model.Item1, page => Url.Action("MenuMain", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>
+
+<div class="modal fade" id="menuCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    导航栏新增
+                </h4>
+            </div>
+            <form id="cr_menu_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">导航栏名称</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="crName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">导航栏路径</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="crPath" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">子导航栏</label>
+                                    <div class="col-lg-6 ">
+                                        <div class="radio">
+                                            <label>
+                                                <input id="ck" type="checkbox"  class="text-danger" onclick="Checked(this)" /> 是否关联到其他导航栏(不选择默认为顶级)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">所属导航栏</label>
+                                    <div class="col-lg-6 ">
+                                        <select id="cr-select" class="form-control " name="floorname" data-live-search="true" disabled>
+                                            <option>选择所属导航栏</option>
+                                            @foreach (var i in Model.Item2)
+                                            {
+                                                <option value="@i.ID">@i.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="cr_saveBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<div class="modal fade" id="menuEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    导航栏编辑
+                </h4>
+            </div>
+            <form id="ed_menu_form" enctype="multipart/form-data" class="form-horizontal" method="post">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">导航栏名称<input type="hidden" id="editid" name="editid" value="" /></label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="edName" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">导航栏路径</label>
+                                    <div class="col-lg-6 ">
+                                        <input type="text" class="form-control" name="edPath" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">子导航栏</label>
+                                    <div class="col-lg-6 ">
+                                        <div class="radio">
+                                            <label>
+                                                <input id="edck" type="checkbox"  class="text-danger" onclick="edChecked(this)" /> 是否关联到其他导航栏(不选择默认为顶级)
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label">所属导航栏</label>
+                                    <div class="col-lg-6 ">
+                                        <select id="ed-select" class="form-control " name="edfloorname" data-live-search="true" disabled>
+                                            <option>选择所属导航栏</option>
+                                            @foreach (var i in Model.Item2)
+                                            {
+                                                <option value="@i.ID">@i.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-primary" id="ed_saveBtn" value="保存" />
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script type="text/javascript">
+
+    function Checked(e) {
+        var ck = $(e).prop("checked");
+        var a = $("#cr-select").prop("disabled");
+        if (ck) {
+
+            if (a == "disabled" || a == true) {
+                $("#cr-select").attr("disabled", false);
+            }
+        }
+        else {
+            if (a == false)
+                $("#cr-select").attr("disabled", "disabled");
+        }
+    }
+
+    function edChecked(e) {
+        var ck = $(e).prop("checked");
+        var a = $("#ed-select").prop("disabled");
+        if (ck) {
+
+            if (a == "disabled" || a == true) {
+                $("#ed-select").attr("disabled", false);
+            }
+        }
+        else {
+            if (a == false)
+                $("#ed-select").attr("disabled", "disabled");
+        }
+    }
+
+    $("#cr_saveBtn").click(function () {
+
+        var formData = new FormData($("#cr_menu_form")[0]);
+        if ($("input[name='crName']").val() == null) {
+            toastr.warning("请填写导航栏名称", '提示');
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Menu/Save",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("MenuMain","Menu")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+    $("#ed_saveBtn").click(function () {
+
+        var formData = new FormData($("#ed_menu_form")[0]);
+        if ($("input[name='crName']").val() == null) {
+            toastr.warning("请填写导航栏名称", '提示');
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Menu/Update",
+            async: true,
+            data: formData,
+            ///提交表单不加会报错
+            cache: false,
+            contentType: false,
+            processData: false,
+
+            success: function (result) {
+                if (result == "保存成功") {
+
+                    window.location.href = "@Url.Action("MenuMain","Menu")";
+                }
+                else {
+                    toastr.warning(result, '提示');
+                }
+            },
+            error: function () {
+                toastr.error('异常', 'error');
+            }
+        })
+    });
+
+
+    $("#cr_menu_form").bootstrapValidator({
+        //live: 'disabled',
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            crName: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入导航栏名称'
+                    }
+                }
+            },
+            crPath: {
+                validators: {
+                    notEmpty: {
+                        message: '请输入导航栏路径'
+                    }
+                }
+            }
+        }
+    });
+
+    $("#cr_menu_form").bootstrapValidator("validate");
+
+</script>

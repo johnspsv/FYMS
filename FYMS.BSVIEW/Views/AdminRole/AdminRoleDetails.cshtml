@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "人员角色信息查看";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+    @*<div class="text-right col-lg-6">
+            <a class="btn btn-primary active" href="/Admin_User/Admin_UserMain">返回</a>
+        </div>*@
+</div>
+@model FYMS.Common.ViewModel.Admin_Role
+<form id="user_form" enctype="multipart/form-data" class="form-horizontal"  method="post">
+    <div class="row">
+        <fieldset disabled>
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">角色编号</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.role_code, new { name = "role_code", htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">角色名称</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.role_name, new { name = "role_name", htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">角色说明</label>
+                    <div class="col-lg-6 ">
+                        <textarea class="form-control" rows="4" name="role_common">@Model.role_common</textarea>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+               
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <a href="/AdminRole/AdminRoleMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
+

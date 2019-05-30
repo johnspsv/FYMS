@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.title = "房源管理系统后台登录";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>@ViewBag.title</title>
+    <link href="~/Content/bootstrap-3.3.7/css/bootstrap.min.css"  rel="stylesheet" />
+    <link rel="stylesheet" media="screen" href="~/Content/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/reset.css" />
+</head>
+<body>
+    <div id="particles-js">
+        <div class="login">
+            <div class="login-top">
+                FYMS-房源管理系统
+            </div>
+            @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+            {
+                <div class="login-center clearfix">
+                    <div class="login-center-img"><img src="~/Content/Img/name.png" /></div>
+                    <div class="login-center-input">
+                        <input type="text" name="inputEmail3" value="" placeholder="请输入您的登录信息" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'" required />
+                        <div class="login-center-input-text">工号|邮箱|手机号</div>
+                    </div>
+                </div>
+                <div class="login-center clearfix">
+                    <div class="login-center-img"><img src="~/Content/Img/password.png" /></div>
+                    <div class="login-center-input">
+                        <input type="password" name="inputPassword3" value="" placeholder="请输入您的密码" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的密码'" required />
+                        <div class="login-center-input-text">密码</div>
+                    </div>
+                </div>
+                <div class="text-center ">
+                    <input id="btn" type="submit" class="btn btn-primary" value="登录" />
+                    @*@if (ViewBag.Message == 0)
+                        {
+                            <div class="alert alert-block fade in">
+                                <div class="alert alert-danger">
+                                    <a href="#" class="alert-link">登录失败！请检查用户名和密码</a>
+                                </div>
+                            </div>
+                        }*@
+                    @*@Html.ActionLink("登录", "Index", FormCollection fc, new { @class = "btn btn-primary" })*@
+                </div>
+            }
+        </div>
+        <div class="sk-rotating-plane"></div>
+    </div>
+
+    <script src="~/Content/particles.min.js"></script>
+    <script src="~/Content/app.js"></script>
+    <script src="~/Content/JQuery/jquery-3.4.0.js"></script>
+    <script src="~/Content/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $("#btn").click(function () {
+            window.location = "/Index/Index";
+            @*if (@ViewBag.Message == 0) {
+                window.location = "/Index/Index";
+            }
+            else {
+                window.location = "/Index/Index";
+            }*@
+    })
+    </script>
+</body>
+</html>

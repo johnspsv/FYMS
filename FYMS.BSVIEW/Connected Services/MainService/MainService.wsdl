@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MainService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8082/MainService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:8082/MainService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMainService_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_login_InputMessage">
+    <wsdl:part name="parameters" element="tns:login" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:loginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminUserAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminUserAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminUserAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminUserAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Add_InputMessage">
+    <wsdl:part name="parameters" element="tns:Add" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Add_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Update_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Update_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Delete_InputMessage">
+    <wsdl:part name="parameters" element="tns:Delete" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_Delete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelEntity_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelEntity" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminRoleRelEntity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminRoleRelEntityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_RoleRelOpen_InputMessage">
+    <wsdl:part name="parameters" element="tns:RoleRelOpen" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_RoleRelOpen_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RoleRelOpenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:MenuAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MenuAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:MenuAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MenuAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:MenuUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MenuUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuEntity_InputMessage">
+    <wsdl:part name="parameters" element="tns:MenuEntity" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuEntity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MenuEntityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuOpen_InputMessage">
+    <wsdl:part name="parameters" element="tns:MenuOpen" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_MenuOpen_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MenuOpenResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMainService">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/DoWork" message="tns:IMainService_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/DoWorkResponse" message="tns:IMainService_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/login" message="tns:IMainService_login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/loginResponse" message="tns:IMainService_login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminUserAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminUserAll" message="tns:IMainService_AdminUserAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminUserAllResponse" message="tns:IMainService_AdminUserAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/Add" message="tns:IMainService_Add_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AddResponse" message="tns:IMainService_Add_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminByID" message="tns:IMainService_AdminByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminByIDResponse" message="tns:IMainService_AdminByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/Update" message="tns:IMainService_Update_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/UpdateResponse" message="tns:IMainService_Update_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/Delete" message="tns:IMainService_Delete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/DeleteResponse" message="tns:IMainService_Delete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleAll" message="tns:IMainService_AdminRoleAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleAllResponse" message="tns:IMainService_AdminRoleAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleAdd" message="tns:IMainService_AdminRoleAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleAddResponse" message="tns:IMainService_AdminRoleAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleByID" message="tns:IMainService_AdminRoleByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleByIDResponse" message="tns:IMainService_AdminRoleByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleUpdate" message="tns:IMainService_AdminRoleUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleUpdateResponse" message="tns:IMainService_AdminRoleUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleDelete" message="tns:IMainService_AdminRoleDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleDeleteResponse" message="tns:IMainService_AdminRoleDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelAll" message="tns:IMainService_AdminRoleRelAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelAllResponse" message="tns:IMainService_AdminRoleRelAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelAdd" message="tns:IMainService_AdminRoleRelAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelAddResponse" message="tns:IMainService_AdminRoleRelAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelUpdate" message="tns:IMainService_AdminRoleRelUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelUpdateResponse" message="tns:IMainService_AdminRoleRelUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelEntity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelEntity" message="tns:IMainService_AdminRoleRelEntity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminRoleRelEntityResponse" message="tns:IMainService_AdminRoleRelEntity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RoleRelOpen">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/RoleRelOpen" message="tns:IMainService_RoleRelOpen_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/RoleRelOpenResponse" message="tns:IMainService_RoleRelOpen_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MenuAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/MenuAll" message="tns:IMainService_MenuAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/MenuAllResponse" message="tns:IMainService_MenuAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MenuAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/MenuAdd" message="tns:IMainService_MenuAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/MenuAddResponse" message="tns:IMainService_MenuAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MenuUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/MenuUpdate" message="tns:IMainService_MenuUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/MenuUpdateResponse" message="tns:IMainService_MenuUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MenuEntity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/MenuEntity" message="tns:IMainService_MenuEntity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/MenuEntityResponse" message="tns:IMainService_MenuEntity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MenuOpen">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/MenuOpen" message="tns:IMainService_MenuOpen_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/MenuOpenResponse" message="tns:IMainService_MenuOpen_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMainService" type="tns:IMainService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IMainService/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="login">
+      <soap:operation soapAction="http://tempuri.org/IMainService/login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminUserAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminUserAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Add">
+      <soap:operation soapAction="http://tempuri.org/IMainService/Add" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap:operation soapAction="http://tempuri.org/IMainService/Update" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://tempuri.org/IMainService/Delete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleDelete">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleRelAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleRelAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleRelUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminRoleRelEntity">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminRoleRelEntity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RoleRelOpen">
+      <soap:operation soapAction="http://tempuri.org/IMainService/RoleRelOpen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MenuAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/MenuAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MenuAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/MenuAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MenuUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/MenuUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MenuEntity">
+      <soap:operation soapAction="http://tempuri.org/IMainService/MenuEntity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MenuOpen">
+      <soap:operation soapAction="http://tempuri.org/IMainService/MenuOpen" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MainService">
+    <wsdl:port name="BasicHttpBinding_IMainService" binding="tns:BasicHttpBinding_IMainService">
+      <soap:address location="http://localhost:8082/MainService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
