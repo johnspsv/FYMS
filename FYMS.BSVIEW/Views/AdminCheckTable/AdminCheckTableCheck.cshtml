@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "人员审核";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+    @*<div class="text-right col-lg-6">
+            <a class="btn btn-primary active" href="/Admin_User/Admin_UserMain">返回</a>
+        </div>*@
+</div>
+@model FYMS.Common.ViewModel.User_admin
+<form id="user_form" enctype="multipart/form-data" class="form-horizontal" action="/Admin_User/Save" method="post">
+    <div class="row">
+        <fieldset disabled>
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">账号</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_code, new { name = "user_code", htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">邮箱</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_email, new { name = "user_email", htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">手机号</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_phone, new { name = "user_phone", htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">密码</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_password, new { name = "user_password", htmlAttributes = new { @class = "form-control", @type = "password" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">确认密码</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_password, new { name = "confirmpassword", htmlAttributes = new { @class = "form-control", @type = "password" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">姓名</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_name, new { name = "user_email", htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">性别</label>
+                    <div class="col-lg-6">
+                        @if (Model.user_gender == 0)
+                        {
+                            <div class="radio">
+                                <label>
+
+                                    <input type="radio" name="user_gender" value="0" checked /> 男
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+
+                                    <input type="radio" name="user_gender" value="1" /> 女
+                                </label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="radio">
+                                <label>
+
+                                    <input type="radio" name="user_gender" value="0" checked /> 男
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+
+                                    <input type="radio" name="user_gender" value="1" checked /> 女
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">身份证号</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.user_idno, new { name = "user_idno", htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">生日</label>
+                    <div class="col-lg-6 ">
+                        <input type="text" id="userdate" class="form-control datepicker" name="user_birthday" value="@Model.user_birthday" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">备注</label>
+                    <div class="col-lg-6 ">
+                        <textarea class="form-control" rows="4" name="user_commmon">@Model.user_common</textarea>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h4 class="page-header">头像显示</h4>
+                <br>
+                @if (string.IsNullOrEmpty(Model.user_photo) || Model.user_photo == "name.png")
+                {
+                    <img src="~/Content/Img/name.png" class="img-circle" width="200" height="200" />
+                }
+                else
+                {
+                    <img src="~/Temp/@Model.user_photo" class="img-circle" width="200" height="200" />
+                }
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <a href="/Admin_User/Admin_UserMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
+

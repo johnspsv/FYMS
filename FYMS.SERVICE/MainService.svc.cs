@@ -384,5 +384,20 @@ namespace FYMS.SERVICE
         }
         #endregion
 
+        #region 角色审核权限
+
+        #endregion
+
+        #region 客户端注册
+        /// <summary>
+        /// 审核数据表保存
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public bool ht_CheckTableSave(string str)
+        {
+            return ht_CheckTableBLL.ht_CheckTableSave(str);
+        }
+        #endregion
     }
 }

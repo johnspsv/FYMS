@@ -156,6 +156,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminCheckTableController.cs" />
     <Compile Include="Controllers\AdminRoleController.cs" />
     <Compile Include="Controllers\AdminRoleRelController.cs" />
     <Compile Include="Controllers\Admin_UserController.cs" />
@@ -5429,6 +5430,9 @@
     <Content Include="Views\Log\CTControlLogMain.cshtml" />
     <Content Include="Views\Log\CTControlLogDeatils.cshtml" />
     <Content Include="Views\Account\CTAccountMain.cshtml" />
+    <Content Include="Views\AdminCheckTable\AdminCheckTableMain.cshtml" />
+    <Content Include="Views\AdminCheckTable\AdminCheckTableDeatils.cshtml" />
+    <Content Include="Views\AdminCheckTable\AdminCheckTableCheck.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

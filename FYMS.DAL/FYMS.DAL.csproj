@@ -66,6 +66,7 @@
     <Compile Include="ht_admin_userDAL.cs" />
     <Compile Include="ht_admin_userroleDAL.cs" />
     <Compile Include="ht_CheckRoleRelDAL.cs" />
+    <Compile Include="ht_CheckTableDAL.cs" />
     <Compile Include="ht_CheckTypeDAL.cs" />
     <Compile Include="ht_control_logDAL.cs" />
     <Compile Include="ht_error_logDAL.cs" />

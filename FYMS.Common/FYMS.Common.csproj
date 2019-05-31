@@ -51,6 +51,7 @@
     <Compile Include="ViewModel\AdminRoleRel.cs" />
     <Compile Include="ViewModel\Admin_Role.cs" />
     <Compile Include="ViewModel\CheckRoleRel.cs" />
+    <Compile Include="ViewModel\CheckTable.cs" />
     <Compile Include="ViewModel\CheckType.cs" />
     <Compile Include="ViewModel\CTRegister.cs" />
     <Compile Include="ViewModel\HtLimit.cs" />

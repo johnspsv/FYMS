@@ -61,6 +61,7 @@
     <Compile Include="ht_admin_userBLL.cs" />
     <Compile Include="ht_admin_userroleBLL.cs" />
     <Compile Include="ht_CheckRoleRelBLL.cs" />
+    <Compile Include="ht_CheckTableBLL.cs" />
     <Compile Include="ht_CheckTypeBLL.cs" />
     <Compile Include="Ht_LimitBLL.cs" />
     <Compile Include="ht_LogBLL.cs" />

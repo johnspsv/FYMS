@@ -124,5 +124,10 @@ namespace FYMS.SERVICE
 
         #endregion 
 
+        #region 客户端注册
+        [OperationContract]
+        bool ht_CheckTableSave(string str);
+        #endregion
+
     }
 }

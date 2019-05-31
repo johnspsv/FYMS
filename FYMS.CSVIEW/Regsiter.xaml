@@ -6,9 +6,11 @@
         xmlns:local="clr-namespace:FYMS.CSVIEW"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:vm="clr-namespace:FYMS.Common.ViewModel;assembly=FYMS.Common"
+        xmlns:val="clr-namespace:FYMS.CSVIEW.Domain"
+        xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
         mc:Ignorable="d"
         Title="Regsiter"
-        Height="700" Width="500"
+        Height="760" Width="500"
         TextElement.FontWeight="Medium"
         FontFamily="Microsoft YaHei"
         WindowStyle="None"
@@ -16,9 +18,7 @@
         BorderThickness="24"
         WindowStartupLocation="CenterScreen" MouseDown="Window_MouseDown"
         >
-    <Window.DataContext>
-        <vm:CTControlLog x:Name="CTControllog"></vm:CTControlLog>
-    </Window.DataContext>
+
     <Window.Effect>
         <DropShadowEffect BlurRadius="24" Color="#FF858484" Direction="90" ShadowDepth="3"/>
     </Window.Effect>
@@ -31,6 +31,9 @@
             </materialDesign:ColorZone>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <Grid >
+                    <Grid.DataContext>
+                        <vm:CTRegister x:Name="CTRegister"></vm:CTRegister>
+                    </Grid.DataContext>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
@@ -54,45 +57,102 @@
                         <ColumnDefinition Width="220"></ColumnDefinition>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Kind="Company"   />
-                    <TextBox Margin="5" Grid.Row="1" Grid.Column="3" Name="CompanyName" Text="{Binding Path=CompanyName}" materialDesign:HintAssist.Hint="公司名称" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Kind="Keyboard"   />
-                    <TextBox Margin="5" Grid.Row="2" Grid.Column="3" Name="CompanyNo" materialDesign:HintAssist.Hint="营业执照号码" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Kind="ImagePlus"   />
-                    <StackPanel Margin="5" Grid.Row="3" Grid.Column="3" Orientation="Horizontal">
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Kind="Company"   />
+                    <TextBox Margin="5,5,5,10"  Grid.Row="1" Grid.Column="3" Name="CompanyName" materialDesign:HintAssist.Hint="公司名称" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Path="CompanyName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" Kind="Keyboard"   />
+                    <TextBox Margin="5,5,5,10" Grid.Row="2" Grid.Column="3" Name="CompanyNo" materialDesign:HintAssist.Hint="营业执照号码" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Path="CompanyNo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="3" Grid.Column="1" VerticalAlignment="Bottom" Kind="ImagePlus"   />
+                    <StackPanel Margin="5,5,5,10" Grid.Row="3" Grid.Column="3" Orientation="Horizontal">
 
-                        <TextBox  Width="120" Name="ImgName" materialDesign:HintAssist.Hint="上传营业执照" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        <Button Name="btnImg">选择图片</Button>
+                        <TextBox  Width="120" Name="CompanyPhoto" materialDesign:HintAssist.Hint="上传营业执照" IsReadOnly="True"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <TextBox.Text>
+                                <Binding Path="CompanyPhoto" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Button Margin="5" Name="btnImg" Click="BtnImg_Click">选择图片</Button>
                     </StackPanel>
                     <Image  Margin="5" Grid.Row="4" Grid.Column="3" MinHeight="0" MaxHeight="220" Name="ShowImg" ></Image>
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="5" Grid.Column="1" VerticalAlignment="Bottom" Kind="Account"   />
-                    <TextBox Margin="5" Grid.Row="5" Grid.Column="3" Name="Account" materialDesign:HintAssist.Hint="账号" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="6" Grid.Column="1" VerticalAlignment="Bottom" Kind="AccountKey"   />
-                    <PasswordBox Margin="5" Grid.Row="6" Grid.Column="3" Name="Password" materialDesign:HintAssist.Hint="密码" 
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="5" Grid.Column="1" VerticalAlignment="Bottom" Kind="Account"   />
+                    <TextBox Margin="5,5,5,10" Grid.Row="5" Grid.Column="3" Name="username" materialDesign:HintAssist.Hint="账号" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Path="username" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="6" Grid.Column="1" VerticalAlignment="Bottom" Kind="AccountKey"   />
+                    <PasswordBox Margin="5,5,5,10" Grid.Row="6" Grid.Column="3" Name="Password" materialDesign:HintAssist.Hint="密码" 
+                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                    </PasswordBox>
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="7" Grid.Column="1" VerticalAlignment="Bottom" Kind="Key"   />
+                    <PasswordBox Margin="5,5,5,10" Grid.Row="7" Grid.Column="3" Name="ComfirmPassword" materialDesign:HintAssist.Hint="确认密码" 
                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="7" Grid.Column="1" VerticalAlignment="Bottom" Kind="Key"   />
-                    <PasswordBox Margin="5" Grid.Row="7" Grid.Column="3" Name="ComfirmPassword" materialDesign:HintAssist.Hint="确认密码" 
-                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="8" Grid.Column="1" VerticalAlignment="Bottom" Kind="Phone"   />
-                    <TextBox Margin="5" Grid.Row="8" Grid.Column="3" Name="Phone" materialDesign:HintAssist.Hint="手机号" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="9" Grid.Column="1" VerticalAlignment="Bottom" Kind="Email"   />
-                    <TextBox Margin="5" Grid.Row="9" Grid.Column="3" Name="Email" materialDesign:HintAssist.Hint="邮箱" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <materialDesign:PackIcon Margin="0,0,0,8"  Grid.Row="10" Grid.Column="1" VerticalAlignment="Bottom" Kind="Face"   />
-                    <TextBox Margin="5" Grid.Row="10" Grid.Column="3" Name="UserName" materialDesign:HintAssist.Hint="姓名" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="8" Grid.Column="1" VerticalAlignment="Bottom" Kind="Phone"   />
+                    <TextBox Margin="5,5,5,10" Grid.Row="8" Grid.Column="3" Name="Phone" materialDesign:HintAssist.Hint="手机号" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Path="mobilephone" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <materialDesign:PackIcon Margin="0,0,0,15" Grid.Row="9" Grid.Column="1" VerticalAlignment="Bottom" Kind="Email"   />
+                    <TextBox Margin="5,5,5,10" Grid.Row="9" Grid.Column="3" Name="Email" materialDesign:HintAssist.Hint="邮箱" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Path="email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <materialDesign:PackIcon Margin="0,0,0,15"  Grid.Row="10" Grid.Column="1" VerticalAlignment="Bottom" Kind="Face"   />
+                    <TextBox Margin="5,5,5,10" Grid.Row="10" Grid.Column="3" Name="name" materialDesign:HintAssist.Hint="姓名" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                        <TextBox.Text>
+                            <Binding Path="name" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:NotEmptyValidationRule ValidatesOnTargetUpdated="True" ValidationStep="ConvertedProposedValue"></val:NotEmptyValidationRule>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
                     <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="11" Grid.Column="1" VerticalAlignment="Bottom" Kind="GenderMaleFemale"   />
                     <StackPanel Margin="0,8,0,0" Grid.Row="11" Grid.Column="3" Orientation="Horizontal">
-                        <CheckBox VerticalAlignment="Bottom" IsThreeState="False" Name="Male"  IsChecked="False"  Margin="0 8 0 0">
+                        <CheckBox VerticalAlignment="Bottom" IsThreeState="False" Name="Male"  IsChecked="True"  Margin="0 8 0 0" Click="Male_Click">
                             男
                         </CheckBox>
                         <TextBlock Width="15"></TextBlock>
-                        <CheckBox VerticalAlignment="Bottom" IsThreeState="False" Name="Famale"  IsChecked="False"  Margin="0 8 0 0">
+                        <CheckBox VerticalAlignment="Bottom" IsThreeState="False" Name="Famale"  IsChecked="False"  Margin="0 8 0 0" Click="Famale_Click">
                             女
                         </CheckBox>
                     </StackPanel>
@@ -101,7 +161,27 @@
                         <TextBlock Width="20"></TextBlock>
                         <Button Name="btnreturn" Click="Btnreturn_Click">返回</Button>
                     </StackPanel>
+                    <DockPanel Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Margin="5" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Margin="0,0,0,8" Grid.Row="11" Grid.Column="1"  Kind="AlertCircleOutline"   />
+                                <TextBlock>提示</TextBlock>  
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock x:Name="warnning"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Margin="5" Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Button x:Name="btnWarnning" Style="{StaticResource MaterialDesignFlatButton}" >确定</Button>
+                            </StackPanel>
+                        </Grid>
+                    </DockPanel>
                 </Grid>
+                
             </ScrollViewer>
         </DockPanel>
     </materialDesign:DialogHost>
