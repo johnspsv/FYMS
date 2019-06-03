@@ -12,7 +12,7 @@ namespace FYMS.SERVICE
     [ServiceContract]
     public interface IMainService
     {
-        
+
         [OperationContract]
         void DoWork();
         #region 登录
@@ -112,6 +112,44 @@ namespace FYMS.SERVICE
         void errorcontrollog(string str, string functionname, string other, string ex);
         #endregion
 
+        #region 前后台日志
+        [OperationContract]
+        string ErrorLogAll();
+
+
+        [OperationContract]
+        string ErrorLogByID(int ID);
+
+        [OperationContract]
+        string AdminLogAll();
+
+        [OperationContract]
+        string ControlLogAll();
+
+        [OperationContract]
+        string ControlLogByID(int ID);
+
+
+        [OperationContract]
+        string CTErrorLogAll();
+
+        [OperationContract]
+        string CTLoginLogAll();
+
+
+        [OperationContract]
+        string CTErrorLogByID(int ID);
+
+
+        [OperationContract]
+        string CTControlLogAll();
+
+
+        [OperationContract]
+        string CTControlLogByID(int ID);
+
+        #endregion
+
         #region 审核类型
         [OperationContract]
         string CheckTypeAll();
@@ -124,9 +162,51 @@ namespace FYMS.SERVICE
 
         #endregion 
 
+        #region 角色审核权限
+        [OperationContract]
+        string CheckRoleRelAll();
+
+        [OperationContract]
+        bool CheckRoleRelAdd(string str);
+
+        [OperationContract]
+        bool CheckRoleRelUpdate(string str);
+
+        [OperationContract]
+        string DataByRoleID(int roleid);
+
+        [OperationContract]
+        string[] CheckRoleRelEdit(int roleid);
+
+        [OperationContract]
+        bool CheckRoleRelDelete(int roleid);
+        #endregion
+
         #region 客户端注册
         [OperationContract]
         bool ht_CheckTableSave(string str);
+        #endregion
+
+        #region 人员审核
+        [OperationContract]
+        string CheckTableAll();
+        [OperationContract]
+        string CheckTableByID(int id);
+        [OperationContract]
+        bool CheckTableSave(string str);
+        [OperationContract]
+        bool CheckTableNoSuccess(int id);
+        #endregion
+
+        #region 账号类型
+        [OperationContract]
+        string AccountTypeAll();
+        [OperationContract]
+        string AccountTypeAdd(string str);
+        [OperationContract]
+        string AccountTypeUpdate(string str);
+        [OperationContract]
+        string AccountTypeDelete(int id);
         #endregion
 
     }

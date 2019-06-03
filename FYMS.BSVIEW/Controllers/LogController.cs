@@ -41,7 +41,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<ErrorLog> list = new List<ErrorLog>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_LogBLL.ErrorLogAll();
+                        string i = client.ErrorLogAll();
 
                         if (i != null)
                         {
@@ -157,7 +157,7 @@ namespace FYMS.BSVIEW.Controllers
                         ViewData["select"] = look.funSelect;
                         ViewData["update"] = look.funUpdate;
 
-                        ErrorLog errorLog = JsonConvert.DeserializeObject<List<ErrorLog>>(BLL.ht_LogBLL.ErrorLogByID(ID)).FirstOrDefault();
+                        ErrorLog errorLog = JsonConvert.DeserializeObject<List<ErrorLog>>(client.ErrorLogByID(ID)).FirstOrDefault();
 
                         string[] str = errorLog.error_catch.Split('|');
                         if (str.Length == 1)
@@ -215,7 +215,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<AdminLog> list = new List<AdminLog>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_LogBLL.AdminLogAll();
+                        string i = client.AdminLogAll();
 
                         if (i != null)
                         {
@@ -308,7 +308,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<ControlLog> list = new List<ControlLog>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_LogBLL.ControlLogAll();
+                        string i = client.ControlLogAll();
                         if (i != null)
                         {
                             List<SelectListItem> itemList1 = new List<SelectListItem>()
@@ -451,7 +451,7 @@ namespace FYMS.BSVIEW.Controllers
                         ViewData["select"] = look.funSelect;
                         ViewData["update"] = look.funUpdate;
 
-                        ControlLog controlLog = JsonConvert.DeserializeObject<List<ControlLog>>(BLL.ht_LogBLL.ControlLogByID(ID)).FirstOrDefault();
+                        ControlLog controlLog = JsonConvert.DeserializeObject<List<ControlLog>>(client.ControlLogByID(ID)).FirstOrDefault();
 
                         
                         if (controlLog.ctrl_bool == 0)
@@ -533,7 +533,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<CTErrorLog> list = new List<CTErrorLog>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_LogBLL.CTErrorLogAll();
+                        string i = client.CTErrorLogAll();
 
                         if (i != null)
                         {
@@ -649,7 +649,7 @@ namespace FYMS.BSVIEW.Controllers
                         ViewData["select"] = look.funSelect;
                         ViewData["update"] = look.funUpdate;
 
-                        CTErrorLog errorLog = JsonConvert.DeserializeObject<List<CTErrorLog>>(BLL.ht_LogBLL.CTErrorLogByID(ID)).FirstOrDefault();
+                        CTErrorLog errorLog = JsonConvert.DeserializeObject<List<CTErrorLog>>(client.CTErrorLogByID(ID)).FirstOrDefault();
 
                         string[] str = errorLog.error_catch.Split('|');
                         if (str.Length == 1)
@@ -706,7 +706,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<CTLoginLog> list = new List<CTLoginLog>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_LogBLL.CTLoginLogAll();
+                        string i = client.CTLoginLogAll();
 
                         if (i != null)
                         {
@@ -797,7 +797,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<CTControlLog> list = new List<CTControlLog>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_LogBLL.CTControlLogAll();
+                        string i = client.CTControlLogAll();
                         if (i != null)
                         {
                             List<SelectListItem> itemList1 = new List<SelectListItem>()
@@ -940,7 +940,7 @@ namespace FYMS.BSVIEW.Controllers
                         ViewData["select"] = look.funSelect;
                         ViewData["update"] = look.funUpdate;
 
-                        CTControlLog controlLog = JsonConvert.DeserializeObject<List<CTControlLog>>(BLL.ht_LogBLL.CTControlLogByID(ID)).FirstOrDefault();
+                        CTControlLog controlLog = JsonConvert.DeserializeObject<List<CTControlLog>>(client.CTControlLogByID(ID)).FirstOrDefault();
 
 
                         if (controlLog.ctrl_bool == 0)

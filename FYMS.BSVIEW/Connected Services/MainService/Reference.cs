@@ -207,6 +207,66 @@ namespace FYMS.BSVIEW.MainService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/errorcontrollog", ReplyAction="http://tempuri.org/IMainService/errorcontrollogResponse")]
         System.Threading.Tasks.Task errorcontrollogAsync(string str, string functionname, string other, string ex);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ErrorLogAll", ReplyAction="http://tempuri.org/IMainService/ErrorLogAllResponse")]
+        string ErrorLogAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ErrorLogAll", ReplyAction="http://tempuri.org/IMainService/ErrorLogAllResponse")]
+        System.Threading.Tasks.Task<string> ErrorLogAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ErrorLogByID", ReplyAction="http://tempuri.org/IMainService/ErrorLogByIDResponse")]
+        string ErrorLogByID(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ErrorLogByID", ReplyAction="http://tempuri.org/IMainService/ErrorLogByIDResponse")]
+        System.Threading.Tasks.Task<string> ErrorLogByIDAsync(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AdminLogAll", ReplyAction="http://tempuri.org/IMainService/AdminLogAllResponse")]
+        string AdminLogAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AdminLogAll", ReplyAction="http://tempuri.org/IMainService/AdminLogAllResponse")]
+        System.Threading.Tasks.Task<string> AdminLogAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ControlLogAll", ReplyAction="http://tempuri.org/IMainService/ControlLogAllResponse")]
+        string ControlLogAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ControlLogAll", ReplyAction="http://tempuri.org/IMainService/ControlLogAllResponse")]
+        System.Threading.Tasks.Task<string> ControlLogAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ControlLogByID", ReplyAction="http://tempuri.org/IMainService/ControlLogByIDResponse")]
+        string ControlLogByID(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ControlLogByID", ReplyAction="http://tempuri.org/IMainService/ControlLogByIDResponse")]
+        System.Threading.Tasks.Task<string> ControlLogByIDAsync(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTErrorLogAll", ReplyAction="http://tempuri.org/IMainService/CTErrorLogAllResponse")]
+        string CTErrorLogAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTErrorLogAll", ReplyAction="http://tempuri.org/IMainService/CTErrorLogAllResponse")]
+        System.Threading.Tasks.Task<string> CTErrorLogAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTLoginLogAll", ReplyAction="http://tempuri.org/IMainService/CTLoginLogAllResponse")]
+        string CTLoginLogAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTLoginLogAll", ReplyAction="http://tempuri.org/IMainService/CTLoginLogAllResponse")]
+        System.Threading.Tasks.Task<string> CTLoginLogAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTErrorLogByID", ReplyAction="http://tempuri.org/IMainService/CTErrorLogByIDResponse")]
+        string CTErrorLogByID(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTErrorLogByID", ReplyAction="http://tempuri.org/IMainService/CTErrorLogByIDResponse")]
+        System.Threading.Tasks.Task<string> CTErrorLogByIDAsync(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTControlLogAll", ReplyAction="http://tempuri.org/IMainService/CTControlLogAllResponse")]
+        string CTControlLogAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTControlLogAll", ReplyAction="http://tempuri.org/IMainService/CTControlLogAllResponse")]
+        System.Threading.Tasks.Task<string> CTControlLogAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTControlLogByID", ReplyAction="http://tempuri.org/IMainService/CTControlLogByIDResponse")]
+        string CTControlLogByID(int ID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CTControlLogByID", ReplyAction="http://tempuri.org/IMainService/CTControlLogByIDResponse")]
+        System.Threading.Tasks.Task<string> CTControlLogByIDAsync(int ID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeAll", ReplyAction="http://tempuri.org/IMainService/CheckTypeAllResponse")]
         string CheckTypeAll();
         
@@ -230,6 +290,96 @@ namespace FYMS.BSVIEW.MainService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTypeDelete", ReplyAction="http://tempuri.org/IMainService/CheckTypeDeleteResponse")]
         System.Threading.Tasks.Task<string> CheckTypeDeleteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelAll", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelAllResponse")]
+        string CheckRoleRelAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelAll", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelAllResponse")]
+        System.Threading.Tasks.Task<string> CheckRoleRelAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelAdd", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelAddResponse")]
+        bool CheckRoleRelAdd(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelAdd", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelAddResponse")]
+        System.Threading.Tasks.Task<bool> CheckRoleRelAddAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelUpdate", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelUpdateResponse")]
+        bool CheckRoleRelUpdate(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelUpdate", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelUpdateResponse")]
+        System.Threading.Tasks.Task<bool> CheckRoleRelUpdateAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/DataByRoleID", ReplyAction="http://tempuri.org/IMainService/DataByRoleIDResponse")]
+        string DataByRoleID(int roleid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/DataByRoleID", ReplyAction="http://tempuri.org/IMainService/DataByRoleIDResponse")]
+        System.Threading.Tasks.Task<string> DataByRoleIDAsync(int roleid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelEdit", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelEditResponse")]
+        string[] CheckRoleRelEdit(int roleid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelEdit", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelEditResponse")]
+        System.Threading.Tasks.Task<string[]> CheckRoleRelEditAsync(int roleid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelDelete", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelDeleteResponse")]
+        bool CheckRoleRelDelete(int roleid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckRoleRelDelete", ReplyAction="http://tempuri.org/IMainService/CheckRoleRelDeleteResponse")]
+        System.Threading.Tasks.Task<bool> CheckRoleRelDeleteAsync(int roleid);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ht_CheckTableSave", ReplyAction="http://tempuri.org/IMainService/ht_CheckTableSaveResponse")]
+        bool ht_CheckTableSave(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/ht_CheckTableSave", ReplyAction="http://tempuri.org/IMainService/ht_CheckTableSaveResponse")]
+        System.Threading.Tasks.Task<bool> ht_CheckTableSaveAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableAll", ReplyAction="http://tempuri.org/IMainService/CheckTableAllResponse")]
+        string CheckTableAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableAll", ReplyAction="http://tempuri.org/IMainService/CheckTableAllResponse")]
+        System.Threading.Tasks.Task<string> CheckTableAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableByID", ReplyAction="http://tempuri.org/IMainService/CheckTableByIDResponse")]
+        string CheckTableByID(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableByID", ReplyAction="http://tempuri.org/IMainService/CheckTableByIDResponse")]
+        System.Threading.Tasks.Task<string> CheckTableByIDAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableSave", ReplyAction="http://tempuri.org/IMainService/CheckTableSaveResponse")]
+        bool CheckTableSave(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableSave", ReplyAction="http://tempuri.org/IMainService/CheckTableSaveResponse")]
+        System.Threading.Tasks.Task<bool> CheckTableSaveAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableNoSuccess", ReplyAction="http://tempuri.org/IMainService/CheckTableNoSuccessResponse")]
+        bool CheckTableNoSuccess(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/CheckTableNoSuccess", ReplyAction="http://tempuri.org/IMainService/CheckTableNoSuccessResponse")]
+        System.Threading.Tasks.Task<bool> CheckTableNoSuccessAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeAll", ReplyAction="http://tempuri.org/IMainService/AccountTypeAllResponse")]
+        string AccountTypeAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeAll", ReplyAction="http://tempuri.org/IMainService/AccountTypeAllResponse")]
+        System.Threading.Tasks.Task<string> AccountTypeAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeAdd", ReplyAction="http://tempuri.org/IMainService/AccountTypeAddResponse")]
+        string AccountTypeAdd(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeAdd", ReplyAction="http://tempuri.org/IMainService/AccountTypeAddResponse")]
+        System.Threading.Tasks.Task<string> AccountTypeAddAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeUpdate", ReplyAction="http://tempuri.org/IMainService/AccountTypeUpdateResponse")]
+        string AccountTypeUpdate(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeUpdate", ReplyAction="http://tempuri.org/IMainService/AccountTypeUpdateResponse")]
+        System.Threading.Tasks.Task<string> AccountTypeUpdateAsync(string str);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeDelete", ReplyAction="http://tempuri.org/IMainService/AccountTypeDeleteResponse")]
+        string AccountTypeDelete(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMainService/AccountTypeDelete", ReplyAction="http://tempuri.org/IMainService/AccountTypeDeleteResponse")]
+        System.Threading.Tasks.Task<string> AccountTypeDeleteAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -515,6 +665,86 @@ namespace FYMS.BSVIEW.MainService {
             return base.Channel.errorcontrollogAsync(str, functionname, other, ex);
         }
         
+        public string ErrorLogAll() {
+            return base.Channel.ErrorLogAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> ErrorLogAllAsync() {
+            return base.Channel.ErrorLogAllAsync();
+        }
+        
+        public string ErrorLogByID(int ID) {
+            return base.Channel.ErrorLogByID(ID);
+        }
+        
+        public System.Threading.Tasks.Task<string> ErrorLogByIDAsync(int ID) {
+            return base.Channel.ErrorLogByIDAsync(ID);
+        }
+        
+        public string AdminLogAll() {
+            return base.Channel.AdminLogAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> AdminLogAllAsync() {
+            return base.Channel.AdminLogAllAsync();
+        }
+        
+        public string ControlLogAll() {
+            return base.Channel.ControlLogAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> ControlLogAllAsync() {
+            return base.Channel.ControlLogAllAsync();
+        }
+        
+        public string ControlLogByID(int ID) {
+            return base.Channel.ControlLogByID(ID);
+        }
+        
+        public System.Threading.Tasks.Task<string> ControlLogByIDAsync(int ID) {
+            return base.Channel.ControlLogByIDAsync(ID);
+        }
+        
+        public string CTErrorLogAll() {
+            return base.Channel.CTErrorLogAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> CTErrorLogAllAsync() {
+            return base.Channel.CTErrorLogAllAsync();
+        }
+        
+        public string CTLoginLogAll() {
+            return base.Channel.CTLoginLogAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> CTLoginLogAllAsync() {
+            return base.Channel.CTLoginLogAllAsync();
+        }
+        
+        public string CTErrorLogByID(int ID) {
+            return base.Channel.CTErrorLogByID(ID);
+        }
+        
+        public System.Threading.Tasks.Task<string> CTErrorLogByIDAsync(int ID) {
+            return base.Channel.CTErrorLogByIDAsync(ID);
+        }
+        
+        public string CTControlLogAll() {
+            return base.Channel.CTControlLogAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> CTControlLogAllAsync() {
+            return base.Channel.CTControlLogAllAsync();
+        }
+        
+        public string CTControlLogByID(int ID) {
+            return base.Channel.CTControlLogByID(ID);
+        }
+        
+        public System.Threading.Tasks.Task<string> CTControlLogByIDAsync(int ID) {
+            return base.Channel.CTControlLogByIDAsync(ID);
+        }
+        
         public string CheckTypeAll() {
             return base.Channel.CheckTypeAll();
         }
@@ -545,6 +775,126 @@ namespace FYMS.BSVIEW.MainService {
         
         public System.Threading.Tasks.Task<string> CheckTypeDeleteAsync(int id) {
             return base.Channel.CheckTypeDeleteAsync(id);
+        }
+        
+        public string CheckRoleRelAll() {
+            return base.Channel.CheckRoleRelAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckRoleRelAllAsync() {
+            return base.Channel.CheckRoleRelAllAsync();
+        }
+        
+        public bool CheckRoleRelAdd(string str) {
+            return base.Channel.CheckRoleRelAdd(str);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckRoleRelAddAsync(string str) {
+            return base.Channel.CheckRoleRelAddAsync(str);
+        }
+        
+        public bool CheckRoleRelUpdate(string str) {
+            return base.Channel.CheckRoleRelUpdate(str);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckRoleRelUpdateAsync(string str) {
+            return base.Channel.CheckRoleRelUpdateAsync(str);
+        }
+        
+        public string DataByRoleID(int roleid) {
+            return base.Channel.DataByRoleID(roleid);
+        }
+        
+        public System.Threading.Tasks.Task<string> DataByRoleIDAsync(int roleid) {
+            return base.Channel.DataByRoleIDAsync(roleid);
+        }
+        
+        public string[] CheckRoleRelEdit(int roleid) {
+            return base.Channel.CheckRoleRelEdit(roleid);
+        }
+        
+        public System.Threading.Tasks.Task<string[]> CheckRoleRelEditAsync(int roleid) {
+            return base.Channel.CheckRoleRelEditAsync(roleid);
+        }
+        
+        public bool CheckRoleRelDelete(int roleid) {
+            return base.Channel.CheckRoleRelDelete(roleid);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckRoleRelDeleteAsync(int roleid) {
+            return base.Channel.CheckRoleRelDeleteAsync(roleid);
+        }
+        
+        public bool ht_CheckTableSave(string str) {
+            return base.Channel.ht_CheckTableSave(str);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ht_CheckTableSaveAsync(string str) {
+            return base.Channel.ht_CheckTableSaveAsync(str);
+        }
+        
+        public string CheckTableAll() {
+            return base.Channel.CheckTableAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckTableAllAsync() {
+            return base.Channel.CheckTableAllAsync();
+        }
+        
+        public string CheckTableByID(int id) {
+            return base.Channel.CheckTableByID(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> CheckTableByIDAsync(int id) {
+            return base.Channel.CheckTableByIDAsync(id);
+        }
+        
+        public bool CheckTableSave(string str) {
+            return base.Channel.CheckTableSave(str);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckTableSaveAsync(string str) {
+            return base.Channel.CheckTableSaveAsync(str);
+        }
+        
+        public bool CheckTableNoSuccess(int id) {
+            return base.Channel.CheckTableNoSuccess(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> CheckTableNoSuccessAsync(int id) {
+            return base.Channel.CheckTableNoSuccessAsync(id);
+        }
+        
+        public string AccountTypeAll() {
+            return base.Channel.AccountTypeAll();
+        }
+        
+        public System.Threading.Tasks.Task<string> AccountTypeAllAsync() {
+            return base.Channel.AccountTypeAllAsync();
+        }
+        
+        public string AccountTypeAdd(string str) {
+            return base.Channel.AccountTypeAdd(str);
+        }
+        
+        public System.Threading.Tasks.Task<string> AccountTypeAddAsync(string str) {
+            return base.Channel.AccountTypeAddAsync(str);
+        }
+        
+        public string AccountTypeUpdate(string str) {
+            return base.Channel.AccountTypeUpdate(str);
+        }
+        
+        public System.Threading.Tasks.Task<string> AccountTypeUpdateAsync(string str) {
+            return base.Channel.AccountTypeUpdateAsync(str);
+        }
+        
+        public string AccountTypeDelete(int id) {
+            return base.Channel.AccountTypeDelete(id);
+        }
+        
+        public System.Threading.Tasks.Task<string> AccountTypeDeleteAsync(int id) {
+            return base.Channel.AccountTypeDeleteAsync(id);
         }
     }
 }

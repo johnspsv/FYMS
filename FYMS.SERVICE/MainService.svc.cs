@@ -23,13 +23,13 @@ namespace FYMS.SERVICE
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public string[] login(string username,string password)
+        public string[] login(string username, string password)
         {
-            return ht_admin_userBLL.Login(username,password);
+            return ht_admin_userBLL.Login(username, password);
         }
 
 
-        public string loginlimit(string username,string password)
+        public string loginlimit(string username, string password)
         {
             return ht_admin_userBLL.Loginlimit(username, password);
         }
@@ -42,7 +42,7 @@ namespace FYMS.SERVICE
         /// <returns></returns>
         public string AdminUserAll()
         {
-            
+
             return ht_admin_userBLL.All();
         }
 
@@ -53,7 +53,7 @@ namespace FYMS.SERVICE
         /// <returns></returns>
         public string Add(string str)
         {
-            
+
             return ht_admin_userBLL.UserAdd(str);
         }
 
@@ -64,7 +64,7 @@ namespace FYMS.SERVICE
         /// <returns></returns>
         public string AdminByID(int id)
         {
-            
+
             return ht_admin_userBLL.ModelByID(id);
         }
 
@@ -75,7 +75,7 @@ namespace FYMS.SERVICE
         /// <returns></returns>
         public string Update(string str)
         {
-            
+
             return ht_admin_userBLL.UserUpdate(str);
         }
 
@@ -263,9 +263,9 @@ namespace FYMS.SERVICE
         /// <param name="str"></param>
         /// <param name="str1"></param>
         /// <returns></returns>
-        public bool LimitAdd(string str,string str1)
+        public bool LimitAdd(string str, string str1)
         {
-            return Ht_LimitBLL.LimitSave(str,str1);
+            return Ht_LimitBLL.LimitSave(str, str1);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace FYMS.SERVICE
         /// <param name="str"></param>
         public void loginlog(string[] str)
         {
-             LogBLL.LoginAdmin(str);
+            LogBLL.LoginAdmin(str);
         }
 
         /// <summary>
@@ -327,9 +327,9 @@ namespace FYMS.SERVICE
         /// <param name="other"></param>
         public void controllog(string str, string functionname, string other)
         {
-            LogBLL.inlog( str, functionname, other);
+            LogBLL.inlog(str, functionname, other);
         }
-        
+
         /// <summary>
         /// 错误操作日志
         /// </summary>
@@ -337,9 +337,104 @@ namespace FYMS.SERVICE
         /// <param name="functionname"></param>
         /// <param name="other"></param>
         /// <param name="ex"></param>
-        public void errorcontrollog(string str, string functionname, string other,string ex)
+        public void errorcontrollog(string str, string functionname, string other, string ex)
         {
             LogBLL.errorControlLog(str, functionname, other, ex);
+        }
+        #endregion
+
+        #region 前后台日志
+        /// <summary>
+        /// 获取错误日志数据
+        /// </summary>
+        /// <returns></returns>
+        public string ErrorLogAll()
+        {
+            return ht_LogBLL.ErrorLogAll();
+        }
+
+        /// <summary>
+        /// 获取错误日志明细数据
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public string ErrorLogByID(int ID)
+        {
+            return ht_LogBLL.ErrorLogByID(ID);
+        }
+
+        /// <summary>
+        /// 获取后台登录日志数据
+        /// </summary>
+        /// <returns></returns>
+        public string AdminLogAll()
+        {
+            return ht_LogBLL.AdminLogAll();
+        }
+
+        /// <summary>
+        /// 获取后台操作日志数据
+        /// </summary>
+        /// <returns></returns>
+        public string ControlLogAll()
+        {
+            return ht_LogBLL.ControlLogAll();
+        }
+
+        /// <summary>
+        /// 获取操作日志明细数据
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public string ControlLogByID(int ID)
+        {
+            return ht_LogBLL.ControlLogByID(ID);
+        }
+
+        /// <summary>
+        /// 获取前台所有错误日志
+        /// </summary>
+        /// <returns></returns>
+        public string CTErrorLogAll()
+        {
+            return ht_LogBLL.CTErrorLogAll();
+        }
+
+        /// <summary>
+        /// 获取前台登录日志数据
+        /// </summary>
+        /// <returns></returns>
+        public string CTLoginLogAll()
+        {
+            return ht_LogBLL.CTLoginLogAll();
+        }
+
+        /// <summary>
+        /// 获取前台错误日志明细
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public string CTErrorLogByID(int ID)
+        {
+            return ht_LogBLL.CTErrorLogByID(ID);
+        }
+
+        /// <summary>
+        /// 获取前台操作日志所有数据
+        /// </summary>
+        /// <returns></returns>
+        public string CTControlLogAll()
+        {
+            return ht_LogBLL.CTControlLogAll();
+        }
+
+        /// <summary>
+        /// 获取前台操作日志所有数据
+        /// </summary>
+        /// <returns></returns>
+        public string CTControlLogByID(int ID)
+        {
+            return ht_LogBLL.CTControlLogByID(ID);
         }
         #endregion
 
@@ -385,7 +480,61 @@ namespace FYMS.SERVICE
         #endregion
 
         #region 角色审核权限
+        /// <summary>
+        /// 获取审核权限的角色数据
+        /// </summary>
+        /// <returns></returns>
+        public string CheckRoleRelAll()
+        {
+            return ht_CheckRoleRelBLL.CheckRoleRelAll();
+        }
 
+        /// <summary>
+        /// 审核权限新增
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckRoleRelAdd(string str)
+        {
+            return ht_CheckRoleRelBLL.CheckRoleRelAdd(str);
+        }
+
+        /// <summary>
+        /// 审核权限更新
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckRoleRelUpdate(string str)
+        {
+            return ht_CheckRoleRelBLL.CheckRoleRelUpdate(str);
+        }
+
+        /// <summary>
+        /// 通过角色ID获取数据
+        /// </summary>
+        /// <param name="roleid"></param>
+        /// <returns></returns>
+        public string DataByRoleID(int roleid)
+        {
+            return ht_CheckRoleRelBLL.DataByRoleID(roleid);
+        }
+
+        /// <summary>
+        /// 获取审核权限的角色数据
+        /// </summary>
+        /// <returns></returns>
+        public string[] CheckRoleRelEdit(int roleid)
+        {
+            return ht_CheckRoleRelBLL.CheckRoleRelEdit(roleid);
+        }
+
+        /// <summary>
+        /// 根据角色ID批量修改ST 
+        /// </summary>
+        /// <param name="roleid"></param>
+        /// <returns></returns>
+        public bool CheckRoleRelDelete(int roleid)
+        {
+            return ht_CheckRoleRelBLL.CheckRoleRelDelete(roleid);
+        }
         #endregion
 
         #region 客户端注册
@@ -397,6 +546,85 @@ namespace FYMS.SERVICE
         public bool ht_CheckTableSave(string str)
         {
             return ht_CheckTableBLL.ht_CheckTableSave(str);
+        }
+        #endregion
+
+        #region 人员审核
+        /// <summary>
+        /// 获取人员审核数据
+        /// </summary>
+        /// <returns></returns>
+        public string CheckTableAll()
+        {
+            return ht_CheckTableBLL.CheckTableAll();
+        }
+
+        /// <summary>
+        /// 获取人员审核的明细数据
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string CheckTableByID(int id)
+        {
+            return ht_CheckTableBLL.CheckTableByID(id);
+        }
+
+        /// <summary>
+        /// 人员审核通过
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public bool CheckTableSave(string str)
+        {
+            return ht_CheckTableBLL.CheckTableSave(str);
+        }
+
+        /// <summary>
+        /// 审核不通过
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool CheckTableNoSuccess(int id)
+        {
+            return ht_CheckTableBLL.CheckTableNoSuccess(id);
+        }
+        #endregion
+
+        #region 账号类型
+        /// <summary>
+        /// 获取所有账号类型
+        /// </summary>
+        /// <returns></returns>
+        public string AccountTypeAll()
+        {
+            return ct_AccountBLL.AccountTypeAll();
+        }
+
+        /// <summary>
+        /// 新增账号类型
+        /// </summary>
+        /// <param name="str"></param>
+        public string AccountTypeAdd(string str)
+        {
+            return ct_AccountBLL.AccountTypeAdd(str);
+        }
+
+        /// <summary>
+        /// 更新账号类型
+        /// </summary>
+        /// <param name="str"></param>
+        public string AccountTypeUpdate(string str)
+        {
+            return ct_AccountBLL.AccountTypeUpdate(str);
+        }
+
+        /// <summary>
+        /// 禁用开启
+        /// </summary>
+        /// <returns></returns>
+        public string AccountTypeDelete(int id)
+        {
+            return ct_AccountBLL.AccountTypeDelete(id);
         }
         #endregion
     }

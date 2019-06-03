@@ -42,8 +42,7 @@ namespace FYMS.BSVIEW.Controllers
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
 
-                        var i = BLL.ht_CheckRoleRelBLL.CheckRoleRelAll(); //client.AdminRoleRelAll();
-                        //var i = BLL.ht_userroleRelBLL.All();
+                        var i = client.CheckRoleRelAll(); 
 
                         if (i != null)
                         {
@@ -166,7 +165,7 @@ namespace FYMS.BSVIEW.Controllers
                     if (look != null)
                     {
                         ViewData["roleID"] = ID;
-                        List<CheckRoleRel> list = JsonConvert.DeserializeObject<List<CheckRoleRel>>(BLL.ht_CheckRoleRelBLL.DataByRoleID(ID)).ToList();
+                        List<CheckRoleRel> list = JsonConvert.DeserializeObject<List<CheckRoleRel>>(client.DataByRoleID(ID)).ToList();
                         ViewData["rolename"] = list.Select(x => x.RoleName).FirstOrDefault().ToString();
                         string checktypes = "";
                         foreach (var a in list)
@@ -238,7 +237,7 @@ namespace FYMS.BSVIEW.Controllers
                     return "请选择角色";
                 }
                 checkRoleRel.RoleID = Convert.ToInt32(fc["checkrolerel_role"]);
-                if (JsonConvert.DeserializeObject<List<CheckRoleRel>>(BLL.ht_CheckRoleRelBLL.CheckRoleRelAll()).Where(x => x.RoleID == checkRoleRel.RoleID).Count() > 0)
+                if (JsonConvert.DeserializeObject<List<CheckRoleRel>>(client.CheckRoleRelAll()).Where(x => x.RoleID == checkRoleRel.RoleID).Count() > 0)
                 {
                     return "该角色已经授予权限，请选择其他角色";
                 }
@@ -261,7 +260,7 @@ namespace FYMS.BSVIEW.Controllers
                 }
                 string str = JsonConvert.SerializeObject(list);
 
-                if (BLL.ht_CheckRoleRelBLL.CheckRoleRelAdd(str))
+                if (client.CheckRoleRelAdd(str))
                 {
                     return "保存成功";
                 }
@@ -292,7 +291,7 @@ namespace FYMS.BSVIEW.Controllers
                     if (look != null)
                     {
                         ViewData["roleID"] = ID;
-                        List<CheckRoleRel> list = JsonConvert.DeserializeObject<List<CheckRoleRel>>(BLL.ht_CheckRoleRelBLL.DataByRoleID(ID)).ToList();
+                        List<CheckRoleRel> list = JsonConvert.DeserializeObject<List<CheckRoleRel>>(client.DataByRoleID(ID)).ToList();
                         ViewData["rolename"] = list.Select(x => x.RoleName).FirstOrDefault().ToString();
                         string checktypes = "";
                         foreach (var a in list)
@@ -328,7 +327,7 @@ namespace FYMS.BSVIEW.Controllers
         public JsonResult TreeDataEdit(int ID)
         {
             List<CheckType> list = new List<CheckType>();
-            var i = BLL.ht_CheckRoleRelBLL.CheckRoleRelEdit(ID);
+            var i = client.CheckRoleRelEdit(ID);
             var parent = JsonConvert.DeserializeObject<List<CheckType>>(i[0]).ToList();
             var checks= JsonConvert.DeserializeObject<List<CheckRoleRel>>(i[1]).ToList();
 
@@ -384,7 +383,7 @@ namespace FYMS.BSVIEW.Controllers
                 }
                 string str = JsonConvert.SerializeObject(list);
 
-                if (BLL.ht_CheckRoleRelBLL.CheckRoleRelUpdate(str))
+                if (client.CheckRoleRelUpdate(str))
                 {
                     return "保存成功";
                 }
@@ -410,7 +409,7 @@ namespace FYMS.BSVIEW.Controllers
         {
             string id = Request["id"].ToString();
             int i = Convert.ToInt32(id);
-            return BLL.ht_CheckRoleRelBLL.CheckRoleRelDelete(i);
+            return client.CheckRoleRelDelete(i);
         }
     }
 }

@@ -40,7 +40,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<CheckT> tlist = new List<CheckT>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ht_CheckTableBLL.CheckTableAll();
+                        string i = client.CheckTableAll();
 
                         if (i != null)
                         {
@@ -158,10 +158,10 @@ namespace FYMS.BSVIEW.Controllers
                         ViewData["select"] = look.funSelect;
                         ViewData["update"] = look.funUpdate;
 
-                        var i = BLL.ht_CheckTableBLL.CheckTableByID(ID);
+                        var i = client.CheckTableByID(ID);
                         CheckT checkT = JsonConvert.DeserializeObject<List<CheckT>>(i).FirstOrDefault();
                         CheckTable checkTable = JsonConvert.DeserializeObject<CheckTable>(checkT.Jsonstr);
-                        var a = BLL.ct_AccountBLL.AccountTypeAll();
+                        var a = client.AccountTypeAll();
                         List<Account> account = JsonConvert.DeserializeObject<List<Account>>(a);
                         checkTable.Accountlist = account;
                         checkTable.ID = checkT.ID;
@@ -206,10 +206,10 @@ namespace FYMS.BSVIEW.Controllers
                         ViewData["select"] = look.funSelect;
                         ViewData["update"] = look.funUpdate;
 
-                        var i = BLL.ht_CheckTableBLL.CheckTableByID(ID);
+                        var i = client.CheckTableByID(ID);
                         CheckT checkT = JsonConvert.DeserializeObject<List<CheckT>>(i).FirstOrDefault();
                         CheckTable checkTable = JsonConvert.DeserializeObject<CheckTable>(checkT.Jsonstr);
-                        var a = BLL.ct_AccountBLL.AccountTypeAll();
+                        var a = client.AccountTypeAll();
                         List<Account> account = JsonConvert.DeserializeObject<List<Account>>(a);
                         checkTable.Accountlist = account;
                         return View(checkTable);
@@ -262,7 +262,7 @@ namespace FYMS.BSVIEW.Controllers
                     return Content("请选择账号类型");
                 }
                 string str = JsonConvert.SerializeObject(checkTable);
-                BLL.ht_CheckTableBLL.CheckTableSave(str);
+                client.CheckTableSave(str);
 
                 return Content("");
             }
@@ -284,7 +284,7 @@ namespace FYMS.BSVIEW.Controllers
             {
                 int id= fc["ID"] == null ? 0 : Convert.ToInt32(fc["ID"]);
 
-                if( BLL.ht_CheckTableBLL.CheckTableNoSuccess(id))
+                if(client.CheckTableNoSuccess(id))
                 {
                     return Content("保存成功");
                 }

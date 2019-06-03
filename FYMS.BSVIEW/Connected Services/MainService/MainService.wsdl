@@ -199,6 +199,66 @@
   <wsdl:message name="IMainService_errorcontrollog_OutputMessage">
     <wsdl:part name="parameters" element="tns:errorcontrollogResponse" />
   </wsdl:message>
+  <wsdl:message name="IMainService_ErrorLogAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorLogAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ErrorLogAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorLogAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ErrorLogByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorLogByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ErrorLogByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ErrorLogByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminLogAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:AdminLogAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AdminLogAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AdminLogAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ControlLogAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:ControlLogAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ControlLogAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ControlLogAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ControlLogByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:ControlLogByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ControlLogByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ControlLogByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTErrorLogAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CTErrorLogAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTErrorLogAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CTErrorLogAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTLoginLogAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CTLoginLogAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTLoginLogAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CTLoginLogAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTErrorLogByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:CTErrorLogByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTErrorLogByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CTErrorLogByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTControlLogAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CTControlLogAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTControlLogAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CTControlLogAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTControlLogByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:CTControlLogByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CTControlLogByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CTControlLogByIDResponse" />
+  </wsdl:message>
   <wsdl:message name="IMainService_CheckTypeAll_InputMessage">
     <wsdl:part name="parameters" element="tns:CheckTypeAll" />
   </wsdl:message>
@@ -222,6 +282,96 @@
   </wsdl:message>
   <wsdl:message name="IMainService_CheckTypeDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:CheckTypeDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_DataByRoleID_InputMessage">
+    <wsdl:part name="parameters" element="tns:DataByRoleID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_DataByRoleID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DataByRoleIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelEdit_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelEdit" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelEdit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelEditResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckRoleRelDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckRoleRelDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ht_CheckTableSave_InputMessage">
+    <wsdl:part name="parameters" element="tns:ht_CheckTableSave" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_ht_CheckTableSave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ht_CheckTableSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableByID" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableSave_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableSave" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableSave_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableNoSuccess_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableNoSuccess" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_CheckTableNoSuccess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckTableNoSuccessResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeAll" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeAdd_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeAdd" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeAdd_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeAddResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeDelete" />
+  </wsdl:message>
+  <wsdl:message name="IMainService_AccountTypeDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountTypeDeleteResponse" />
   </wsdl:message>
   <wsdl:portType name="IMainService">
     <wsdl:operation name="DoWork">
@@ -352,6 +502,46 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/errorcontrollog" message="tns:IMainService_errorcontrollog_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainService/errorcontrollogResponse" message="tns:IMainService_errorcontrollog_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="ErrorLogAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/ErrorLogAll" message="tns:IMainService_ErrorLogAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/ErrorLogAllResponse" message="tns:IMainService_ErrorLogAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ErrorLogByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/ErrorLogByID" message="tns:IMainService_ErrorLogByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/ErrorLogByIDResponse" message="tns:IMainService_ErrorLogByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminLogAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AdminLogAll" message="tns:IMainService_AdminLogAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AdminLogAllResponse" message="tns:IMainService_AdminLogAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ControlLogAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/ControlLogAll" message="tns:IMainService_ControlLogAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/ControlLogAllResponse" message="tns:IMainService_ControlLogAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ControlLogByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/ControlLogByID" message="tns:IMainService_ControlLogByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/ControlLogByIDResponse" message="tns:IMainService_ControlLogByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CTErrorLogAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CTErrorLogAll" message="tns:IMainService_CTErrorLogAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CTErrorLogAllResponse" message="tns:IMainService_CTErrorLogAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CTLoginLogAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CTLoginLogAll" message="tns:IMainService_CTLoginLogAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CTLoginLogAllResponse" message="tns:IMainService_CTLoginLogAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CTErrorLogByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CTErrorLogByID" message="tns:IMainService_CTErrorLogByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CTErrorLogByIDResponse" message="tns:IMainService_CTErrorLogByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CTControlLogAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CTControlLogAll" message="tns:IMainService_CTControlLogAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CTControlLogAllResponse" message="tns:IMainService_CTControlLogAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CTControlLogByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CTControlLogByID" message="tns:IMainService_CTControlLogByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CTControlLogByIDResponse" message="tns:IMainService_CTControlLogByID_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CheckTypeAll">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTypeAll" message="tns:IMainService_CheckTypeAll_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTypeAllResponse" message="tns:IMainService_CheckTypeAll_OutputMessage" />
@@ -367,6 +557,66 @@
     <wsdl:operation name="CheckTypeDelete">
       <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTypeDelete" message="tns:IMainService_CheckTypeDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTypeDeleteResponse" message="tns:IMainService_CheckTypeDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelAll" message="tns:IMainService_CheckRoleRelAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelAllResponse" message="tns:IMainService_CheckRoleRelAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelAdd" message="tns:IMainService_CheckRoleRelAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelAddResponse" message="tns:IMainService_CheckRoleRelAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelUpdate" message="tns:IMainService_CheckRoleRelUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelUpdateResponse" message="tns:IMainService_CheckRoleRelUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DataByRoleID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/DataByRoleID" message="tns:IMainService_DataByRoleID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/DataByRoleIDResponse" message="tns:IMainService_DataByRoleID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelEdit">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelEdit" message="tns:IMainService_CheckRoleRelEdit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelEditResponse" message="tns:IMainService_CheckRoleRelEdit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelDelete" message="tns:IMainService_CheckRoleRelDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckRoleRelDeleteResponse" message="tns:IMainService_CheckRoleRelDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ht_CheckTableSave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/ht_CheckTableSave" message="tns:IMainService_ht_CheckTableSave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/ht_CheckTableSaveResponse" message="tns:IMainService_ht_CheckTableSave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTableAll" message="tns:IMainService_CheckTableAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTableAllResponse" message="tns:IMainService_CheckTableAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTableByID" message="tns:IMainService_CheckTableByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTableByIDResponse" message="tns:IMainService_CheckTableByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableSave">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTableSave" message="tns:IMainService_CheckTableSave_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTableSaveResponse" message="tns:IMainService_CheckTableSave_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableNoSuccess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/CheckTableNoSuccess" message="tns:IMainService_CheckTableNoSuccess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/CheckTableNoSuccessResponse" message="tns:IMainService_CheckTableNoSuccess_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AccountTypeAll" message="tns:IMainService_AccountTypeAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AccountTypeAllResponse" message="tns:IMainService_AccountTypeAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeAdd">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AccountTypeAdd" message="tns:IMainService_AccountTypeAdd_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AccountTypeAddResponse" message="tns:IMainService_AccountTypeAdd_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AccountTypeUpdate" message="tns:IMainService_AccountTypeUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AccountTypeUpdateResponse" message="tns:IMainService_AccountTypeUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMainService/AccountTypeDelete" message="tns:IMainService_AccountTypeDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMainService/AccountTypeDeleteResponse" message="tns:IMainService_AccountTypeDelete_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMainService" type="tns:IMainService">
@@ -659,6 +909,96 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ErrorLogAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/ErrorLogAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ErrorLogByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/ErrorLogByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminLogAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AdminLogAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ControlLogAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/ControlLogAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ControlLogByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/ControlLogByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CTErrorLogAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CTErrorLogAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CTLoginLogAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CTLoginLogAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CTErrorLogByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CTErrorLogByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CTControlLogAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CTControlLogAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CTControlLogByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CTControlLogByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CheckTypeAll">
       <soap:operation soapAction="http://tempuri.org/IMainService/CheckTypeAll" style="document" />
       <wsdl:input>
@@ -688,6 +1028,141 @@
     </wsdl:operation>
     <wsdl:operation name="CheckTypeDelete">
       <soap:operation soapAction="http://tempuri.org/IMainService/CheckTypeDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckRoleRelAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckRoleRelAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckRoleRelUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DataByRoleID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/DataByRoleID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelEdit">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckRoleRelEdit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckRoleRelDelete">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckRoleRelDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ht_CheckTableSave">
+      <soap:operation soapAction="http://tempuri.org/IMainService/ht_CheckTableSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTableAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableByID">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTableByID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableSave">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTableSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckTableNoSuccess">
+      <soap:operation soapAction="http://tempuri.org/IMainService/CheckTableNoSuccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeAll">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AccountTypeAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeAdd">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AccountTypeAdd" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeUpdate">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AccountTypeUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountTypeDelete">
+      <soap:operation soapAction="http://tempuri.org/IMainService/AccountTypeDelete" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

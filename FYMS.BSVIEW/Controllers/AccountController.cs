@@ -40,7 +40,7 @@ namespace FYMS.BSVIEW.Controllers
                         List<Account> list = new List<Account>();
                         ViewBag.CurrentSort = sortOrder;
                         ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-                        string i = BLL.ct_AccountBLL.AccountTypeAll();
+                        string i = client.AccountTypeAll();
                      
                         if (i != null)
                         {
@@ -120,7 +120,7 @@ namespace FYMS.BSVIEW.Controllers
                 account.AccountDate =Convert.ToInt32(fc["cr_AccountDate"]);
                 account.AccountNUM = Convert.ToInt32(fc["cr_AccountNUM"]);
                 string str = JsonConvert.SerializeObject(account).ToString();
-                string i = BLL.ct_AccountBLL.AccountTypeAdd(str); 
+                string i = client.AccountTypeAdd(str); 
                 return Content(i);
             }
             catch (Exception ex)
@@ -147,7 +147,7 @@ namespace FYMS.BSVIEW.Controllers
                 account.AccountDate = Convert.ToInt32(fc["ed_AccountDate"]);
                 account.AccountNUM = Convert.ToInt32(fc["ed_AccountNUM"]);
                 string str = JsonConvert.SerializeObject(account).ToString();
-                string i = BLL.ct_AccountBLL.AccountTypeUpdate(str);
+                string i = client.AccountTypeUpdate(str);
            
                 return Content(i);
             }
@@ -168,7 +168,7 @@ namespace FYMS.BSVIEW.Controllers
         {
             string id = Request["id"].ToString();
             int i = Convert.ToInt32(id);
-            return BLL.ct_AccountBLL.AccountTypeDelete(i);
+            return client.AccountTypeDelete(i);
         }
     }
 }
