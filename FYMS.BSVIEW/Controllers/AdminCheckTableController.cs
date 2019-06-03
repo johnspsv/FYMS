@@ -138,8 +138,7 @@ namespace FYMS.BSVIEW.Controllers
             }
         }
 
-
-
+      
         /// <summary>
         /// 人员审核查看
         /// </summary>
@@ -147,18 +146,158 @@ namespace FYMS.BSVIEW.Controllers
         /// <returns></returns>
         public ActionResult AdminCheckTableDeatils(int ID)
         {
-            return View();
+            try
+            {
+                if (Common.Common.UserID > 0)
+                {
+                    var look = Common.Common.CanRead("/AdminCheckTable/AdminCheckTableMain");
+                    if (look != null)
+                    {
+                        ViewData["add"] = look.funAdd;
+                        ViewData["delete"] = look.funDelete;
+                        ViewData["select"] = look.funSelect;
+                        ViewData["update"] = look.funUpdate;
+
+                        var i = BLL.ht_CheckTableBLL.CheckTableByID(ID);
+                        CheckT checkT = JsonConvert.DeserializeObject<List<CheckT>>(i).FirstOrDefault();
+                        CheckTable checkTable = JsonConvert.DeserializeObject<CheckTable>(checkT.Jsonstr);
+                        var a = BLL.ct_AccountBLL.AccountTypeAll();
+                        List<Account> account = JsonConvert.DeserializeObject<List<Account>>(a);
+                        checkTable.Accountlist = account;
+                        checkTable.ID = checkT.ID;
+                        checkTable.ST = checkT.ST;
+                        return View(checkTable);
+
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("Log" + "|" + "人员审核查看_AdminCheckTableDeatils" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
+
         }
-        
 
         /// <summary>
-        /// 人员审核查看
+        /// 人员审核
         /// </summary>
         /// <param name="ID"></param>
         /// <returns></returns>
         public ActionResult AdminCheckTableCheck(int ID)
         {
-            return View();
+            try
+            {
+                if (Common.Common.UserID > 0)
+                {
+                    var look = Common.Common.CanRead("/AdminCheckTable/AdminCheckTableMain");
+                    if (look != null)
+                    {
+                        ViewData["add"] = look.funAdd;
+                        ViewData["delete"] = look.funDelete;
+                        ViewData["select"] = look.funSelect;
+                        ViewData["update"] = look.funUpdate;
+
+                        var i = BLL.ht_CheckTableBLL.CheckTableByID(ID);
+                        CheckT checkT = JsonConvert.DeserializeObject<List<CheckT>>(i).FirstOrDefault();
+                        CheckTable checkTable = JsonConvert.DeserializeObject<CheckTable>(checkT.Jsonstr);
+                        var a = BLL.ct_AccountBLL.AccountTypeAll();
+                        List<Account> account = JsonConvert.DeserializeObject<List<Account>>(a);
+                        checkTable.Accountlist = account;
+                        return View(checkTable);
+
+                    }
+                    else
+                    {
+                        return Redirect("/Index/ErrorPage404");
+                    }
+                }
+                else
+                {
+                    return Redirect("/Login/Login");
+                }
+            }
+            catch (Exception ex)
+            {
+                client.ErrorlogAsync("Log" + "|" + "人员审核_AdminCheckTableCheck" + "|" + ex.ToString());
+                return Redirect("/Index/ErrorPage404");
+            }
+
+        }
+
+
+        /// <summary>
+        /// 审核通过
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public ActionResult Success(FormCollection fc)
+        {
+            try
+            {
+                CheckTable checkTable = new CheckTable();
+                checkTable.ID = fc["ID"] == null ? 0 : Convert.ToInt32(fc["ID"]);
+                checkTable.CompanyName = fc["CompanyName"].ToString();
+                checkTable.CompanyNo = fc["CompanyNo"].ToString();
+                checkTable.CompanyPhoto = fc["CompanyPhoto"].ToString();
+                checkTable.username = fc["username"].ToString();
+                checkTable.password = fc["password"].ToString();
+                checkTable.mobilephone = fc["mobilephone"].ToString();
+                checkTable.email = fc["email"].ToString();
+                checkTable.name = fc["name"].ToString();
+                
+                checkTable.gender = Convert.ToInt32(fc["gender"]);
+                checkTable.Common = fc["Common"] == null ? "" : fc["Common"].ToString();
+                checkTable.AccountID = Convert.ToInt32(fc["AccountID"]);
+                if(checkTable.AccountID==0)
+                {
+                    return Content("请选择账号类型");
+                }
+                string str = JsonConvert.SerializeObject(checkTable);
+                BLL.ht_CheckTableBLL.CheckTableSave(str);
+
+                return Content("");
+            }
+            catch(Exception ex )
+            {
+                client.ErrorlogAsync("Admin_User" + "|" + "人员审核通过_Success" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
+        }
+
+        /// <summary>
+        /// 审核不通过
+        /// </summary>
+        /// <param name="fc"></param>
+        /// <returns></returns>
+        public ActionResult NoSuccess(FormCollection fc)
+        {
+            try
+            {
+                int id= fc["ID"] == null ? 0 : Convert.ToInt32(fc["ID"]);
+
+                if( BLL.ht_CheckTableBLL.CheckTableNoSuccess(id))
+                {
+                    return Content("保存成功");
+                }
+                else
+                {
+                    return Content("保存失败");
+                }
+            }
+            catch(Exception ex)
+            {
+                client.ErrorlogAsync("Admin_User" + "|" + "人员审核不通过_NoSuccess" + "|" + ex.ToString());
+                return Content("保存失败");
+            }
         }
     }
 }

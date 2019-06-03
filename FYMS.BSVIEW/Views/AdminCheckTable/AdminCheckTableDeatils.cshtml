@@ -4,5 +4,124 @@
     Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
 }
 
-<h2>AdminCheckTableDeatils</h2>
+<div class="row">
+    <h3 class="page-header">@ViewBag.Title</h3>
+</div>
+@model FYMS.Common.ViewModel.CheckTable
+<form id="user_form" enctype="multipart/form-data" class="form-horizontal" action="/Admin_User/Save" method="post">
+    <div class="row">
+        <fieldset disabled>
+            <div class="col-lg-7">
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">公司名称</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.CompanyName, new { name = "CompanyName", htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                        @Html.TextBoxFor(model => model.ID, new { name = "ID", @class = "hidden" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">营业执照号码</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.CompanyNo, new { name = "CompanyNo", htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">账号</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.username, new { name = "username", htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">密码</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.password, new { name = "password", htmlAttributes = new { @readonly = "readonly", @class = "form-control", @type = "password" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">手机号</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.mobilephone, new { name = "mobilephone", htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">邮箱</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.email, new { name = "email", htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">姓名</label>
+                    <div class="col-lg-6 ">
+                        @Html.EditorFor(model => model.name, new { name = "name", htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">性别</label>
+                    <div class="col-lg-6">
+                        @Html.TextBoxFor(model => model.gender, new { name = "gender", @class = "hidden" })
+                        @if (Model.gender == 0)
+                        {
+                            <div class="radio">
+                                <label>
+
+                                    <input type="radio" name="" value="1" checked readonly="readonly" /> 男
+                                </label>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="radio">
+                                <label>
+
+                                    <input type="radio" name="" value="1" checked readonly="readonly" /> 女
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">审核结果</label>
+                    <div class="col-lg-6 ">
+                        @if (Model.ST == 0)
+                        {
+                            <input type="text" class="form-control" value="审核未通过" />
+                        }
+                        @if (Model.ST == 1)
+                        {
+                            <input type="text" class="form-control" value="审核通过" />
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-2 control-label">说明</label>
+                    <div class="col-lg-6 ">
+                        <textarea class="form-control" rows="4" name="Common">@Model.Common</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <h4 class="page-header">营业执照图片</h4>
+                <br>
+                @Html.TextBoxFor(model => model.CompanyPhoto, new { name = "CompanyPhoto", @class = "hidden" })
+                @if (string.IsNullOrEmpty(Model.CompanyPhoto) || Model.CompanyPhoto == "name.png")
+                {
+                    <img src="http://localhost:8082/uploadimg/name.png" width="200" height="200" />
+                }
+                else
+                {
+                    <img src="http://localhost:8082/uploadimg/@Model.CompanyPhoto" width="200" height="200" />
+                }
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <div class="col-lg-8 col-lg-offset-4">
+                <a href="/AdminCheckTable/AdminCheckTableMain" class="btn btn-primary">返回</a>
+            </div>
+        </div>
+    </div>
+</form>
 

@@ -20,7 +20,7 @@ namespace FYMS.Common.ViewModel
         public DateTime CT { get; set; }
 
         [DataMember]
-        public int Common { get; set; }
+        public string Common { get; set; }
 
         [DataMember]
         public string CompanyName { get; set; }
@@ -52,6 +52,11 @@ namespace FYMS.Common.ViewModel
         public int number { get; set; }
 
         public string CheckName { get; set; }
+
+        public List<Account> Accountlist { get; set; }
+
+        [DataMember]
+        public int AccountID { get; set; }
     }
 
 

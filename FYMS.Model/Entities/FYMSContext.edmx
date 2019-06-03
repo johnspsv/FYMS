@@ -23,7 +23,7 @@
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CU" Type="int" Nullable="false" />
           <Property Name="CT" Type="datetime" Nullable="false" />
           <Property Name="LU" Type="int" Nullable="false" />

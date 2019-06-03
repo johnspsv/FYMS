@@ -184,7 +184,7 @@
                             <td>
                                 @if (ViewData["select"].ToString() == "1")
                                 {
-                                    @Html.ActionLink("审核", "AdminCheckTableCheck", new { id = item.ID }, new { @class = "glyphicon glyphicon-eye-open label label-primary" })
+                                    @Html.ActionLink("审核", "AdminCheckTableCheck", new { id = item.ID }, new { @class = "glyphicon glyphicon-eye-open label label-danger" })
                                 }
                             </td>
                         </tr>
